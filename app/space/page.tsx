@@ -38,7 +38,7 @@ export default function SpacePage() {
         {GROUPS.map((group) => (
           <section key={group.name} className="mt-12">
             <h2
-              className="text-lg font-semibold tracking-wide"
+              className="font-serif text-lg font-semibold tracking-wide"
               style={{ color: group.accent }}
             >
               {group.name}
@@ -50,7 +50,7 @@ export default function SpacePage() {
               const dim = DIMENSIONS.find((d) => d.id === dimId)!;
               return (
                 <div key={dim.id} className="mt-6">
-                  <h3 className="text-base font-semibold text-ink">
+                  <h3 className="font-serif text-base font-semibold text-ink">
                     {dim.id} — {dim.title}
                   </h3>
                   <p className="text-sm text-ink/60">{dim.question}</p>

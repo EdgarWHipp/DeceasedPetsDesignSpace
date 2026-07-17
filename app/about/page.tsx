@@ -12,7 +12,7 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader current="/about" />
       <main className="mx-auto w-full max-w-3xl flex-1 px-6">
-        <h2 className="text-lg font-semibold text-ink">About this design space</h2>
+        <h2 className="font-serif text-lg font-semibold text-ink">About this design space</h2>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
           Losing a companion animal is, for many people, losing a family
           member. Emerging technologies — extended reality, robotics,
@@ -47,7 +47,7 @@ export default function AboutPage() {
           </a>
         </p>
         <div className="mt-8 rounded-xl border border-black/10 bg-white/70 p-5">
-          <h3 className="text-sm font-semibold text-ink">Citation</h3>
+          <h3 className="font-serif text-sm font-semibold text-ink">Citation</h3>
           <p className="mt-2 text-sm italic text-ink/60">
             Thesis citation to be added upon publication.
           </p>

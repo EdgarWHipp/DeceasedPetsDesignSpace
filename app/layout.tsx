@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
 });
 
@@ -11,6 +15,10 @@ export const metadata: Metadata = {
   title: "A Design Space for Representations of Deceased Companion Animals",
   description:
     "Interactive explorer for the design space of XR and technology-mediated representations of deceased companion animals — a Master's thesis at Karlsruhe Institute of Technology (KIT).",
+  openGraph: {
+    type: "website",
+    siteName: "Deceased Pets Design Space",
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${sourceSerif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

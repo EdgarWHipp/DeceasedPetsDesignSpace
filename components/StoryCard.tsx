@@ -57,7 +57,7 @@ export default function StoryCard({ selection }: { selection: Selection }) {
     <div className="mx-auto max-w-2xl rounded-xl border border-black/10 bg-white/70 px-6 py-5 text-center">
       {story ? (
         <>
-          <p className="text-base md:text-lg leading-relaxed text-ink">{story}</p>
+          <p className="font-serif text-base md:text-lg leading-relaxed text-ink">{story}</p>
           <p className="mt-3 font-mono text-[11px] tracking-wide text-ink/45">{coords}</p>
         </>
       ) : (

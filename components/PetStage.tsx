@@ -79,7 +79,9 @@ export default function PetStage({
             }}
             style={active ? { cursor: 'pointer' } : undefined}
           >
-            <PetBody selection={selection} />
+            <g className="idle-breathe">
+              <PetBody selection={selection} />
+            </g>
           </g>
         </g>
         {/* spawn particles: 6 circles fading out over 400ms */}

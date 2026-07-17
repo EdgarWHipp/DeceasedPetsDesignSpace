@@ -17,6 +17,7 @@
   --color-interaction: #b18452;
   --color-afterlife: #8a7ca8;
   --font-sans: var(--font-inter);
+  --font-serif: var(--font-source-serif);
 }
 
 body {
@@ -198,4 +199,69 @@ body {
 }
 .attract-caption {
   animation: caption-pulse 2.4s ease-in-out infinite;
+}
+/* idle life: breathing, blinking, ear twitch */
+@keyframes idle-breathe {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(1.015);
+  }
+}
+.idle-breathe {
+  animation: idle-breathe 4.5s ease-in-out infinite alternate;
+  transform-origin: 240px 382px;
+}
+@keyframes blink-eyes {
+  0%,
+  90%,
+  98%,
+  100% {
+    transform: scaleY(1);
+  }
+  93%,
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+.idle-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink-eyes 5s infinite;
+}
+@keyframes ear-twitch {
+  0%,
+  93%,
+  100% {
+    transform: rotate(0deg);
+  }
+  95% {
+    transform: rotate(-7deg);
+  }
+  97% {
+    transform: rotate(3deg);
+  }
+}
+.idle-twitch {
+  transform-box: fill-box;
+  transform-origin: 95% 5%;
+  animation: ear-twitch 7s infinite;
+}
+
+/* reduced motion: disable looping animations; one-shots stay */
+@media (prefers-reduced-motion: reduce) {
+  .idle-breathe,
+  .idle-blink,
+  .idle-twitch,
+  .tail-wag,
+  .ring-breathe,
+  .cloud-drift,
+  .cloud-drift-late,
+  .mote-orbit,
+  .led-blink,
+  .letting-go,
+  .attract-caption {
+    animation: none;
+  }
 }

@@ -112,6 +112,23 @@ export function PetBody({ selection }: { selection: Selection }) {
         stroke={stroke}
         strokeWidth={sw}
       />
+      {/* haunch contours */}
+      <path
+        d="M167 332 Q180 294 210 297"
+        fill="none"
+        stroke={INK}
+        strokeWidth={stylized ? 3.5 : 2.5}
+        strokeLinecap="round"
+        opacity="0.65"
+      />
+      <path
+        d="M313 332 Q300 294 270 297"
+        fill="none"
+        stroke={INK}
+        strokeWidth={stylized ? 3.5 : 2.5}
+        strokeLinecap="round"
+        opacity="0.65"
+      />
       {/* four paw bumps */}
       {[196, 226, 254, 284].map((x) => (
         <ellipse
@@ -125,6 +142,23 @@ export function PetBody({ selection }: { selection: Selection }) {
           strokeWidth={sw}
         />
       ))}
+      {/* front-leg contours */}
+      <path
+        d="M224 338 Q222 358 224 378"
+        fill="none"
+        stroke={INK}
+        strokeWidth={stylized ? 3.5 : 2.5}
+        strokeLinecap="round"
+        opacity="0.65"
+      />
+      <path
+        d="M256 338 Q258 358 256 378"
+        fill="none"
+        stroke={INK}
+        strokeWidth={stylized ? 3.5 : 2.5}
+        strokeLinecap="round"
+        opacity="0.65"
+      />
       {/* fills-only overlays clipped to body+head */}
       <g clipPath="url(#petClip)">
         {holo &&
@@ -202,6 +236,7 @@ export function PetBody({ selection }: { selection: Selection }) {
       <g transform={stylized ? 'translate(240 205) scale(1.25) translate(-240 -205)' : undefined}>
         {/* ears */}
         <path
+          className="idle-twitch"
           d="M210 154 Q178 150 176 204 Q178 232 196 226 Q208 218 212 184 Z"
           fill={fill}
           stroke={stroke}
@@ -217,6 +252,32 @@ export function PetBody({ selection }: { selection: Selection }) {
         />
         {/* head */}
         <circle cx="240" cy="205" r="58" fill={fill} stroke={stroke} strokeWidth={sw} />
+        {/* muzzle + mouth */}
+        <ellipse cx="240" cy="226" rx="27" ry="19" fill={fill} stroke={stroke} strokeWidth={sw} />
+        <path
+          d="M228 240 Q234 248 240 240 Q246 248 252 240"
+          fill="none"
+          stroke={INK}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        {/* stylized blush */}
+        {stylized && (
+          <>
+            <ellipse cx="203" cy="214" rx="7" ry="4.5" fill="#d99a8f" opacity="0.55" />
+            <ellipse cx="277" cy="214" rx="7" ry="4.5" fill="#d99a8f" opacity="0.55" />
+          </>
+        )}
+        {/* realistic cheek fur */}
+        {realistic && (
+          <path
+            d="M190 222 l-9 5 M193 231 l-9 5 M290 222 l9 5 M287 231 l9 5"
+            fill="none"
+            stroke={INK}
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
+        )}
         {/* eyes: stone = closed lines, stylized = oversized ovals, else dots */}
         {stone ? (
           <g stroke={INK} strokeWidth="3" fill="none" strokeLinecap="round">
@@ -225,15 +286,19 @@ export function PetBody({ selection }: { selection: Selection }) {
           </g>
         ) : stylized ? (
           <>
-            <ellipse cx="219" cy="197" rx="10" ry="13" fill={INK} />
-            <ellipse cx="261" cy="197" rx="10" ry="13" fill={INK} />
-            <circle cx="222" cy="192" r="3" fill="#ffffff" />
-            <circle cx="264" cy="192" r="3" fill="#ffffff" />
+            <g className="idle-blink">
+              <ellipse cx="219" cy="197" rx="10" ry="13" fill={INK} />
+              <circle cx="222" cy="192" r="3" fill="#ffffff" />
+            </g>
+            <g className="idle-blink">
+              <ellipse cx="261" cy="197" rx="10" ry="13" fill={INK} />
+              <circle cx="264" cy="192" r="3" fill="#ffffff" />
+            </g>
           </>
         ) : (
           <>
-            <circle cx="219" cy="198" r="6" fill={INK} />
-            <circle cx="261" cy="198" r="6" fill={INK} />
+            <circle className="idle-blink" cx="219" cy="198" r="6" fill={INK} />
+            <circle className="idle-blink" cx="261" cy="198" r="6" fill={INK} />
           </>
         )}
         {/* nose */}
