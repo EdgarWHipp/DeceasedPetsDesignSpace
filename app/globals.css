@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5f0;
+  --foreground: #252827;
+  --accent-manifestation: #2f8c78;
+  --accent-interaction: #b18452;
+  --accent-afterlife: #8a7ca8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: #252827;
+  --color-paper: #f7f5f0;
+  --color-manifestation: #2f8c78;
+  --color-interaction: #b18452;
+  --color-afterlife: #8a7ca8;
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* --- pet stage animations (all animation lives here; no JS libraries) --- */
+
+/* spawn: pet group scales 0.9 -> 1 on every generation change */
+@keyframes spawn {
+  from {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.pet-spawn {
+  animation: spawn 0.4s ease-out;
+  transform-origin: 240px 300px;
+}
+
+/* spawn particles: 6 circles fading out over 400ms */
+@keyframes particle {
+  from {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+.spawn-particle {
+  animation: particle 0.4s ease-out forwards;
+  transform-origin: 240px 300px;
+}
+
+/* D1-P3 Interactive: antenna LED blink */
+@keyframes blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.led-blink {
+  animation: blink 2s infinite;
+}
+
+/* D4-P2 Active: tail wag, rotate +/-14deg at tail base */
+@keyframes wag {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(14deg);
+  }
+}
+.tail-wag {
+  animation: wag 0.6s ease-in-out infinite alternate;
+  transform-origin: 318px 318px;
+}
+
+/* D4-P2: "wuff" speech bubble, shown 1.2s on pet click */
+@keyframes wuff {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.wuff-bubble {
+  animation: wuff 1.2s ease-out forwards;
+}
+
+/* D5-P1 / D5-P2: ripple / pulse ring expanding once on spawn */
+@keyframes ripple {
+  from {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+.spawn-ripple {
+  animation: ripple 0.9s ease-out forwards;
+}
+
+/* D5-P3 Persistent: large soft ring breathing over 8s */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+.ring-breathe {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+/* D6-P2 Moves With You: clouds drifting across the stage */
+@keyframes drift {
+  from {
+    transform: translateX(-120px);
+  }
+  to {
+    transform: translateX(600px);
+  }
+}
+.cloud-drift {
+  animation: drift 30s linear infinite;
+}
+.cloud-drift-late {
+  animation: drift 30s linear infinite;
+  animation-delay: -15s;
+}
+
+/* D7: motes orbiting the pet */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.mote-orbit {
+  animation: orbit 14s linear infinite;
+  transform-origin: 240px 290px;
+}
+
+/* D8-P4 Letting Go: whole pet gently pulses to 0.8 opacity over 6s */
+@keyframes fade-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+.letting-go {
+  animation: fade-pulse 6s ease-in-out infinite;
+}
+
+/* kiosk attract-mode caption */
+@keyframes caption-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.attract-caption {
+  animation: caption-pulse 2.4s ease-in-out infinite;
+}
