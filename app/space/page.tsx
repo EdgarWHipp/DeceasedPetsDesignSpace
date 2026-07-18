@@ -16,9 +16,9 @@ export default function SpacePage() {
         <p className="max-w-3xl text-sm text-ink/70">
           The complete design space: three groups, nine dimensions,{' '}
           {TOTAL_CONFIGURATIONS.toLocaleString('en-US')} possible
-          configurations. The figure below is the thesis overview with one
-          visual example per position — click it to open the full-resolution
-          vector in a new tab.
+          configurations. The figure below is the thesis overview, one visual
+          example per position — open it in a new tab for the full-resolution
+          vector.
         </p>
         <a
           href="/design_space_visual_examples.svg"

@@ -62,7 +62,7 @@ export default function StoryCard({ selection }: { selection: Selection }) {
         </>
       ) : (
         <p className="text-base text-ink/55 italic">
-          Tap any dimension to begin building a pet.
+          Pick any dimension to start shaping a pet.
         </p>
       )}
     </div>

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 import type { Selection } from '@/lib/designSpace';
+import PetModel from '@/components/PetModel';
 import {
   AmbientLayer,
   BackgroundLayer,
@@ -9,9 +11,9 @@ import {
   INK,
   MotesLayer,
   ParticipationLayer,
-  PetBody,
-  StageDefs,
+  SensoryCues,
   TimelineLayer,
+  TrailCue,
 } from '@/lib/petLayers';
 
 export default function PetStage({
@@ -31,83 +33,91 @@ export default function PetStage({
     [],
   );
 
-  const active = selection.D4 === 'D4-P2';
-  const holo = selection.D1 === 'D1-P1';
-  const stone = selection.D1 === 'D1-P2';
   const lettingGo = selection.D8 === 'D8-P4';
+  const realistic = selection.D2 === 'D2-P2';
+
+  const onWuff = () => {
+    setWuffAt(Date.now());
+    clearTimeout(wuffTimer.current);
+    wuffTimer.current = window.setTimeout(() => setWuffAt(0), 1200);
+  };
 
   return (
-    <svg
-      viewBox="0 0 480 480"
-      className="w-full h-full select-none"
+    <div
+      className="relative h-full w-full select-none"
       role="img"
       aria-label="Your configured pet"
     >
-      <StageDefs />
-      {/* background (D6) */}
-      <BackgroundLayer selection={selection} />
-      {/* ambient ring (D5-P3) */}
-      <AmbientLayer selection={selection} />
-      {/* pet group, re-keyed each generation to replay the spawn animation */}
-      <g key={generation}>
-        <g className="pet-spawn">
-          {/* ground contact: plinth for material, shadow otherwise */}
-          {stone ? (
-            <g>
-              <rect x="168" y="396" width="144" height="20" rx="4" fill="#8f887c" stroke={INK} strokeWidth="2" />
-              <rect x="176" y="392" width="128" height="8" rx="3" fill="#b8b0a4" stroke={INK} strokeWidth="2" />
-            </g>
-          ) : (
-            <ellipse
-              cx="240"
-              cy="402"
-              rx={holo ? 68 : 80}
-              ry="11"
-              fill={INK}
-              opacity={holo ? 0.18 : 0.1}
+      {/* back overlay: background (D6) + ambient ring (D5-P3) */}
+      <svg
+        viewBox="0 0 480 480"
+        className="absolute inset-0 h-full w-full"
+        aria-hidden
+      >
+        <BackgroundLayer selection={selection} />
+        <AmbientLayer selection={selection} />
+      </svg>
+      {/* 3D pet; the wrapper carries the D8-P4 opacity pulse */}
+      <div
+        className={
+          lettingGo
+            ? 'letting-go absolute inset-0 h-full w-full'
+            : 'absolute inset-0 h-full w-full'
+        }
+      >
+        <Canvas
+          camera={{ position: [0, 1.15, 4.8], fov: 38 }}
+          shadows
+          gl={{ alpha: true, antialias: true }}
+          style={{ background: 'transparent' }}
+          onCreated={({ camera }) => camera.lookAt(0, 1.1, 0)}
+        >
+          <ambientLight intensity={0.9} />
+          <directionalLight
+            position={[2.5, 4, 2]}
+            intensity={1.3}
+            castShadow={realistic}
+            shadow-mapSize={[1024, 1024]}
+          />
+          <Suspense fallback={null}>
+            <PetModel
+              selection={selection}
+              generation={generation}
+              onWuff={onWuff}
             />
-          )}
-          <g
-            className={lettingGo ? 'letting-go' : undefined}
-            onClick={() => {
-              if (!active) return;
-              setWuffAt(Date.now());
-              clearTimeout(wuffTimer.current);
-              wuffTimer.current = window.setTimeout(() => setWuffAt(0), 1200);
-            }}
-            style={active ? { cursor: 'pointer' } : undefined}
-          >
-            <g className="idle-breathe">
-              <PetBody selection={selection} />
-            </g>
+          </Suspense>
+        </Canvas>
+      </div>
+      {/* front overlay: annotations (D3 cues, D7 motes, D4/D5 glyphs, D8, D9) */}
+      <svg
+        viewBox="0 0 480 480"
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden
+      >
+        <SensoryCues selection={selection} />
+        <TrailCue selection={selection} />
+        <MotesLayer selection={selection} />
+        <GlyphLayer selection={selection} generation={generation} />
+        <TimelineLayer selection={selection} />
+        <ParticipationLayer selection={selection} />
+        {/* "wuff" speech bubble (D4-P2, on pet click) */}
+        {wuffAt > 0 && (
+          <g key={wuffAt} className="wuff-bubble">
+            <rect x="292" y="112" width="76" height="40" rx="12" fill="#ffffff" stroke={INK} strokeWidth="2.5" />
+            <path d="M306 150 l-8 14 l20 -12 Z" fill="#ffffff" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+            <text
+              x="330"
+              y="138"
+              textAnchor="middle"
+              fontSize="18"
+              fontWeight="600"
+              fill={INK}
+            >
+              wuff
+            </text>
           </g>
-        </g>
-      </g>
-      {/* motes (D7) */}
-      <MotesLayer selection={selection} />
-      {/* foreground glyphs (D4/D5) */}
-      <GlyphLayer selection={selection} generation={generation} />
-      {/* timeline strip (D8) */}
-      <TimelineLayer selection={selection} />
-      {/* participation silhouettes (D9) */}
-      <ParticipationLayer selection={selection} />
-      {/* "wuff" speech bubble (D4-P2, on click) */}
-      {wuffAt > 0 && (
-        <g key={wuffAt} className="wuff-bubble">
-          <rect x="292" y="112" width="76" height="40" rx="12" fill="#ffffff" stroke={INK} strokeWidth="2.5" />
-          <path d="M306 150 l-8 14 l20 -12 Z" fill="#ffffff" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
-          <text
-            x="330"
-            y="138"
-            textAnchor="middle"
-            fontSize="18"
-            fontWeight="600"
-            fill={INK}
-          >
-            wuff
-          </text>
-        </g>
-      )}
-    </svg>
+        )}
+      </svg>
+    </div>
   );
 }

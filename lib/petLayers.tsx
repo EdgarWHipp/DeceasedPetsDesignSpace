@@ -1,6 +1,6 @@
-// Per-position visual layers for the pet stage. Every art decision for the
-// 24 positions is enumerated here; PetStage only composes these layers.
-// Stage viewBox is 0 0 480 480, pet centered around (240, 290), ground y=400.
+// Per-position SVG overlay layers for the pet stage. The pet body itself is
+// 3D (components/PetModel.tsx); these layers are the diagrammatic annotations
+// composed around it. Stage viewBox is 0 0 480 480, ground y=400.
 
 import type { ReactNode } from 'react';
 import type { Selection } from './designSpace';
@@ -11,352 +11,37 @@ const MANIFESTATION = '#2f8c78';
 const INTERACTION = '#b18452';
 const AFTERLIFE = '#8a7ca8';
 
-/* ---------------------------------------------------------------- defs --- */
+/* --------------------------------------- D3 annotation cues (front) --- */
 
-export function StageDefs() {
+// D3-P2 Sensory: scent wisps + sound arcs beside the head (kept clear of the
+// pet's face region).
+export function SensoryCues({ selection }: { selection: Selection }) {
+  if (selection.D3 !== 'D3-P2') return null;
   return (
-    <defs>
-      {/* D1-P1 Perceived: teal hologram gradient fading to transparent */}
-      <linearGradient id="holoGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor={MANIFESTATION} />
-        <stop offset="100%" stopColor={MANIFESTATION} stopOpacity="0" />
-      </linearGradient>
-      {/* D2-P2 Realistic: soft shading overlay */}
-      <radialGradient id="shadeGrad" cx="0.5" cy="0.35" r="0.75">
-        <stop offset="55%" stopColor={INK} stopOpacity="0" />
-        <stop offset="100%" stopColor={INK} stopOpacity="0.22" />
-      </radialGradient>
-      {/* clip for scanlines / speckles / panel seams */}
-      <clipPath id="petClip">
-        <ellipse cx="240" cy="312" rx="86" ry="70" />
-        <circle cx="240" cy="205" r="58" />
-      </clipPath>
-    </defs>
-  );
-}
-
-/* ------------------------------------------------------- pet body (D1/D2) --- */
-
-function bodyFill(d1: string | undefined, d2: string | undefined): string {
-  const flat = d2 === 'D2-P1'; // Stylized drops gradients, uses flat fills
-  if (d1 === 'D1-P1') return flat ? MANIFESTATION : 'url(#holoGrad)';
-  if (d1 === 'D1-P2') return '#a8a094';
-  if (d1 === 'D1-P3') return '#ccd2d4';
-  return NEUTRAL;
-}
-
-export function PetBody({ selection }: { selection: Selection }) {
-  const d1 = selection.D1;
-  const d2 = selection.D2;
-  const stylized = d2 === 'D2-P1';
-  const realistic = d2 === 'D2-P2';
-  const holo = d1 === 'D1-P1';
-  const stone = d1 === 'D1-P2';
-  const robot = d1 === 'D1-P3';
-
-  const sw = stylized ? 6 : realistic ? 2 : 3;
-  const fill = bodyFill(d1, d2);
-  const stroke = INK;
-
-  return (
-    <g opacity={holo ? 0.65 : 1}>
-      {/* tail (wagged by PetStage when D4-P2) */}
-      <g className={selection.D4 === 'D4-P2' ? 'tail-wag' : undefined}>
-        <path
-          d="M318 318 Q366 300 372 252"
-          fill="none"
-          stroke={stroke}
-          strokeWidth={18 + sw * 2}
-          strokeLinecap="round"
-        />
-        <path
-          d="M318 318 Q366 300 372 252"
-          fill="none"
-          stroke={fill}
-          strokeWidth="18"
-          strokeLinecap="round"
-        />
-        {realistic && (
-          <path
-            d="M366 262 l10 -12 l-2 14 l10 -8"
-            fill="none"
-            stroke={stroke}
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        )}
-      </g>
-      {/* body */}
-      <ellipse
-        cx="240"
-        cy="312"
-        rx="86"
-        ry="70"
-        fill={fill}
-        stroke={stroke}
-        strokeWidth={sw}
-      />
-      {/* haunch contours */}
-      <path
-        d="M167 332 Q180 294 210 297"
-        fill="none"
-        stroke={INK}
-        strokeWidth={stylized ? 3.5 : 2.5}
-        strokeLinecap="round"
-        opacity="0.65"
-      />
-      <path
-        d="M313 332 Q300 294 270 297"
-        fill="none"
-        stroke={INK}
-        strokeWidth={stylized ? 3.5 : 2.5}
-        strokeLinecap="round"
-        opacity="0.65"
-      />
-      {/* four paw bumps */}
-      {[196, 226, 254, 284].map((x) => (
-        <ellipse
-          key={x}
-          cx={x}
-          cy="381"
-          rx="14"
-          ry="10"
-          fill={fill}
-          stroke={stroke}
-          strokeWidth={sw}
-        />
-      ))}
-      {/* front-leg contours */}
-      <path
-        d="M224 338 Q222 358 224 378"
-        fill="none"
-        stroke={INK}
-        strokeWidth={stylized ? 3.5 : 2.5}
-        strokeLinecap="round"
-        opacity="0.65"
-      />
-      <path
-        d="M256 338 Q258 358 256 378"
-        fill="none"
-        stroke={INK}
-        strokeWidth={stylized ? 3.5 : 2.5}
-        strokeLinecap="round"
-        opacity="0.65"
-      />
-      {/* fills-only overlays clipped to body+head */}
-      <g clipPath="url(#petClip)">
-        {holo &&
-          !stylized &&
-          [150, 196, 242, 288, 334, 380].map((y) => (
-            <rect
-              key={y}
-              x="140"
-              y={y}
-              width="200"
-              height="5"
-              fill="#ffffff"
-              opacity="0.35"
-            />
-          ))}
-        {stone &&
-          [
-            [206, 300],
-            [258, 322],
-            [230, 348],
-            [270, 290],
-            [214, 330],
-            [250, 360],
-            [226, 190],
-            [256, 214],
-            [238, 236],
-            [220, 214],
-            [262, 184],
-            [284, 330],
-          ].map(([x, y]) => (
-            <circle key={`${x}-${y}`} cx={x} cy={y} r="2.4" fill="#6f695f" opacity="0.6" />
-          ))}
-        {robot && (
-          <g stroke="#9aa4a7" strokeWidth="2" fill="none">
-            <path d="M240 252 V382" />
-            <path d="M158 320 H322" />
-            <path d="M196 165 H284" />
-          </g>
-        )}
-        {realistic && (
-          <>
-            <ellipse cx="240" cy="312" rx="86" ry="70" fill="url(#shadeGrad)" />
-            <circle cx="240" cy="205" r="58" fill="url(#shadeGrad)" />
-          </>
-        )}
-      </g>
-      {/* D1-P3: rounded chest plate + antenna with blinking LED */}
-      {robot && (
-        <>
-          <rect
-            x="214"
-            y="290"
-            width="52"
-            height="46"
-            rx="14"
-            fill="#b9c1c4"
-            stroke={stroke}
-            strokeWidth={sw}
-          />
-          <line x1="240" y1="150" x2="240" y2="120" stroke={stroke} strokeWidth="3" />
-          <circle className="led-blink" cx="240" cy="114" r="6" fill="#e2574e" stroke={stroke} strokeWidth="2" />
-        </>
-      )}
-      {/* realistic fur tufts on chest */}
-      {realistic && (
-        <path
-          d="M228 262 l-5 12 l9 -4 l-4 12 l9 -5 M330 322 l11 -3 l-6 10 l11 -2"
-          fill="none"
-          stroke={stroke}
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      )}
-      {/* head group — stylized scales up 1.25 around head center */}
-      <g transform={stylized ? 'translate(240 205) scale(1.25) translate(-240 -205)' : undefined}>
-        {/* ears */}
-        <path
-          className="idle-twitch"
-          d="M210 154 Q178 150 176 204 Q178 232 196 226 Q208 218 212 184 Z"
-          fill={fill}
-          stroke={stroke}
-          strokeWidth={sw}
-          strokeLinejoin="round"
-        />
-        <path
-          d="M270 154 Q302 150 304 204 Q302 232 284 226 Q272 218 268 184 Z"
-          fill={fill}
-          stroke={stroke}
-          strokeWidth={sw}
-          strokeLinejoin="round"
-        />
-        {/* head */}
-        <circle cx="240" cy="205" r="58" fill={fill} stroke={stroke} strokeWidth={sw} />
-        {/* muzzle + mouth */}
-        <ellipse cx="240" cy="226" rx="27" ry="19" fill={fill} stroke={stroke} strokeWidth={sw} />
-        <path
-          d="M228 240 Q234 248 240 240 Q246 248 252 240"
-          fill="none"
-          stroke={INK}
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        {/* stylized blush */}
-        {stylized && (
-          <>
-            <ellipse cx="203" cy="214" rx="7" ry="4.5" fill="#d99a8f" opacity="0.55" />
-            <ellipse cx="277" cy="214" rx="7" ry="4.5" fill="#d99a8f" opacity="0.55" />
-          </>
-        )}
-        {/* realistic cheek fur */}
-        {realistic && (
-          <path
-            d="M190 222 l-9 5 M193 231 l-9 5 M290 222 l9 5 M287 231 l9 5"
-            fill="none"
-            stroke={INK}
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-        )}
-        {/* eyes: stone = closed lines, stylized = oversized ovals, else dots */}
-        {stone ? (
-          <g stroke={INK} strokeWidth="3" fill="none" strokeLinecap="round">
-            <path d="M211 198 Q219 205 227 198" />
-            <path d="M253 198 Q261 205 269 198" />
-          </g>
-        ) : stylized ? (
-          <>
-            <g className="idle-blink">
-              <ellipse cx="219" cy="197" rx="10" ry="13" fill={INK} />
-              <circle cx="222" cy="192" r="3" fill="#ffffff" />
-            </g>
-            <g className="idle-blink">
-              <ellipse cx="261" cy="197" rx="10" ry="13" fill={INK} />
-              <circle cx="264" cy="192" r="3" fill="#ffffff" />
-            </g>
-          </>
-        ) : (
-          <>
-            <circle className="idle-blink" cx="219" cy="198" r="6" fill={INK} />
-            <circle className="idle-blink" cx="261" cy="198" r="6" fill={INK} />
-          </>
-        )}
-        {/* nose */}
-        <path
-          d="M231 222 h18 l-9 12 Z"
-          fill={INK}
-          stroke={INK}
-          strokeWidth="4"
-          strokeLinejoin="round"
-        />
-      </g>
-      {/* D3 recognizable cues sit on the body */}
-      <CueLayer selection={selection} />
+    <g fill="none" stroke={MANIFESTATION} strokeWidth="2.5" strokeLinecap="round" opacity="0.75">
+      <path d="M308 218 q10 -8 4 -18 q-6 -9 2 -17" />
+      <path d="M322 226 q10 -8 4 -18 q-6 -9 2 -17" />
+      <path d="M336 234 q10 -8 4 -18 q-6 -9 2 -17" />
+      <path d="M304 148 a20 20 0 0 1 6 26" />
+      <path d="M314 138 a30 30 0 0 1 9 40" />
     </g>
   );
 }
 
-/* ------------------------------------------------------------- D3 cues --- */
-
-function CueLayer({ selection }: { selection: Selection }) {
-  const d3 = selection.D3;
-  if (d3 === 'D3-P1') {
-    // Symbolic: collar band + hanging tag with paw glyph
-    return (
-      <g>
-        <path
-          d="M194 254 Q240 274 286 254"
-          fill="none"
-          stroke="#7a3b2e"
-          strokeWidth="10"
-          strokeLinecap="round"
-        />
-        <line x1="240" y1="268" x2="240" y2="276" stroke={INK} strokeWidth="2" />
-        <circle cx="240" cy="286" r="11" fill="#d9b23c" stroke={INK} strokeWidth="2" />
-        <g fill={INK}>
-          <circle cx="240" cy="288" r="3" />
-          <circle cx="235" cy="282" r="1.6" />
-          <circle cx="240" cy="280" r="1.6" />
-          <circle cx="245" cy="282" r="1.6" />
-        </g>
-      </g>
-    );
-  }
-  if (d3 === 'D3-P2') {
-    // Sensory: scent wisps near the nose + sound arcs at the ear
-    return (
-      <g fill="none" stroke={MANIFESTATION} strokeWidth="2.5" strokeLinecap="round" opacity="0.75">
-        <path d="M262 218 q10 -8 4 -18 q-6 -9 2 -17" />
-        <path d="M276 226 q10 -8 4 -18 q-6 -9 2 -17" />
-        <path d="M290 234 q10 -8 4 -18 q-6 -9 2 -17" />
-        <path d="M304 148 a20 20 0 0 1 6 26" />
-        <path d="M314 138 a30 30 0 0 1 9 40" />
-      </g>
-    );
-  }
-  if (d3 === 'D3-P3') {
-    // Behavioral: dashed motion trail behind the tail + tennis ball at paws
-    return (
-      <g>
-        <path
-          d="M336 344 q42 8 68 -20"
-          fill="none"
-          stroke={INK}
-          strokeWidth="3"
-          strokeDasharray="7 7"
-          strokeLinecap="round"
-          opacity="0.6"
-        />
-        <circle cx="172" cy="380" r="13" fill="#c9d44a" stroke={INK} strokeWidth="2" />
-        <path d="M161 374 q11 6 22 0" fill="none" stroke={INK} strokeWidth="1.5" />
-      </g>
-    );
-  }
-  return null;
+// D3-P3 Behavioral: dashed motion trail (the ball itself is 3D).
+export function TrailCue({ selection }: { selection: Selection }) {
+  if (selection.D3 !== 'D3-P3') return null;
+  return (
+    <path
+      d="M336 344 q42 8 68 -20"
+      fill="none"
+      stroke={INK}
+      strokeWidth="3"
+      strokeDasharray="7 7"
+      strokeLinecap="round"
+      opacity="0.6"
+    />
+  );
 }
 
 /* ---------------------------------------------------- D6 background --- */

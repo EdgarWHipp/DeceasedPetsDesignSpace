@@ -26,55 +26,7 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-/* --- pet stage animations (all animation lives here; no JS libraries) --- */
-
-/* spawn: pet group scales 0.9 -> 1 on every generation change */
-@keyframes spawn {
-  from {
-    transform: scale(0.9);
-    opacity: 0.4;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-.pet-spawn {
-  animation: spawn 0.4s ease-out;
-  transform-origin: 240px 300px;
-}
-
-/* D1-P3 Interactive: antenna LED blink */
-@keyframes blink {
-  0%,
-  45% {
-    opacity: 1;
-  }
-  50%,
-  95% {
-    opacity: 0.15;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.led-blink {
-  animation: blink 2s infinite;
-}
-
-/* D4-P2 Active: tail wag, rotate +/-14deg at tail base */
-@keyframes wag {
-  from {
-    transform: rotate(-14deg);
-  }
-  to {
-    transform: rotate(14deg);
-  }
-}
-.tail-wag {
-  animation: wag 0.6s ease-in-out infinite alternate;
-  transform-origin: 318px 318px;
-}
+/* --- overlay + UI animations (pet-body motion lives in PetModel) --- */
 
 /* D4-P2: "wuff" speech bubble, shown 1.2s on pet click */
 @keyframes wuff {
@@ -180,65 +132,12 @@ body {
 .attract-caption {
   animation: caption-pulse 2.4s ease-in-out infinite;
 }
-/* idle life: breathing, blinking, ear twitch */
-@keyframes idle-breathe {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(1.015);
-  }
-}
-.idle-breathe {
-  animation: idle-breathe 4.5s ease-in-out infinite alternate;
-  transform-origin: 240px 382px;
-}
-@keyframes blink-eyes {
-  0%,
-  90%,
-  98%,
-  100% {
-    transform: scaleY(1);
-  }
-  93%,
-  95% {
-    transform: scaleY(0.08);
-  }
-}
-.idle-blink {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: blink-eyes 5s infinite;
-}
-@keyframes ear-twitch {
-  0%,
-  93%,
-  100% {
-    transform: rotate(0deg);
-  }
-  95% {
-    transform: rotate(-7deg);
-  }
-  97% {
-    transform: rotate(3deg);
-  }
-}
-.idle-twitch {
-  transform-box: fill-box;
-  transform-origin: 95% 5%;
-  animation: ear-twitch 7s infinite;
-}
 
 /* reduced motion: disable looping animations; one-shots stay */
 @media (prefers-reduced-motion: reduce) {
-  .idle-breathe,
-  .idle-blink,
-  .idle-twitch,
-  .tail-wag,
   .ring-breathe,
   .cloud-drift,
   .mote-orbit,
-  .led-blink,
   .letting-go,
   .attract-caption {
     animation: none;

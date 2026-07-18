@@ -56,7 +56,7 @@ export default function DimensionPanel({
                   <span className="font-medium text-sm text-ink">{pos.label}</span>
                   {chosen && (
                     <span className="text-[11px] font-semibold" style={{ color: accent }}>
-                      chosen — tap to clear
+                      selected · tap to clear
                     </span>
                   )}
                 </span>

@@ -15,8 +15,8 @@ export function SiteHeader({ current }: { current: string }) {
             A Design Space for Representations of Deceased Companion Animals
           </h1>
           <p className="mt-1 text-sm text-ink/60">
-            Nine dimensions, 5184 possible pets — pick a position on each and
-            see who comes back.
+            Nine dimensions. 5,184 possible pets. Choose a position on each,
+            and see who comes back.
           </p>
         </div>
         <nav className="flex gap-1 text-sm">
@@ -43,8 +43,8 @@ export function SiteFooter() {
   return (
     <footer className="mx-auto w-full max-w-5xl px-6 py-8 text-xs text-ink/50">
       <p>
-        Developed as part of a Master&apos;s thesis at Karlsruhe Institute of
-        Technology (KIT) ·{' '}
+        A Master&apos;s thesis project — Karlsruhe Institute of Technology
+        (KIT) ·{' '}
         <a
           href="https://github.com/EdgarWHipp/DeceasedPetsDesignSpace"
           className="underline hover:text-ink"

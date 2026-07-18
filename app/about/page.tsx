@@ -18,21 +18,19 @@ export default function AboutPage() {
           member. Emerging technologies — extended reality, robotics,
           interactive media — open a wide range of ways a deceased pet can be
           represented, remembered, and encountered again. This design space
-          maps that range. It was developed through a series of design
-          workshops in which participants ideated, sketched, and discussed
-          concepts for technology-mediated representations of deceased
-          companion animals; the resulting concepts were then synthesized and
-          evaluated into a shared structure.
+          maps that range. It grew out of a series of design workshops:
+          participants sketched and discussed concepts for technology-mediated
+          representations of deceased companion animals, and those concepts
+          were then synthesized into the shared structure presented here.
         </p>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
           The synthesis yields nine dimensions in three groups — how the pet is
           made present (Manifestation), how the owner can encounter and act
           with it (Interaction), and how the representation is created, how the
           bond continues, and who can take part (Afterlife). Each dimension
-          offers two to four positions; combined, they describe 5,184 possible
-          configurations. The interactive builder on the front page lets you
-          explore them one pet at a time; the atlas shows the full space at
-          once.
+          offers two to four positions; together they describe 5,184 possible
+          configurations. The builder explores them one pet at a time; the
+          atlas lays out the whole space.
         </p>
         <p className="mt-6 text-sm text-ink/70">
           Master&apos;s thesis at Karlsruhe Institute of Technology (KIT), 2026.
@@ -45,6 +43,13 @@ export default function AboutPage() {
           >
             github.com/EdgarWHipp/DeceasedPetsDesignSpace
           </a>
+        </p>
+        <p className="mt-2 text-sm text-ink/70">
+          3D dog model by{' '}
+          <a href="https://quaternius.com" className="underline hover:text-ink">
+            Quaternius
+          </a>{' '}
+          (CC0), via poly.pizza.
         </p>
         <div className="mt-8 rounded-xl border border-black/10 bg-white p-5">
           <h3 className="font-serif text-sm font-semibold text-ink">Citation</h3>

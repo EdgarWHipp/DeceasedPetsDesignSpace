@@ -1,7 +1,9 @@
-// Single source of truth for the design space, transcribed verbatim from the
+// Single source of truth for the design space, adapted from the
 // final 9-dimension version in the thesis (text/content.tex, "The
 // Workshop-Grounded Design Space"). Consumed by the builder, story card,
 // spider graph, and atlas page — no second data source may exist.
+// Wording lightly humanized for the site; dimension/position structure,
+// labels, and examples match the thesis exactly.
 
 export type DimId =
   | 'D1'
@@ -42,20 +44,20 @@ export const GROUPS: {
     name: 'Manifestation',
     accent: '#2f8c78',
     description:
-      'How the representation appears and takes form — how the pet is made present and recognizable.',
+      'How the pet takes form — what makes it present and recognizable.',
     dims: ['D1', 'D2', 'D3'],
   },
   {
     name: 'Interaction',
     accent: '#b18452',
-    description: 'How the owner can encounter and act with the pet.',
+    description: 'How the owner can meet and engage with the pet.',
     dims: ['D4', 'D5', 'D6'],
   },
   {
     name: 'Afterlife',
     accent: '#8a7ca8',
     description:
-      'How the representation is created, how the bond continues or changes, and who can take part.',
+      'Where the pet comes from, how the bond carries on, and who shares in it.',
     dims: ['D7', 'D8', 'D9'],
   },
 ];
@@ -64,7 +66,7 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D1',
     title: 'Tangibility',
-    question: 'How the representation appears and takes form.',
+    question: 'Can the pet be touched?',
     group: 'Manifestation',
     positions: [
       {
@@ -77,14 +79,14 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D1-P2',
         label: 'Material',
-        definition: 'Touchable without acting on its own.',
+        definition: 'A touchable object that does not act on its own.',
         examples: ['collar', 'memorial stone', 'candle'],
         story: 'a quiet object you can hold in your hands',
       },
       {
         id: 'D1-P3',
         label: 'Interactive',
-        definition: 'Appears as an entity that can react.',
+        definition: 'A body that can sense and react.',
         examples: ['robot dog', 'animatronic pet', 'responsive avatar'],
         story: 'a responsive body that reacts when you reach out',
       },
@@ -93,13 +95,13 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D2',
     title: 'Fidelity',
-    question: 'How closely it resembles reality.',
+    question: 'How lifelike should it be?',
     group: 'Manifestation',
     positions: [
       {
         id: 'D2-P1',
         label: 'Stylized',
-        definition: 'Uses an expressive or simplified likeness.',
+        definition: 'An expressive, simplified likeness.',
         examples: ['comic hologram', 'cartoon avatar', 'game pet'],
         story: 'drawn with a soft, simplified likeness',
       },
@@ -115,27 +117,27 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D3',
     title: 'Recognizable Cues',
-    question: 'What makes it recognizable.',
+    question: 'How do you know it is yours?',
     group: 'Manifestation',
     positions: [
       {
         id: 'D3-P1',
         label: 'Symbolic',
-        definition: 'Recognized through signs or symbols.',
+        definition: 'Recognized by signs and symbols.',
         examples: ['birthday', 'name tag', 'paw symbol'],
         story: 'you know it by its name tag and paw mark',
       },
       {
         id: 'D3-P2',
         label: 'Sensory',
-        definition: 'Recognized through sensory cues.',
+        definition: 'Recognized by look, sound, and scent.',
         examples: ['fur color', 'scent', 'warmth', 'bark'],
         story: 'you know it by its color, scent, and bark',
       },
       {
         id: 'D3-P3',
         label: 'Behavioral',
-        definition: 'Recognized through habits or routines.',
+        definition: 'Recognized by its habits and routines.',
         examples: ['favorite trick', 'feeding routine', 'play style'],
         story: 'you know it by its favorite trick and daily routine',
       },
@@ -144,20 +146,20 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D4',
     title: 'Responsiveness',
-    question: 'Whether the pet reacts to the user.',
+    question: 'Does it react to you?',
     group: 'Interaction',
     positions: [
       {
         id: 'D4-P1',
         label: 'Passive',
-        definition: 'Presents content or cues without reacting as the pet.',
+        definition: 'Shows moments and cues without reacting back.',
         examples: ['photo album', 'video replay', 'scent cue'],
         story: 'it shows you moments without reacting back',
       },
       {
         id: 'D4-P2',
         label: 'Active',
-        definition: 'The pet responds during use.',
+        definition: 'Responds to you in the moment.',
         examples: ['chatbot', 'robot dog', 'interactive game pet'],
         story: 'it answers you — nudging, playing, responding',
       },
@@ -166,27 +168,27 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D5',
     title: 'Availability',
-    question: 'When and why it appears.',
+    question: 'When does it appear?',
     group: 'Interaction',
     positions: [
       {
         id: 'D5-P1',
         label: 'User Initiated',
-        definition: 'Opened or started by the owner.',
+        definition: 'Appears when the owner calls it up.',
         examples: ['album replay', 'saved video', 'guided replay'],
         story: 'it appears when you choose to call it',
       },
       {
         id: 'D5-P2',
         label: 'Externally Initiated',
-        definition: 'Appears through external activation.',
+        definition: 'Appears when something else triggers it.',
         examples: ['button', 'app', 'voice command'],
         story: 'it arrives when something in the world triggers it',
       },
       {
         id: 'D5-P3',
         label: 'Persistent',
-        definition: 'Present by default or continuously available.',
+        definition: 'Always available; present by default.',
         examples: ['timer', 'arrival cue', 'stress detection'],
         story: 'it is simply always there',
       },
@@ -195,20 +197,20 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D6',
     title: 'Mobility',
-    question: 'How far it can move across contexts.',
+    question: 'Where can it be?',
     group: 'Interaction',
     positions: [
       {
         id: 'D6-P1',
         label: 'Fixed Place',
-        definition: 'Limited to a specific context.',
+        definition: 'Bound to one meaningful place.',
         examples: ['grave', 'old corner', 'fixed display', 'specific VR world'],
         story: 'it lives in one meaningful place',
       },
       {
         id: 'D6-P2',
         label: 'Moves With You',
-        definition: 'Can appear across changing contexts.',
+        definition: 'Comes along wherever you are.',
         examples: ['mobile AR', 'wearable overlay', 'cloud companion'],
         story: 'it travels with you wherever you go',
       },
@@ -217,20 +219,20 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D7',
     title: 'Creation',
-    question: 'What information is used to make it.',
+    question: 'What is it made from?',
     group: 'Afterlife',
     positions: [
       {
         id: 'D7-P1',
         label: 'Personal Memories',
-        definition: 'Built from subjective accounts of the owner and others.',
+        definition: 'Built from what you and others remember.',
         examples: ['memory notes', 'questionnaire', 'owner photos', 'voice clips'],
         story: 'built from your own memories, photos, and stories',
       },
       {
         id: 'D7-P2',
         label: 'Recorded Data',
-        definition: 'Built from external data sources.',
+        definition: 'Built from data the world recorded.',
         examples: [
           'home sensors',
           'public cameras',
@@ -244,7 +246,7 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D8',
     title: 'Continuity Logic',
-    question: 'What direction the relationship takes after loss.',
+    question: 'Where does the relationship go from here?',
     group: 'Afterlife',
     positions: [
       {
@@ -264,14 +266,14 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D8-P3',
         label: 'New Relationship',
-        definition: 'Helps move toward a different relationship.',
+        definition: 'Helps open a new relationship.',
         examples: ['adoption matching', 'meeting another pet'],
         story: 'it walks you toward a new companion',
       },
       {
         id: 'D8-P4',
         label: 'Letting Go',
-        definition: 'Supports farewell or closure.',
+        definition: 'Helps with farewell and closure.',
         examples: ['farewell ritual', 'limited session'],
         story: 'it helps you say goodbye',
       },
@@ -280,7 +282,7 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D9',
     title: 'Participation Circle',
-    question: 'Who can take part in the experience.',
+    question: 'Who can take part?',
     group: 'Afterlife',
     positions: [
       {
@@ -293,14 +295,14 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D9-P2',
         label: 'Close Circle',
-        definition: 'Close others can join the experience.',
+        definition: 'Open to the people closest to you.',
         examples: ['family viewing', 'shared keepsake', 'group visit'],
         story: 'your closest people can join you',
       },
       {
         id: 'D9-P3',
         label: 'Public Community',
-        definition: 'Is meant for wider collective participation.',
+        definition: 'Open to a wider community.',
         examples: ['online tribute', 'communal ceremony', 'public memory archive'],
         story: 'a whole community remembers with you',
       },
@@ -351,7 +353,7 @@ export const PRESETS: {
   },
   {
     name: 'Memorial Candle',
-    blurb: 'A quiet keepsake lit on meaningful days to say goodbye gently.',
+    blurb: 'A quiet keepsake, lit on meaningful days, that helps say goodbye.',
     selection: {
       D1: 'D1-P2',
       D2: 'D2-P1',
