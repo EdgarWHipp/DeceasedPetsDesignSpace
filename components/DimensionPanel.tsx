@@ -19,7 +19,7 @@ export default function DimensionPanel({
 }) {
   const accent = GROUP_ACCENT[dimension.group];
   return (
-    <div className="rounded-xl border border-black/10 bg-white/95 shadow-lg backdrop-blur-sm p-4 text-left">
+    <div className="rounded-xl border border-black/10 bg-white shadow-md p-4 text-left">
       <div className="flex items-start justify-between gap-3 mb-1">
         <div>
           <p className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: accent }}>

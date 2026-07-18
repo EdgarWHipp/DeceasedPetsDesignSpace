@@ -67,7 +67,7 @@ export default function KioskMode({
   if (!attract) return null;
   return (
     <div className="pointer-events-none fixed inset-0 z-40 flex items-end justify-center pb-16">
-      <p className="attract-caption rounded-full bg-ink/85 px-8 py-4 text-lg font-medium text-paper shadow-xl">
+      <p className="attract-caption rounded-full bg-ink/85 px-8 py-4 text-lg font-medium text-paper shadow-md">
         Touch to build your own pet
       </p>
     </div>

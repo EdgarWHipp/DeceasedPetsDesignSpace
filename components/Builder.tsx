@@ -58,7 +58,7 @@ export default function Builder() {
               key={preset.name}
               onClick={() => apply(preset.selection)}
               title={preset.blurb}
-              className="rounded-full border border-black/15 bg-white/80 px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
+              className="rounded-full border border-black/15 bg-white px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
             >
               {preset.name}
             </button>
@@ -66,7 +66,7 @@ export default function Builder() {
           <span className="mx-1 hidden h-5 w-px bg-black/15 sm:block" />
           <button
             onClick={() => apply(randomSelection())}
-            className="rounded-full border border-black/15 bg-white/80 px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
+            className="rounded-full border border-black/15 bg-white px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
           >
             Random
           </button>
@@ -125,7 +125,7 @@ export default function Builder() {
                     return (
                       <div
                         key={dimId}
-                        className="rounded-lg border border-black/10 bg-white/70"
+                        className="rounded-lg border border-black/10 bg-white"
                       >
                         <button
                           onClick={() =>

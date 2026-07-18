@@ -14,8 +14,6 @@ import {
   TimelineLayer,
 } from '@/lib/petLayers';
 
-const PARTICLE_ANGLES = [15, 75, 135, 195, 255, 315];
-
 export default function PetStage({
   selection,
   generation,
@@ -84,22 +82,6 @@ export default function PetStage({
             </g>
           </g>
         </g>
-        {/* spawn particles: 6 circles fading out over 400ms */}
-        {generation > 0 && (
-          <g className="spawn-particle" fill={INK}>
-            {PARTICLE_ANGLES.map((a) => {
-              const rad = (a * Math.PI) / 180;
-              return (
-                <circle
-                  key={a}
-                  cx={240 + 120 * Math.cos(rad)}
-                  cy={290 + 120 * Math.sin(rad)}
-                  r="5"
-                />
-              );
-            })}
-          </g>
-        )}
       </g>
       {/* motes (D7) */}
       <MotesLayer selection={selection} />

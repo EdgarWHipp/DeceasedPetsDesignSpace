@@ -46,7 +46,7 @@ export default function AboutPage() {
             github.com/EdgarWHipp/DeceasedPetsDesignSpace
           </a>
         </p>
-        <div className="mt-8 rounded-xl border border-black/10 bg-white/70 p-5">
+        <div className="mt-8 rounded-xl border border-black/10 bg-white p-5">
           <h3 className="font-serif text-sm font-semibold text-ink">Citation</h3>
           <p className="mt-2 text-sm italic text-ink/60">
             Thesis citation to be added upon publication.

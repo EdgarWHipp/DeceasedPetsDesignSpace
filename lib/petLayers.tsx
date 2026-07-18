@@ -21,23 +21,11 @@ export function StageDefs() {
         <stop offset="0%" stopColor={MANIFESTATION} />
         <stop offset="100%" stopColor={MANIFESTATION} stopOpacity="0" />
       </linearGradient>
-      {/* D1-P2 Material: stone gradient */}
-      <linearGradient id="stoneGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#b8b0a4" />
-        <stop offset="100%" stopColor="#8f887c" />
-      </linearGradient>
       {/* D2-P2 Realistic: soft shading overlay */}
       <radialGradient id="shadeGrad" cx="0.5" cy="0.35" r="0.75">
         <stop offset="55%" stopColor={INK} stopOpacity="0" />
         <stop offset="100%" stopColor={INK} stopOpacity="0.22" />
       </radialGradient>
-      <filter id="holoGlow" x="-40%" y="-40%" width="180%" height="180%">
-        <feGaussianBlur stdDeviation="3" result="blur" />
-        <feMerge>
-          <feMergeNode in="blur" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-      </filter>
       {/* clip for scanlines / speckles / panel seams */}
       <clipPath id="petClip">
         <ellipse cx="240" cy="312" rx="86" ry="70" />
@@ -52,7 +40,7 @@ export function StageDefs() {
 function bodyFill(d1: string | undefined, d2: string | undefined): string {
   const flat = d2 === 'D2-P1'; // Stylized drops gradients, uses flat fills
   if (d1 === 'D1-P1') return flat ? MANIFESTATION : 'url(#holoGrad)';
-  if (d1 === 'D1-P2') return flat ? '#a8a094' : 'url(#stoneGrad)';
+  if (d1 === 'D1-P2') return '#a8a094';
   if (d1 === 'D1-P3') return '#ccd2d4';
   return NEUTRAL;
 }
@@ -71,11 +59,7 @@ export function PetBody({ selection }: { selection: Selection }) {
   const stroke = INK;
 
   return (
-    <g
-      opacity={holo ? 0.65 : 1}
-      filter={holo ? 'url(#holoGlow)' : undefined}
-      transform={holo ? 'translate(0 -12)' : undefined}
-    >
+    <g opacity={holo ? 0.65 : 1}>
       {/* tail (wagged by PetStage when D4-P2) */}
       <g className={selection.D4 === 'D4-P2' ? 'tail-wag' : undefined}>
         <path
@@ -401,10 +385,6 @@ export function BackgroundLayer({ selection }: { selection: Selection }) {
           <ellipse cx="60" cy="92" rx="34" ry="14" />
           <ellipse cx="86" cy="84" rx="24" ry="12" />
         </g>
-        <g className="cloud-drift-late" fill="#ffffff" opacity="0.7">
-          <ellipse cx="-40" cy="146" rx="28" ry="11" />
-          <ellipse cx="-18" cy="140" rx="18" ry="9" />
-        </g>
         {[152, 180, 208, 272, 300, 328].map((x) => (
           <circle key={x} cx={x} cy="410" r="3" fill={INK} opacity="0.25" />
         ))}
@@ -426,7 +406,7 @@ export function AmbientLayer({ selection }: { selection: Selection }) {
       r="155"
       fill="none"
       stroke={INTERACTION}
-      strokeWidth="18"
+      strokeWidth="8"
     />
   );
 }

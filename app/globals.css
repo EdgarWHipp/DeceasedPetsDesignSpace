@@ -44,22 +44,6 @@ body {
   transform-origin: 240px 300px;
 }
 
-/* spawn particles: 6 circles fading out over 400ms */
-@keyframes particle {
-  from {
-    transform: scale(0.4);
-    opacity: 0.9;
-  }
-  to {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-}
-.spawn-particle {
-  animation: particle 0.4s ease-out forwards;
-  transform-origin: 240px 300px;
-}
-
 /* D1-P3 Interactive: antenna LED blink */
 @keyframes blink {
   0%,
@@ -135,7 +119,7 @@ body {
     opacity: 0.25;
   }
   50% {
-    opacity: 0.6;
+    opacity: 0.45;
   }
 }
 .ring-breathe {
@@ -153,10 +137,6 @@ body {
 }
 .cloud-drift {
   animation: drift 30s linear infinite;
-}
-.cloud-drift-late {
-  animation: drift 30s linear infinite;
-  animation-delay: -15s;
 }
 
 /* D7: motes orbiting the pet */
@@ -257,7 +237,6 @@ body {
   .tail-wag,
   .ring-breathe,
   .cloud-drift,
-  .cloud-drift-late,
   .mote-orbit,
   .led-blink,
   .letting-go,
