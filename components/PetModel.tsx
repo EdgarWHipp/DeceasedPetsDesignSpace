@@ -36,10 +36,9 @@ const PROP_ANCHORS = {
     tag: [0, 0.6, 0.62],
   },
   voxelStylized: {
-    // The stage camera sits nearly level with the collar, so a flat ring
-    // reads as a straight line. The stronger tilt opens the ellipse toward
-    // the camera: the band dips under the chin and arcs over the shoulders.
-    collar: { pos: [0, 0.74, 0.29], rotX: -1.3, r: 0.54, tube: 0.055, squash: 0.9 },
+    // A snug band at the head-body junction, tilted like the beagle's
+    // collar so it reads as a neck band rather than a hoop.
+    collar: { pos: [0, 0.8, 0.28], rotX: -1.05, r: 0.36, tube: 0.05, squash: 0.95 },
     tag: [0, 0.55, 0.72],
   },
   real: {
@@ -537,7 +536,8 @@ export default function PetModel({
             <meshStandardMaterial color="#8f887c" />
           </mesh>
         )}
-        {/* D3-P1 Symbolic: collar around the neck base + tag below the chin */}
+        {/* D3-P1 Symbolic: collar around the neck base + tag below the chin.
+            Perceived (D1-P1) renders the necklace as translucent as the pet. */}
         {symbolic && (
           <>
             <mesh
@@ -546,14 +546,26 @@ export default function PetModel({
               scale={[1, anchors.collar.squash, 1]}
             >
               <torusGeometry args={[anchors.collar.r, anchors.collar.tube, 24, 64]} />
-              <meshStandardMaterial color="#7a3b2e" />
+              <meshStandardMaterial
+                key={d1 === 'D1-P1' ? 'ghost' : 'solid'}
+                color="#7a3b2e"
+                transparent={d1 === 'D1-P1'}
+                opacity={d1 === 'D1-P1' ? 0.55 : 1}
+              />
             </mesh>
             <mesh
               position={anchors.tag as unknown as THREE.Vector3Tuple}
               rotation-x={Math.PI / 2}
             >
               <cylinderGeometry args={[0.09, 0.09, 0.03, 20]} />
-              <meshStandardMaterial color="#d9b23c" metalness={0.6} roughness={0.4} />
+              <meshStandardMaterial
+                key={d1 === 'D1-P1' ? 'ghost' : 'solid'}
+                color="#d9b23c"
+                metalness={0.6}
+                roughness={0.4}
+                transparent={d1 === 'D1-P1'}
+                opacity={d1 === 'D1-P1' ? 0.55 : 1}
+              />
             </mesh>
           </>
         )}

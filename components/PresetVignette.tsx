@@ -30,7 +30,7 @@ export default function PresetVignette({ preset }: { preset: string | null }) {
   return null;
 }
 
-/** Cream candle with a flickering flame, on the ground beside the plinth. */
+/** Cream candle with a flickering flame — the stage's sole subject. */
 function Candle() {
   const reducedMotion = useReducedMotion();
   const flame = useRef<THREE.Mesh>(null);
@@ -47,12 +47,12 @@ function Candle() {
   });
 
   return (
-    <group position={[0.85, 0, 0.5]}>
+    <group position={[0, 0, 0.2]} scale={2}>
       <mesh position={[0, 0.21, 0]}>
         <cylinderGeometry args={[0.09, 0.1, 0.42, 24]} />
         <meshStandardMaterial color="#e9dcc2" roughness={0.9} />
       </mesh>
-      <mesh ref={flame} position={[0, 0.5, 0]} scale={[0.7, 1.6, 0.7]}>
+      <mesh ref={flame} position={[0, 0.47, 0]} scale={[0.7, 1.6, 0.7]}>
         <sphereGeometry args={[0.045, 12, 12]} />
         <meshStandardMaterial
           color="#ffd27a"

@@ -43,9 +43,12 @@ export default function PetStage({
             castShadow={realistic}
             shadow-mapSize={[1024, 1024]}
           />
-          <Suspense fallback={null}>
-            <PetModel selection={selection} generation={generation} />
-          </Suspense>
+          {/* Memorial Candle: the candle vignette IS the representation */}
+          {preset !== 'Memorial Candle' && (
+            <Suspense fallback={null}>
+              <PetModel selection={selection} generation={generation} />
+            </Suspense>
+          )}
           <PresetVignette preset={preset} />
         </Canvas>
       </div>
