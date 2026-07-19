@@ -6,10 +6,8 @@ import type { ReactNode } from 'react';
 import type { Selection } from './designSpace';
 
 export const INK = '#252827';
-export const NEUTRAL = '#c9c3b8';
 const MANIFESTATION = '#2f8c78';
 const INTERACTION = '#b18452';
-const AFTERLIFE = '#8a7ca8';
 
 /* --------------------------------------- D3 annotation cues (front) --- */
 
@@ -83,60 +81,6 @@ export function AmbientLayer({ selection }: { selection: Selection }) {
       strokeWidth="4"
       opacity="0.6"
     />
-  );
-}
-
-/* ------------------------------------------------------- D7 motes --- */
-
-export function MotesLayer({ selection }: { selection: Selection }) {
-  const d7 = selection.D7;
-  if (!d7) return null;
-  const personal = d7 === 'D7-P1';
-  const angles = [90, 210, 330];
-  return (
-    <g className="mote-orbit">
-      {angles.map((a, i) => {
-        const rad = (a * Math.PI) / 180;
-        const x = 240 + 150 * Math.cos(rad);
-        const y = 290 + 150 * Math.sin(rad);
-        if (personal) {
-          // tiny photo frames and hearts
-          return i % 2 === 0 ? (
-            <g key={a} transform={`translate(${x - 8} ${y - 6})`}>
-              <rect width="16" height="12" fill="#ffffff" stroke={INK} strokeWidth="1.5" />
-              <rect x="2.5" y="2.5" width="11" height="7" fill={AFTERLIFE} opacity="0.7" />
-            </g>
-          ) : (
-            <path
-              key={a}
-              transform={`translate(${x} ${y - 5})`}
-              d="M0 3 C-1 0 -6 0 -6 4 C-6 8 0 11 0 11 C0 11 6 8 6 4 C6 0 1 0 0 3"
-              fill={AFTERLIFE}
-              opacity="0.85"
-            />
-          );
-        }
-        // recorded data: tiny squares and waveform ticks
-        return i % 2 === 0 ? (
-          <rect
-            key={a}
-            x={x - 5}
-            y={y - 5}
-            width="10"
-            height="10"
-            fill="none"
-            stroke={AFTERLIFE}
-            strokeWidth="2"
-          />
-        ) : (
-          <g key={a} stroke={AFTERLIFE} strokeWidth="2" strokeLinecap="round">
-            <line x1={x - 5} y1={y - 3} x2={x - 5} y2={y + 3} />
-            <line x1={x} y1={y - 7} x2={x} y2={y + 7} />
-            <line x1={x + 5} y1={y - 4} x2={x + 5} y2={y + 4} />
-          </g>
-        );
-      })}
-    </g>
   );
 }
 

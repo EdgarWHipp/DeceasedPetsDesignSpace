@@ -42,20 +42,20 @@ export const GROUPS: {
 }[] = [
   {
     name: 'Manifestation',
-    accent: '#2f8c78',
+    accent: '#1d6a58',
     description:
       'How the pet takes form — what makes it present and recognizable.',
     dims: ['D1', 'D2', 'D3'],
   },
   {
     name: 'Interaction',
-    accent: '#b18452',
+    accent: '#8f6228',
     description: 'How the owner can meet and engage with the pet.',
     dims: ['D4', 'D5', 'D6'],
   },
   {
     name: 'Afterlife',
-    accent: '#8a7ca8',
+    accent: '#635488',
     description:
       'Where the pet comes from, how the bond carries on, and who shares in it.',
     dims: ['D7', 'D8', 'D9'],

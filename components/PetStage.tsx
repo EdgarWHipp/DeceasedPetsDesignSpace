@@ -9,7 +9,6 @@ import {
   BackgroundLayer,
   GlyphLayer,
   INK,
-  MotesLayer,
   SensoryCues,
   TrailCue,
 } from '@/lib/petLayers';
@@ -79,7 +78,7 @@ export default function PetStage({
           </Suspense>
         </Canvas>
       </div>
-      {/* front overlay: annotations (D3 cues, D7 motes, D4/D5 glyphs) */}
+      {/* front overlay: annotations (D3 cues, D4/D5 glyphs) */}
       <svg
         viewBox="0 0 480 480"
         className="pointer-events-none absolute inset-0 h-full w-full"
@@ -87,7 +86,6 @@ export default function PetStage({
       >
         <SensoryCues selection={selection} />
         <TrailCue selection={selection} />
-        <MotesLayer selection={selection} />
         <GlyphLayer selection={selection} generation={generation} />
         {/* "wuff" speech bubble (D4-P2, on pet click) */}
         {wuffAt > 0 && (

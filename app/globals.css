@@ -3,9 +3,9 @@
 :root {
   --background: #f7f5f0;
   --foreground: #252827;
-  --accent-manifestation: #2f8c78;
-  --accent-interaction: #b18452;
-  --accent-afterlife: #8a7ca8;
+  --accent-manifestation: #1d6a58;
+  --accent-interaction: #8f6228;
+  --accent-afterlife: #635488;
 }
 
 @theme inline {
@@ -13,9 +13,9 @@
   --color-foreground: var(--foreground);
   --color-ink: #252827;
   --color-paper: #f7f5f0;
-  --color-manifestation: #2f8c78;
-  --color-interaction: #b18452;
-  --color-afterlife: #8a7ca8;
+  --color-manifestation: #1d6a58;
+  --color-interaction: #8f6228;
+  --color-afterlife: #635488;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-source-serif);
 }
@@ -78,20 +78,6 @@ body {
   animation: breathe 8s ease-in-out infinite;
 }
 
-/* D7: motes orbiting the pet */
-@keyframes orbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.mote-orbit {
-  animation: orbit 14s linear infinite;
-  transform-origin: 240px 290px;
-}
-
 /* kiosk attract-mode caption */
 @keyframes caption-pulse {
   0%,
@@ -109,7 +95,6 @@ body {
 /* reduced motion: disable looping animations; one-shots stay */
 @media (prefers-reduced-motion: reduce) {
   .ring-breathe,
-  .mote-orbit,
   .attract-caption {
     animation: none;
   }
