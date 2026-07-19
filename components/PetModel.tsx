@@ -10,9 +10,10 @@
 
 import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 import * as THREE from 'three';
-import { useFrame, useGraph, type ThreeEvent } from '@react-three/fiber';
+import { useFrame, useGraph, useThree, type ThreeEvent } from '@react-three/fiber';
 import { ContactShadows, useAnimations, useGLTF } from '@react-three/drei';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import type { Selection } from '@/lib/designSpace';
 
 const MODEL_URL = '/models/dog.glb';
@@ -27,6 +28,49 @@ function subscribeReducedMotion(onChange: () => void) {
   const mq = window.matchMedia(REDUCED_MOTION);
   mq.addEventListener('change', onChange);
   return () => mq.removeEventListener('change', onChange);
+}
+
+// D4-P2 head tracking: reusable scratch objects (set + consumed within one
+// frame callback, so sharing across stage instances is safe).
+const HEAD_Q = new THREE.Quaternion();
+const HEAD_E = new THREE.Euler();
+
+// D2-P2 Realistic: average area-weighted face normals across duplicated
+// vertices (the GLB splits verts at every hard edge, so
+// computeVertexNormals() alone cannot smooth the silhouette).
+function smoothedGeometry(src: THREE.BufferGeometry): THREE.BufferGeometry {
+  const geo = src.clone();
+  const pos = geo.attributes.position;
+  const idx = geo.index!;
+  const key = (i: number) =>
+    `${pos.getX(i).toFixed(4)},${pos.getY(i).toFixed(4)},${pos.getZ(i).toFixed(4)}`;
+  const acc = new Map<string, THREE.Vector3>();
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  const n = new THREE.Vector3();
+  for (let t = 0; t < idx.count; t += 3) {
+    const ia = idx.getX(t);
+    const ib = idx.getX(t + 1);
+    const ic = idx.getX(t + 2);
+    a.fromBufferAttribute(pos, ia);
+    b.fromBufferAttribute(pos, ib);
+    c.fromBufferAttribute(pos, ic);
+    n.copy(b).sub(a).cross(c.sub(a)); // unnormalized = area-weighted
+    for (const i of [ia, ib, ic]) {
+      const k = key(i);
+      const v = acc.get(k);
+      if (v) v.add(n);
+      else acc.set(k, n.clone());
+    }
+  }
+  const normal = geo.attributes.normal;
+  for (let i = 0; i < pos.count; i++) {
+    n.copy(acc.get(key(i))!).normalize();
+    normal.setXYZ(i, n.x, n.y, n.z);
+  }
+  normal.needsUpdate = true;
+  return geo;
 }
 
 export default function PetModel({
@@ -47,7 +91,10 @@ export default function PetModel({
     const c = cloneSkeleton(scene);
     c.traverse((obj) => {
       const mesh = obj as THREE.SkinnedMesh;
-      if (mesh.isSkinnedMesh) mesh.userData.originalMaterial = mesh.material;
+      if (mesh.isSkinnedMesh) {
+        mesh.userData.originalMaterial = mesh.material;
+        mesh.userData.originalGeometry = mesh.geometry;
+      }
     });
     return c;
   }, [scene]);
@@ -106,8 +153,14 @@ export default function PetModel({
     return () => {
       cache.forEach((m) => m.dispose());
       cache.clear();
+      model.traverse((obj) => {
+        const smooth = (obj as THREE.SkinnedMesh).userData.smoothGeometry as
+          | THREE.BufferGeometry
+          | undefined;
+        smooth?.dispose();
+      });
     };
-  }, []);
+  }, [model]);
 
   useEffect(() => {
     const cache = matCache.current;
@@ -145,9 +198,31 @@ export default function PetModel({
       mesh.material = materialFor(
         mesh.userData.originalMaterial as THREE.MeshStandardMaterial,
       );
+      mesh.geometry = realistic
+        ? ((mesh.userData.smoothGeometry as THREE.BufferGeometry | undefined) ??
+          (mesh.userData.smoothGeometry = smoothedGeometry(
+            mesh.userData.originalGeometry as THREE.BufferGeometry,
+          )))
+        : (mesh.userData.originalGeometry as THREE.BufferGeometry);
       mesh.castShadow = realistic;
     });
   }, [model, d1, stylized, realistic]);
+
+  // D2-P2 Realistic: image-based lighting grounds the standard materials.
+  // MeshToonMaterial ignores scene.environment, so stylized is untouched.
+  const { gl, scene: rootScene } = useThree();
+  useEffect(() => {
+    if (!realistic) return;
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const env = pmrem.fromScene(new RoomEnvironment()).texture;
+    rootScene.environment = env;
+    rootScene.environmentIntensity = 0.5;
+    return () => {
+      rootScene.environment = null;
+      env.dispose();
+      pmrem.dispose();
+    };
+  }, [realistic, gl, rootScene]);
 
   // D2-P1 Stylized: oversized head (mirrors the 2D 1.25 head-scale encoding).
   useEffect(() => {
@@ -188,26 +263,58 @@ export default function PetModel({
 
   const wagUntil = useRef(0);
   const wasWagging = useRef(false);
+  const headOffset = useRef(new THREE.Vector2());
+  const headBase = useRef(new THREE.Quaternion());
+  const headLast = useRef(new THREE.Quaternion());
+  const wasTracking = useRef(false);
   const ledMat = useRef<THREE.MeshStandardMaterial>(null);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, pointer }) => {
     const g = group.current;
     if (!g) return;
     // spawn feedback: scale 0.9 -> 1 over 250ms, ease-out cubic
     const t = Math.min((performance.now() - spawnStart.current) / SPAWN_MS, 1);
     const eased = 1 - (1 - t) ** 3;
     g.scale.setScalar(0.9 + 0.1 * eased);
-    // D4-P2 wag: bone-driven tail swing while the wag timer runs
+    const animating = mixer.timeScale > 0;
+    // D4-P2 wag: gentle idle swing whenever Active; fast burst on click
     const tail = nodes.Tail as THREE.Bone | undefined;
     if (tail) {
-      const wagging =
-        !reducedMotion && active && performance.now() < wagUntil.current;
-      if (wagging) {
-        tail.rotation.z = Math.sin(clock.elapsedTime * 18) * 0.45;
+      if (active && animating) {
+        tail.rotation.z =
+          performance.now() < wagUntil.current
+            ? Math.sin(clock.elapsedTime * 18) * 0.45
+            : Math.sin(clock.elapsedTime * 6) * 0.18;
         wasWagging.current = true;
       } else if (wasWagging.current) {
         wasWagging.current = false;
         tail.rotation.z = 0;
+      }
+    }
+    // D4-P2 head tracking: compose (mixer pose x damped pointer offset) on
+    // the Head bone. The mixer's PropertyMixer only rewrites the quaternion
+    // when the track value changes between frames, so a bare post-multiply
+    // would accumulate during constant idle segments. Detect whether the
+    // mixer wrote this frame (quaternion differs from our last composite)
+    // and re-capture its pose as the base; on disengage restore it once.
+    const head = nodes.Head as THREE.Bone | undefined;
+    if (head) {
+      if (active && animating) {
+        if (!wasTracking.current || !head.quaternion.equals(headLast.current)) {
+          headBase.current.copy(head.quaternion);
+        }
+        headOffset.current.lerp(pointer, 0.12);
+        // Head bone axes (GLB rest pose): local Z = world up (yaw),
+        // local X = world -X (pitch). Signs verified visually.
+        HEAD_Q.setFromEuler(
+          HEAD_E.set(headOffset.current.y * 0.15, 0, headOffset.current.x * 0.3),
+        );
+        head.quaternion.copy(headBase.current).multiply(HEAD_Q);
+        headLast.current.copy(head.quaternion);
+        wasTracking.current = true;
+      } else if (wasTracking.current) {
+        wasTracking.current = false;
+        head.quaternion.copy(headBase.current);
       }
     }
     // D1-P3 LED: square wave 0 <-> 1 every 1s

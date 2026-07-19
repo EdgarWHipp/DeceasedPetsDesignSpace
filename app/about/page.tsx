@@ -32,8 +32,13 @@ export default function AboutPage() {
           configurations. The builder explores them one pet at a time; the
           atlas lays out the whole space.
         </p>
-        <p className="mt-6 text-sm text-ink/70">
-          Master&apos;s thesis at Karlsruhe Institute of Technology (KIT), 2026.
+        <p className="mt-6 text-sm font-medium text-ink/80">
+          Edgar Hipp, Dr.-Ing. Martin Feick, M.Sc. Shi Liu, Prof. Dr. Alexander
+          Mädche
+        </p>
+        <p className="mt-1 text-sm text-ink/70">
+          Master&apos;s Thesis · Human-Centered Systems Lab (h-lab), WIN,
+          Karlsruhe Institute of Technology (KIT) · 2026
         </p>
         <p className="mt-2 text-sm text-ink/70">
           Source code:{' '}

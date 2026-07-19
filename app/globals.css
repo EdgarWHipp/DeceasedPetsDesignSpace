@@ -78,7 +78,7 @@ body {
   animation: breathe 8s ease-in-out infinite;
 }
 
-/* D6-P2 Moves With You: clouds drifting across the stage */
+/* D6-P2 Unrestricted: clouds drifting across the stage */
 @keyframes drift {
   from {
     transform: translateX(-120px);

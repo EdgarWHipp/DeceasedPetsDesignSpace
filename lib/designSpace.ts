@@ -175,21 +175,21 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D5-P1',
         label: 'User Initiated',
         definition: 'Appears when the owner calls it up.',
-        examples: ['album replay', 'saved video', 'guided replay'],
+        examples: ['button', 'app', 'voice command'],
         story: 'it appears when you choose to call it',
       },
       {
         id: 'D5-P2',
         label: 'Externally Initiated',
         definition: 'Appears when something else triggers it.',
-        examples: ['button', 'app', 'voice command'],
+        examples: ['timer', 'arrival cue', 'stress detection'],
         story: 'it arrives when something in the world triggers it',
       },
       {
         id: 'D5-P3',
         label: 'Persistent',
         definition: 'Always available; present by default.',
-        examples: ['timer', 'arrival cue', 'stress detection'],
+        examples: ['always-on companion', 'standby display'],
         story: 'it is simply always there',
       },
     ],
@@ -202,14 +202,14 @@ export const DIMENSIONS: Dimension[] = [
     positions: [
       {
         id: 'D6-P1',
-        label: 'Fixed Place',
-        definition: 'Bound to one meaningful place.',
+        label: 'Context-Bound',
+        definition: 'Bound to one specific place or context.',
         examples: ['grave', 'old corner', 'fixed display', 'specific VR world'],
         story: 'it lives in one meaningful place',
       },
       {
         id: 'D6-P2',
-        label: 'Moves With You',
+        label: 'Unrestricted',
         definition: 'Comes along wherever you are.',
         examples: ['mobile AR', 'wearable overlay', 'cloud companion'],
         story: 'it travels with you wherever you go',
@@ -224,14 +224,14 @@ export const DIMENSIONS: Dimension[] = [
     positions: [
       {
         id: 'D7-P1',
-        label: 'Personal Memories',
-        definition: 'Built from what you and others remember.',
+        label: 'Subjective Personal Data',
+        definition: 'Built from your memories and personal records.',
         examples: ['memory notes', 'questionnaire', 'owner photos', 'voice clips'],
         story: 'built from your own memories, photos, and stories',
       },
       {
         id: 'D7-P2',
-        label: 'Recorded Data',
+        label: 'Objective Data',
         definition: 'Built from data the world recorded.',
         examples: [
           'home sensors',

@@ -49,7 +49,7 @@ export function TrailCue({ selection }: { selection: Selection }) {
 export function BackgroundLayer({ selection }: { selection: Selection }) {
   const d6 = selection.D6;
   if (d6 === 'D6-P1') {
-    // Fixed Place: room corner, window, pet bed
+    // Context-Bound: room corner, window, pet bed
     return (
       <g>
         <line x1="90" y1="120" x2="90" y2="400" stroke="#d8d2c4" strokeWidth="3" />
@@ -62,7 +62,7 @@ export function BackgroundLayer({ selection }: { selection: Selection }) {
     );
   }
   if (d6 === 'D6-P2') {
-    // Moves With You: horizon + drifting clouds + path dots
+    // Unrestricted: horizon + drifting clouds + path dots
     return (
       <g>
         <line x1="0" y1="400" x2="480" y2="400" stroke="#d8d2c4" strokeWidth="3" />
