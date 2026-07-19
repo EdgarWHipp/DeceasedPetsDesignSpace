@@ -32,17 +32,19 @@ useGLTF.preload(REAL_MODEL_URL);
 // its head-base collar must widen and drop with it.
 const PROP_ANCHORS = {
   voxel: {
-    collar: { pos: [0, 0.8, 0.24], rotX: -1.5, r: 0.44, tube: 0.055 },
+    collar: { pos: [0, 0.8, 0.24], rotX: -1.5, r: 0.44, tube: 0.055, squash: 1 },
     tag: [0, 0.64, 0.62],
     led: [0, 1.55, 0.19],
   },
   voxelStylized: {
-    collar: { pos: [0, 0.74, 0.29], rotX: -1.5, r: 0.54, tube: 0.055 },
-    tag: [0, 0.58, 0.78],
+    // Mild squash pulls the ring toward the head base; the tilt dips the
+    // front of the band below the muzzle so it stays visible under the chin.
+    collar: { pos: [0, 0.72, 0.29], rotX: -1.44, r: 0.54, tube: 0.055, squash: 0.9 },
+    tag: [0, 0.55, 0.72],
     led: [0, 1.58, 0.21],
   },
   real: {
-    collar: { pos: [0, 1.03, 0.47], rotX: -0.95, r: 0.17, tube: 0.03 },
+    collar: { pos: [0, 1.03, 0.47], rotX: -0.95, r: 0.17, tube: 0.03, squash: 1 },
     tag: [0, 0.84, 0.62],
     led: [0, 1.52, 0.6],
   },
@@ -547,8 +549,9 @@ export default function PetModel({
             <mesh
               position={anchors.collar.pos as unknown as THREE.Vector3Tuple}
               rotation-x={anchors.collar.rotX}
+              scale={[1, anchors.collar.squash, 1]}
             >
-              <torusGeometry args={[anchors.collar.r, anchors.collar.tube, 12, 32]} />
+              <torusGeometry args={[anchors.collar.r, anchors.collar.tube, 24, 64]} />
               <meshStandardMaterial color="#7a3b2e" />
             </mesh>
             <mesh
