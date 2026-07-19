@@ -29,9 +29,15 @@ export default function Builder() {
   const [activeDim, setActiveDim] = useState<DimId | null>(null);
   const [openAccordion, setOpenAccordion] = useState<DimId | null>(null);
 
+  // The spawn pulse (generation) only fires when the pet's own visuals
+  // change: Manifestation dims D1-D3. Interaction and Afterlife picks
+  // update the story without re-generating the picture.
+  const VISUAL_DIMS: DimId[] = ['D1', 'D2', 'D3'];
+
   const apply = (sel: Selection) => {
+    if (VISUAL_DIMS.some((d) => selection[d] !== sel[d]))
+      setGeneration((g) => g + 1);
     setSelection(sel);
-    setGeneration((g) => g + 1);
     setActiveDim(null);
   };
 
@@ -42,7 +48,7 @@ export default function Builder() {
       else next[dim] = posId;
       return next;
     });
-    setGeneration((g) => g + 1);
+    if (VISUAL_DIMS.includes(dim)) setGeneration((g) => g + 1);
     setActiveDim(null);
   };
 
@@ -50,7 +56,7 @@ export default function Builder() {
     <div className="flex min-h-screen flex-col">
       {!kiosk && <SiteHeader current="/" />}
 
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 md:px-6">
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 md:px-6">
         {/* preset bar */}
         <div className="flex flex-wrap items-center justify-center gap-2 py-4">
           {PRESETS.map((preset) => (
@@ -78,8 +84,9 @@ export default function Builder() {
           </button>
         </div>
 
-        {/* desktop: radial spider graph around the stage */}
-        <div className="relative mx-auto hidden aspect-square w-full max-w-[820px] md:block">
+        {/* desktop: radial spider graph on the left, live story on the right */}
+        <div className="hidden items-center gap-6 md:flex">
+          <div className="relative aspect-square w-full min-w-0 max-w-[820px] flex-1">
           <SpiderGraph
             selection={selection}
             activeDim={activeDim}
@@ -101,6 +108,10 @@ export default function Builder() {
               onClose={() => setActiveDim(null)}
             />
           )}
+        </div>
+          <div className="w-[320px] shrink-0">
+            <StoryCard selection={selection} />
+          </div>
         </div>
 
         {/* mobile: stage + grouped accordion */}
@@ -169,7 +180,7 @@ export default function Builder() {
           </div>
         </div>
 
-        <div className="py-6">
+        <div className="py-6 md:hidden">
           <StoryCard selection={selection} />
         </div>
       </main>

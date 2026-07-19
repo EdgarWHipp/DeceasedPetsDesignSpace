@@ -32,14 +32,15 @@ useGLTF.preload(REAL_MODEL_URL);
 // its head-base collar must widen and drop with it.
 const PROP_ANCHORS = {
   voxel: {
-    collar: { pos: [0, 0.8, 0.24], rotX: -1.5, r: 0.44, tube: 0.055, squash: 1 },
-    tag: [0, 0.64, 0.62],
+    collar: { pos: [0, 0.78, 0.24], rotX: -1.32, r: 0.44, tube: 0.055, squash: 0.95 },
+    tag: [0, 0.6, 0.62],
     led: [0, 1.55, 0.19],
   },
   voxelStylized: {
-    // Mild squash pulls the ring toward the head base; the tilt dips the
-    // front of the band below the muzzle so it stays visible under the chin.
-    collar: { pos: [0, 0.72, 0.29], rotX: -1.44, r: 0.54, tube: 0.055, squash: 0.9 },
+    // The stage camera sits nearly level with the collar, so a flat ring
+    // reads as a straight line. The stronger tilt opens the ellipse toward
+    // the camera: the band dips under the chin and arcs over the shoulders.
+    collar: { pos: [0, 0.74, 0.29], rotX: -1.3, r: 0.54, tube: 0.055, squash: 0.9 },
     tag: [0, 0.55, 0.72],
     led: [0, 1.58, 0.21],
   },
