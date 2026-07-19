@@ -13,17 +13,14 @@ const AFTERLIFE = '#8a7ca8';
 
 /* --------------------------------------- D3 annotation cues (front) --- */
 
-// D3-P2 Sensory: scent wisps + sound arcs beside the head (kept clear of the
-// pet's face region).
+// D3-P2 Sensory: one scent wisp + one sound arc beside the head (kept clear
+// of the pet's face region).
 export function SensoryCues({ selection }: { selection: Selection }) {
   if (selection.D3 !== 'D3-P2') return null;
   return (
-    <g fill="none" stroke={MANIFESTATION} strokeWidth="2.5" strokeLinecap="round" opacity="0.75">
-      <path d="M308 218 q10 -8 4 -18 q-6 -9 2 -17" />
-      <path d="M322 226 q10 -8 4 -18 q-6 -9 2 -17" />
-      <path d="M336 234 q10 -8 4 -18 q-6 -9 2 -17" />
-      <path d="M304 148 a20 20 0 0 1 6 26" />
-      <path d="M314 138 a30 30 0 0 1 9 40" />
+    <g fill="none" stroke={MANIFESTATION} strokeWidth="2.5" strokeLinecap="round" opacity="0.6">
+      <path d="M318 224 q10 -8 4 -18 q-6 -9 2 -17" />
+      <path d="M310 142 a26 26 0 0 1 8 34" />
     </g>
   );
 }
@@ -49,27 +46,19 @@ export function TrailCue({ selection }: { selection: Selection }) {
 export function BackgroundLayer({ selection }: { selection: Selection }) {
   const d6 = selection.D6;
   if (d6 === 'D6-P1') {
-    // Context-Bound: room corner, window, pet bed
+    // Context-Bound: ground line + pet bed mark its one place
     return (
       <g>
-        <line x1="90" y1="120" x2="90" y2="400" stroke="#d8d2c4" strokeWidth="3" />
-        <line x1="28" y1="400" x2="452" y2="400" stroke="#d8d2c4" strokeWidth="4" />
-        <rect x="330" y="82" width="92" height="112" rx="4" fill="#efece4" stroke="#d8d2c4" strokeWidth="3" />
-        <line x1="376" y1="82" x2="376" y2="194" stroke="#d8d2c4" strokeWidth="3" />
-        <line x1="330" y1="138" x2="422" y2="138" stroke="#d8d2c4" strokeWidth="3" />
+        <line x1="60" y1="400" x2="420" y2="400" stroke="#d8d2c4" strokeWidth="3" />
         <ellipse cx="240" cy="396" rx="115" ry="22" fill="#e6dfd0" stroke="#d8d2c4" strokeWidth="3" />
       </g>
     );
   }
   if (d6 === 'D6-P2') {
-    // Unrestricted: horizon + drifting clouds + path dots
+    // Unrestricted: open horizon + path dots trailing off
     return (
       <g>
         <line x1="0" y1="400" x2="480" y2="400" stroke="#d8d2c4" strokeWidth="3" />
-        <g className="cloud-drift" fill="#ffffff" opacity="0.85">
-          <ellipse cx="60" cy="92" rx="34" ry="14" />
-          <ellipse cx="86" cy="84" rx="24" ry="12" />
-        </g>
         {[152, 180, 208, 272, 300, 328].map((x) => (
           <circle key={x} cx={x} cy="410" r="3" fill={INK} opacity="0.25" />
         ))}
@@ -91,7 +80,8 @@ export function AmbientLayer({ selection }: { selection: Selection }) {
       r="155"
       fill="none"
       stroke={INTERACTION}
-      strokeWidth="8"
+      strokeWidth="4"
+      opacity="0.6"
     />
   );
 }
@@ -102,7 +92,7 @@ export function MotesLayer({ selection }: { selection: Selection }) {
   const d7 = selection.D7;
   if (!d7) return null;
   const personal = d7 === 'D7-P1';
-  const angles = [0, 72, 144, 216, 288];
+  const angles = [90, 210, 330];
   return (
     <g className="mote-orbit">
       {angles.map((a, i) => {
@@ -163,7 +153,7 @@ export function GlyphLayer({
   if (selection.D4 === 'D4-P1') {
     // Passive: thin frame corner brackets at the 4 stage corners
     nodes.push(
-      <g key="brackets" fill="none" stroke={INTERACTION} strokeWidth="3" opacity="0.8">
+      <g key="brackets" fill="none" stroke={INTERACTION} strokeWidth="2.5" opacity="0.6">
         <path d="M16 44 V16 H44" />
         <path d="M436 16 H464 V44" />
         <path d="M464 436 V464 H436" />
@@ -211,101 +201,4 @@ export function GlyphLayer({
     );
   }
   return <>{nodes}</>;
-}
-
-/* ------------------------------------------------------ D8 timeline --- */
-
-export function TimelineLayer({ selection }: { selection: Selection }) {
-  const d8 = selection.D8;
-  if (!d8) return null;
-  const xs = [168, 216, 264, 312];
-  const y = 446;
-  const cut = d8 === 'D8-P4';
-  return (
-    <g>
-      <line
-        x1={xs[0]}
-        y1={y}
-        x2={cut ? xs[1] : xs[3]}
-        y2={y}
-        stroke={AFTERLIFE}
-        strokeWidth="3"
-      />
-      {xs.map((x, i) => (
-        <circle
-          key={x}
-          cx={x}
-          cy={y}
-          r="6"
-          fill={AFTERLIFE}
-          opacity={cut && i > 1 ? 0.25 : 1}
-        />
-      ))}
-      {d8 === 'D8-P1' && (
-        // arrow curving back to dot 1
-        <g fill="none" stroke={AFTERLIFE} strokeWidth="2.5">
-          <path d="M312 438 Q240 412 174 436" />
-          <path d="M182 428 L174 436 L185 439" fill="none" />
-        </g>
-      )}
-      {d8 === 'D8-P2' && (
-        // loop arcs across all dots
-        <g fill="none" stroke={AFTERLIFE} strokeWidth="2.5">
-          <path d="M168 440 q24 -20 48 0" />
-          <path d="M216 440 q24 -20 48 0" />
-          <path d="M264 440 q24 -20 48 0" />
-        </g>
-      )}
-      {d8 === 'D8-P3' && (
-        // arrow to a hollow extra dot
-        <g stroke={AFTERLIFE} strokeWidth="2.5" fill="none">
-          <line x1="312" y1={y} x2="348" y2={y} />
-          <path d="M341 440 L349 446 L341 452" />
-          <circle cx="360" cy={y} r="6" fill="#f7f5f0" />
-        </g>
-      )}
-    </g>
-  );
-}
-
-/* ------------------------------------------- D9 participation circle --- */
-
-function Person({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
-  return (
-    <g transform={`translate(${x} ${y}) scale(${s})`} fill={INK} opacity="0.55">
-      <circle cx="0" cy="-15" r="6" />
-      <path d="M-8 12 Q-8 -6 0 -6 Q8 -6 8 12 Z" />
-    </g>
-  );
-}
-
-export function ParticipationLayer({ selection }: { selection: Selection }) {
-  const d9 = selection.D9;
-  if (d9 === 'D9-P1') {
-    return <Person x={418} y={430} />;
-  }
-  if (d9 === 'D9-P2') {
-    return (
-      <g>
-        <Person x={396} y={432} s={0.85} />
-        <Person x={419} y={428} />
-        <Person x={441} y={433} s={0.85} />
-      </g>
-    );
-  }
-  if (d9 === 'D9-P3') {
-    // arc of 12 crowd dots along the lower stage rim
-    const dots = Array.from({ length: 12 }, (_, i) => {
-      const t = ((18 + i * 12) * Math.PI) / 180; // 18°..150°
-      return [240 + 215 * Math.cos(t), 300 + 152 * Math.sin(t)];
-    });
-    return (
-      <g fill={INK} opacity="0.45">
-        {dots.map(([x, y], i) => (
-          <circle key={i} cx={x} cy={y} r="5" />
-        ))}
-      </g>
-    );
-  }
-  return null;
 }

@@ -78,19 +78,6 @@ body {
   animation: breathe 8s ease-in-out infinite;
 }
 
-/* D6-P2 Unrestricted: clouds drifting across the stage */
-@keyframes drift {
-  from {
-    transform: translateX(-120px);
-  }
-  to {
-    transform: translateX(600px);
-  }
-}
-.cloud-drift {
-  animation: drift 30s linear infinite;
-}
-
 /* D7: motes orbiting the pet */
 @keyframes orbit {
   from {
@@ -103,20 +90,6 @@ body {
 .mote-orbit {
   animation: orbit 14s linear infinite;
   transform-origin: 240px 290px;
-}
-
-/* D8-P4 Letting Go: whole pet gently pulses to 0.8 opacity over 6s */
-@keyframes fade-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-.letting-go {
-  animation: fade-pulse 6s ease-in-out infinite;
 }
 
 /* kiosk attract-mode caption */
@@ -136,9 +109,7 @@ body {
 /* reduced motion: disable looping animations; one-shots stay */
 @media (prefers-reduced-motion: reduce) {
   .ring-breathe,
-  .cloud-drift,
   .mote-orbit,
-  .letting-go,
   .attract-caption {
     animation: none;
   }

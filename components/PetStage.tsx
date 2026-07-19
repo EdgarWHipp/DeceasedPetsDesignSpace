@@ -10,9 +10,7 @@ import {
   GlyphLayer,
   INK,
   MotesLayer,
-  ParticipationLayer,
   SensoryCues,
-  TimelineLayer,
   TrailCue,
 } from '@/lib/petLayers';
 
@@ -33,7 +31,6 @@ export default function PetStage({
     [],
   );
 
-  const lettingGo = selection.D8 === 'D8-P4';
   const realistic = selection.D2 === 'D2-P2';
 
   const onWuff = () => {
@@ -57,14 +54,8 @@ export default function PetStage({
         <BackgroundLayer selection={selection} />
         <AmbientLayer selection={selection} />
       </svg>
-      {/* 3D pet; the wrapper carries the D8-P4 opacity pulse */}
-      <div
-        className={
-          lettingGo
-            ? 'letting-go absolute inset-0 h-full w-full'
-            : 'absolute inset-0 h-full w-full'
-        }
-      >
+      {/* 3D pet */}
+      <div className="absolute inset-0 h-full w-full">
         <Canvas
           camera={{ position: [0, 1.15, 4.8], fov: 38 }}
           shadows
@@ -88,7 +79,7 @@ export default function PetStage({
           </Suspense>
         </Canvas>
       </div>
-      {/* front overlay: annotations (D3 cues, D7 motes, D4/D5 glyphs, D8, D9) */}
+      {/* front overlay: annotations (D3 cues, D7 motes, D4/D5 glyphs) */}
       <svg
         viewBox="0 0 480 480"
         className="pointer-events-none absolute inset-0 h-full w-full"
@@ -98,8 +89,6 @@ export default function PetStage({
         <TrailCue selection={selection} />
         <MotesLayer selection={selection} />
         <GlyphLayer selection={selection} generation={generation} />
-        <TimelineLayer selection={selection} />
-        <ParticipationLayer selection={selection} />
         {/* "wuff" speech bubble (D4-P2, on pet click) */}
         {wuffAt > 0 && (
           <g key={wuffAt} className="wuff-bubble">
