@@ -42,9 +42,24 @@ body {
   animation: caption-pulse 2.4s ease-in-out infinite;
 }
 
+/* empty stage: question mark bobbing up and down */
+@keyframes qmark-bob {
+  0%,
+  100% {
+    transform: translateY(6px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.qmark-bob {
+  animation: qmark-bob 2s ease-in-out infinite;
+}
+
 /* reduced motion: disable looping animations; one-shots stay */
 @media (prefers-reduced-motion: reduce) {
-  .attract-caption {
+  .attract-caption,
+  .qmark-bob {
     animation: none;
   }
 }

@@ -405,7 +405,10 @@ export default function PetModel({
   useEffect(() => {
     const cache = matCache.current;
     const materialFor = (orig: THREE.MeshStandardMaterial): THREE.Material => {
-      if (!d1 && !stylized) return orig;
+      // Interactive (D1-P3) keeps the dog's own colours — the blinking LED
+      // is its whole encoding — so it only needs an override when stylized.
+      const noRecolor = !d1 || d1 === 'D1-P3';
+      if (noRecolor && !stylized) return orig;
       const key = `${d1 ?? 'base'}|${stylized ? 'toon' : 'std'}`;
       const cached = cache.get(key);
       if (cached) return cached;
@@ -420,13 +423,8 @@ export default function PetModel({
         mat = stylized
           ? new THREE.MeshToonMaterial({ color: '#a8a094' })
           : new THREE.MeshStandardMaterial({ color: '#a8a094', roughness: 1, metalness: 0 });
-      } else if (d1 === 'D1-P3') {
-        // Interactive: brushed chrome.
-        mat = stylized
-          ? new THREE.MeshToonMaterial({ color: '#ccd2d4' })
-          : new THREE.MeshStandardMaterial({ color: '#ccd2d4', metalness: 0.4, roughness: 0.3 });
       } else {
-        // No D1, stylized: toon-shaded atlas texture.
+        // No recolor + stylized: toon-shaded original atlas.
         mat = new THREE.MeshToonMaterial({ map: orig.map });
       }
       cache.set(key, mat);
@@ -494,6 +492,7 @@ export default function PetModel({
   }, [generation]);
 
   const ledMat = useRef<THREE.MeshStandardMaterial>(null);
+  const realBob = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
     const g = group.current;
@@ -502,6 +501,18 @@ export default function PetModel({
     const t = Math.min((performance.now() - spawnStart.current) / SPAWN_MS, 1);
     const eased = 1 - (1 - t) ** 3;
     g.scale.setScalar(0.9 + 0.1 * eased);
+    // Realistic idle: the beagle has no skeleton, so a gentle procedural
+    // bob + sway keeps it alive (frozen for stone and reduced motion,
+    // mirroring the voxel mixer).
+    if (realBob.current) {
+      const alive = realistic && !stone && !reducedMotion;
+      realBob.current.position.y = alive
+        ? 0.028 * (0.5 + 0.5 * Math.sin(clock.elapsedTime * 2.1))
+        : 0;
+      realBob.current.rotation.z = alive
+        ? 0.012 * Math.sin(clock.elapsedTime * 1.3)
+        : 0;
+    }
     // D1-P3 LED: square wave 0 <-> 1 every 1s
     if (ledMat.current) {
       ledMat.current.emissiveIntensity = reducedMotion
@@ -522,8 +533,10 @@ export default function PetModel({
     <>
       <group ref={group} rotation-y={-0.6}>
         {realistic ? (
-          <group scale={realFit.scale} position={realFit.position}>
-            <primitive object={realModel} />
+          <group ref={realBob}>
+            <group scale={realFit.scale} position={realFit.position}>
+              <primitive object={realModel} />
+            </group>
           </group>
         ) : (
           <group scale={fit.scale} position={fit.position}>
