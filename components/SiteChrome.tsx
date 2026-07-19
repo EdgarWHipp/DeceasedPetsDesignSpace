@@ -14,10 +14,12 @@ export function SiteHeader({ current }: { current: string }) {
           <h1 className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-ink text-balance">
             A Design Space for Representations of Deceased Companion Animals
           </h1>
-          <p className="mt-1 text-sm text-ink/60">
-            Nine dimensions. 5,184 possible pets. Choose a position on each,
-            and see who comes back.
-          </p>
+          {current === '/' && (
+            <p className="mt-1 text-sm text-ink/60">
+              Nine dimensions. Choose a position on each, and see who comes
+              back.
+            </p>
+          )}
         </div>
         <nav className="flex gap-1 text-sm">
           {NAV.map((item) => (

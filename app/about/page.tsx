@@ -54,7 +54,14 @@ export default function AboutPage() {
           <a href="https://quaternius.com" className="underline hover:text-ink">
             Quaternius
           </a>{' '}
-          (CC0), via poly.pizza.
+          (CC0), via poly.pizza. Realistic dog model &ldquo;Beagle&rdquo; by{' '}
+          <a
+            href="https://poly.pizza/m/0BnDT3T1wTE"
+            className="underline hover:text-ink"
+          >
+            Poly by Google
+          </a>{' '}
+          (CC-BY 3.0), via poly.pizza.
         </p>
         <div className="mt-8 rounded-xl border border-black/10 bg-white p-5">
           <h3 className="font-serif text-sm font-semibold text-ink">Citation</h3>

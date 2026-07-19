@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="5400" height="5628" viewBox="0 0 5400 5628">
 <rect x="0.0" y="0.0" width="5400.0" height="5628.0" rx="0" fill="#ffffff" stroke="none" stroke-width="0"/>
-<text x="150.0" y="152.0" font-family="Helvetica" font-size="70" font-weight="700" fill="#252827" text-anchor="start">Proposed Design Space</text>
-<text x="152.0" y="208.0" font-family="Helvetica" font-size="34" font-weight="400" fill="#252827" text-anchor="start">2026-07-05</text>
+<text x="150.0" y="152.0" font-family="Helvetica" font-size="70" font-weight="700" fill="#252827" text-anchor="start">Design Space</text>
 <line x1="150.0" y1="245.0" x2="5250.0" y2="245.0" stroke="#2f3432" stroke-width="6"/>
 <rect x="150.0" y="310.0" width="5100.0" height="70.0" rx="0" fill="#eef1ee" stroke="#c8cec9" stroke-width="2"/>
 <text x="184.0" y="358.0" font-family="Helvetica" font-size="42" font-weight="800" fill="#252827" text-anchor="start">Manifestation</text>

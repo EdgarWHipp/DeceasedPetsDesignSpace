@@ -30,7 +30,7 @@ export default function OpengraphImage() {
           A Design Space for Representations of Deceased Companion Animals
         </div>
         <div style={{ fontSize: 28, marginTop: 28, color: '#5c5955' }}>
-          Nine dimensions · 5,184 possible pets · KIT Master&apos;s thesis
+          Nine dimensions · KIT Master&apos;s thesis
         </div>
       </div>
     ),
