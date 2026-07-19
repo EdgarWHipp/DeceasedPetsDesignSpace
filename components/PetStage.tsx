@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import type { Selection } from '@/lib/designSpace';
 import PetModel from '@/components/PetModel';
-import { SensoryCues, TrailCue } from '@/lib/petLayers';
+import { SensoryCues } from '@/lib/petLayers';
 
 export default function PetStage({
   selection,
@@ -42,14 +42,13 @@ export default function PetStage({
           </Suspense>
         </Canvas>
       </div>
-      {/* front overlay: D3 annotation cues */}
+      {/* front overlay: D3-P2 sensory cues */}
       <svg
         viewBox="0 0 480 480"
         className="pointer-events-none absolute inset-0 h-full w-full"
         aria-hidden
       >
         <SensoryCues selection={selection} />
-        <TrailCue selection={selection} />
       </svg>
     </div>
   );

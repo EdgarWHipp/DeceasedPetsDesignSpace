@@ -5,10 +5,9 @@
 
 import type { Selection } from './designSpace';
 
-export const INK = '#252827';
 const MANIFESTATION = '#2f8c78';
 
-/* --------------------------------------- D3 annotation cues (front) --- */
+/* --------------------------------------- D3 annotation cue (front) --- */
 
 // D3-P2 Sensory: one scent wisp + one sound arc beside the head (kept clear
 // of the pet's face region).
@@ -19,21 +18,5 @@ export function SensoryCues({ selection }: { selection: Selection }) {
       <path d="M318 224 q10 -8 4 -18 q-6 -9 2 -17" />
       <path d="M310 142 a26 26 0 0 1 8 34" />
     </g>
-  );
-}
-
-// D3-P3 Behavioral: dashed motion trail (the ball itself is 3D).
-export function TrailCue({ selection }: { selection: Selection }) {
-  if (selection.D3 !== 'D3-P3') return null;
-  return (
-    <path
-      d="M336 344 q42 8 68 -20"
-      fill="none"
-      stroke={INK}
-      strokeWidth="3"
-      strokeDasharray="7 7"
-      strokeLinecap="round"
-      opacity="0.6"
-    />
   );
 }

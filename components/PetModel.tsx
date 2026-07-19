@@ -27,12 +27,19 @@ useGLTF.preload(MODEL_URL);
 useGLTF.preload(REAL_MODEL_URL);
 
 // Prop anchors in normalized stage space (height 1.4, feet on y=0), per
-// body model: the voxel dog and the beagle carry their necks differently.
+// body state: the voxel dog and the beagle carry their necks differently,
+// and D2-P1 Stylized scales the voxel head 1.2x about the Head pivot, so
+// its head-base collar must widen and drop with it.
 const PROP_ANCHORS = {
   voxel: {
     collar: { pos: [0, 0.8, 0.24], rotX: -1.5, r: 0.44, tube: 0.055 },
     tag: [0, 0.64, 0.62],
     led: [0, 1.55, 0.19],
+  },
+  voxelStylized: {
+    collar: { pos: [0, 0.74, 0.29], rotX: -1.5, r: 0.54, tube: 0.055 },
+    tag: [0, 0.58, 0.78],
+    led: [0, 1.58, 0.21],
   },
   real: {
     collar: { pos: [0, 1.03, 0.47], rotX: -0.95, r: 0.17, tube: 0.03 },
@@ -502,7 +509,11 @@ export default function PetModel({
     }
   });
 
-  const anchors = realistic ? PROP_ANCHORS.real : PROP_ANCHORS.voxel;
+  const anchors = realistic
+    ? PROP_ANCHORS.real
+    : stylized
+      ? PROP_ANCHORS.voxelStylized
+      : PROP_ANCHORS.voxel;
 
   return (
     <>
