@@ -5,12 +5,12 @@
    driving them imperatively from effects and the frame loop is the
    react-three-fiber contract. */
 
-// 3D pet: all D1-D4 body encodings live here (materials, shadows, animation,
+// 3D pet: all D1-D3 body encodings live here (materials, shadows,
 // attachments). Diagrammatic context layers stay in the SVG overlays.
 
 import { useEffect, useMemo, useRef, useSyncExternalStore } from 'react';
 import * as THREE from 'three';
-import { useFrame, useGraph, useThree, type ThreeEvent } from '@react-three/fiber';
+import { useFrame, useGraph, useThree } from '@react-three/fiber';
 import { ContactShadows, useAnimations, useGLTF } from '@react-three/drei';
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
@@ -19,7 +19,6 @@ import type { Selection } from '@/lib/designSpace';
 const MODEL_URL = '/models/dog.glb';
 const TARGET_HEIGHT = 1.4; // normalized world height of the dog
 const SPAWN_MS = 250;
-const WAG_MS = 1200;
 
 useGLTF.preload(MODEL_URL);
 
@@ -29,11 +28,6 @@ function subscribeReducedMotion(onChange: () => void) {
   mq.addEventListener('change', onChange);
   return () => mq.removeEventListener('change', onChange);
 }
-
-// D4-P2 head tracking: reusable scratch objects (set + consumed within one
-// frame callback, so sharing across stage instances is safe).
-const HEAD_Q = new THREE.Quaternion();
-const HEAD_E = new THREE.Euler();
 
 // D2-P2 Realistic: average area-weighted face normals across duplicated
 // vertices (the GLB splits verts at every hard edge, so
@@ -76,11 +70,9 @@ function smoothedGeometry(src: THREE.BufferGeometry): THREE.BufferGeometry {
 export default function PetModel({
   selection,
   generation,
-  onWuff,
 }: {
   selection: Selection;
   generation: number;
-  onWuff: () => void;
 }) {
   const group = useRef<THREE.Group>(null);
   const { scene, animations } = useGLTF(MODEL_URL);
@@ -134,8 +126,6 @@ export default function PetModel({
   const realistic = selection.D2 === 'D2-P2';
   const symbolic = selection.D3 === 'D3-P1';
   const behavioral = selection.D3 === 'D3-P3';
-  const active = selection.D4 === 'D4-P2';
-  const walk = selection.D6 === 'D6-P2';
   const stone = d1 === 'D1-P2';
   const robot = d1 === 'D1-P3';
 
@@ -239,84 +229,29 @@ export default function PetModel({
 
   const currentAction = useRef<THREE.AnimationAction | null>(null);
   useEffect(() => {
-    const base = walk ? 'Walk' : 'Idle';
-    const name = names.find((n) => n === base || n.endsWith(`|${base}`));
+    const name = names.find((n) => n === 'Idle' || n.endsWith('|Idle'));
     const next = name ? actions[name] : null;
     if (!next || currentAction.current === next) return;
-    const prev = currentAction.current;
-    if (mixer.timeScale === 0) {
-      prev?.stop();
-      next.reset().setEffectiveWeight(1).play();
-    } else {
-      prev?.fadeOut(0.3);
-      next.reset().fadeIn(0.3).play();
-    }
+    next.reset().setEffectiveWeight(1).play();
     currentAction.current = next;
-  }, [actions, names, mixer, walk]);
+  }, [actions, names]);
 
-  /* ------------------------------- per-frame: spawn, wag, LED --- */
+  /* ------------------------------------ per-frame: spawn, LED --- */
 
   const spawnStart = useRef(0);
   useEffect(() => {
     spawnStart.current = performance.now();
   }, [generation]);
 
-  const wagUntil = useRef(0);
-  const wasWagging = useRef(false);
-  const headOffset = useRef(new THREE.Vector2());
-  const headBase = useRef(new THREE.Quaternion());
-  const headLast = useRef(new THREE.Quaternion());
-  const wasTracking = useRef(false);
   const ledMat = useRef<THREE.MeshStandardMaterial>(null);
 
-  useFrame(({ clock, pointer }) => {
+  useFrame(({ clock }) => {
     const g = group.current;
     if (!g) return;
     // spawn feedback: scale 0.9 -> 1 over 250ms, ease-out cubic
     const t = Math.min((performance.now() - spawnStart.current) / SPAWN_MS, 1);
     const eased = 1 - (1 - t) ** 3;
     g.scale.setScalar(0.9 + 0.1 * eased);
-    const animating = mixer.timeScale > 0;
-    // D4-P2 wag: gentle idle swing whenever Active; fast burst on click
-    const tail = nodes.Tail as THREE.Bone | undefined;
-    if (tail) {
-      if (active && animating) {
-        tail.rotation.z =
-          performance.now() < wagUntil.current
-            ? Math.sin(clock.elapsedTime * 18) * 0.45
-            : Math.sin(clock.elapsedTime * 6) * 0.18;
-        wasWagging.current = true;
-      } else if (wasWagging.current) {
-        wasWagging.current = false;
-        tail.rotation.z = 0;
-      }
-    }
-    // D4-P2 head tracking: compose (mixer pose x damped pointer offset) on
-    // the Head bone. The mixer's PropertyMixer only rewrites the quaternion
-    // when the track value changes between frames, so a bare post-multiply
-    // would accumulate during constant idle segments. Detect whether the
-    // mixer wrote this frame (quaternion differs from our last composite)
-    // and re-capture its pose as the base; on disengage restore it once.
-    const head = nodes.Head as THREE.Bone | undefined;
-    if (head) {
-      if (active && animating) {
-        if (!wasTracking.current || !head.quaternion.equals(headLast.current)) {
-          headBase.current.copy(head.quaternion);
-        }
-        headOffset.current.lerp(pointer, 0.12);
-        // Head bone axes (GLB rest pose): local Z = world up (yaw),
-        // local X = world -X (pitch). Signs verified visually.
-        HEAD_Q.setFromEuler(
-          HEAD_E.set(headOffset.current.y * 0.15, 0, headOffset.current.x * 0.3),
-        );
-        head.quaternion.copy(headBase.current).multiply(HEAD_Q);
-        headLast.current.copy(head.quaternion);
-        wasTracking.current = true;
-      } else if (wasTracking.current) {
-        wasTracking.current = false;
-        head.quaternion.copy(headBase.current);
-      }
-    }
     // D1-P3 LED: square wave 0 <-> 1 every 1s
     if (ledMat.current) {
       ledMat.current.emissiveIntensity = reducedMotion
@@ -327,28 +262,9 @@ export default function PetModel({
     }
   });
 
-  /* ----------------------------------------------- interaction --- */
-
-  const handleClick = (e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation();
-    if (!active) return;
-    onWuff();
-    wagUntil.current = performance.now() + WAG_MS;
-  };
-
   return (
     <>
-      <group
-        ref={group}
-        rotation-y={-0.6}
-        onClick={handleClick}
-        onPointerOver={() => {
-          if (active) document.body.style.cursor = 'pointer';
-        }}
-        onPointerOut={() => {
-          document.body.style.cursor = '';
-        }}
-      >
+      <group ref={group} rotation-y={-0.6}>
         <group scale={fit.scale} position={fit.position}>
           <primitive object={model} />
         </group>

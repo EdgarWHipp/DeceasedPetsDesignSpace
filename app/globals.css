@@ -26,57 +26,7 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-/* --- overlay + UI animations (pet-body motion lives in PetModel) --- */
-
-/* D4-P2: "wuff" speech bubble, shown 1.2s on pet click */
-@keyframes wuff {
-  0% {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  15% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.wuff-bubble {
-  animation: wuff 1.2s ease-out forwards;
-}
-
-/* D5-P1 / D5-P2: ripple / pulse ring expanding once on spawn */
-@keyframes ripple {
-  from {
-    transform: scale(0.3);
-    opacity: 0.8;
-  }
-  to {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
-.spawn-ripple {
-  animation: ripple 0.9s ease-out forwards;
-}
-
-/* D5-P3 Persistent: large soft ring breathing over 8s */
-@keyframes breathe {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.45;
-  }
-}
-.ring-breathe {
-  animation: breathe 8s ease-in-out infinite;
-}
+/* --- UI animations (pet-body motion lives in PetModel) --- */
 
 /* kiosk attract-mode caption */
 @keyframes caption-pulse {
@@ -94,7 +44,6 @@ body {
 
 /* reduced motion: disable looping animations; one-shots stay */
 @media (prefers-reduced-motion: reduce) {
-  .ring-breathe,
   .attract-caption {
     animation: none;
   }

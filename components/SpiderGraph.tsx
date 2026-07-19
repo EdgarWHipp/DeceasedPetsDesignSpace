@@ -10,20 +10,16 @@ import {
 } from '@/lib/designSpace';
 
 // Radial layout: viewBox 1000x1000, pet stage centered at (500, 510).
-// D1-D6 sit on a 380px circle (D1 at -90° then clockwise every 40°);
-// D7-D9 render as a selectable text list under an AFTERLIFE title on the left.
+// 9 nodes on a 380px circle, D1 at -90° then clockwise every 40°.
+// The ring around them is split into three 120° group segments, each in its
+// group colour, with a leader line out to the section title.
 const CX = 500;
 const CY = 510;
 const R_NODE = 380;
 const R_RIM = 258;
 const NODE_R = 58;
 const R_ARC = R_NODE + 78;
-const AFTERLIFE_X = 68;
-const AFTERLIFE_ROW_Y: Record<'D7' | 'D8' | 'D9', number> = {
-  D7: 424,
-  D8: 480,
-  D9: 536,
-};
+const PAPER = '#f7f5f0';
 
 function polar(angleDeg: number, r: number): [number, number] {
   const a = (angleDeg * Math.PI) / 180;
@@ -34,13 +30,8 @@ const NODE_ANGLE: Record<DimId, number> = Object.fromEntries(
   DIMENSIONS.map((d, i) => [d.id, -90 + i * 40]),
 ) as Record<DimId, number>;
 
-const NODE_DIMS = DIMENSIONS.filter((d) => d.group !== 'Afterlife');
-const AFTERLIFE_DIMS = DIMENSIONS.filter((d) => d.group === 'Afterlife');
-
 /** Node center as percentages of the square container (for panel anchoring). */
 export function nodePercent(dim: DimId): { x: number; y: number } {
-  if (dim === 'D7' || dim === 'D8' || dim === 'D9')
-    return { x: AFTERLIFE_X / 10, y: AFTERLIFE_ROW_Y[dim] / 10 };
   const [x, y] = polar(NODE_ANGLE[dim], R_NODE);
   return { x: x / 10, y: y / 10 };
 }
@@ -71,17 +62,21 @@ export default function SpiderGraph({
   activeDim: DimId | null;
   onNodeClick: (dim: DimId) => void;
 }) {
-  const afterlifeAccent = GROUP_ACCENT['Afterlife'];
   return (
     <svg viewBox="0 0 1000 1000" className="absolute inset-0 w-full h-full">
-      {/* group arcs + connector ticks + titles (circle groups only) */}
-      {GROUPS.filter((g) => g.name !== 'Afterlife').map((g) => {
+      {/* group ring: one 1/3 colour segment per group + leader line + title */}
+      {GROUPS.map((g) => {
         const a0 = NODE_ANGLE[g.dims[0]] - 16;
         const a1 = NODE_ANGLE[g.dims[g.dims.length - 1]] + 16;
-        const mid = (a0 + a1) / 2;
-        const [tx0, ty0] = polar(mid, R_ARC);
-        const [tx1, ty1] = polar(mid, R_NODE + 96);
-        const [rawLx, ly] = polar(mid, R_NODE + 114);
+        // Title anchor: segment midpoint, except Afterlife (mid-left has no
+        // free space outside the ring) which hangs off its lower end at the
+        // bottom-left, mirroring Interaction at the bottom-right.
+        const afterlife = g.name === 'Afterlife';
+        const ta = afterlife ? 140 : (a0 + a1) / 2;
+        const titleR = afterlife ? R_ARC + 62 : R_NODE + 114;
+        const [tx0, ty0] = polar(ta, R_ARC);
+        const [tx1, ty1] = polar(ta, titleR - 18);
+        const [rawLx, ly] = polar(ta, titleR);
         const lx = Math.min(910, Math.max(90, rawLx));
         return (
           <g key={g.name}>
@@ -89,28 +84,11 @@ export default function SpiderGraph({
               d={arcPath(a0, a1, R_ARC)}
               fill="none"
               stroke={g.accent}
-              strokeWidth="8"
+              strokeWidth="12"
               strokeLinecap="round"
-              opacity="0.4"
+              opacity="0.55"
             />
-            {/* node → arc ticks: each dimension connects through the arc to the title */}
-            {g.dims.map((dimId) => {
-              const [x0, y0] = polar(NODE_ANGLE[dimId], R_NODE + NODE_R);
-              const [x1, y1] = polar(NODE_ANGLE[dimId], R_ARC);
-              return (
-                <line
-                  key={dimId}
-                  x1={x0}
-                  y1={y0}
-                  x2={x1}
-                  y2={y1}
-                  stroke={g.accent}
-                  strokeWidth="2.5"
-                  opacity="0.7"
-                />
-              );
-            })}
-            {/* arc → title tick */}
+            {/* leader line from the segment out to the section title */}
             <line
               x1={tx0}
               y1={ty0}
@@ -118,7 +96,7 @@ export default function SpiderGraph({
               y2={ty1}
               stroke={g.accent}
               strokeWidth="2.5"
-              opacity="0.7"
+              opacity="0.8"
             />
             <text
               x={lx}
@@ -129,79 +107,17 @@ export default function SpiderGraph({
               fontWeight="700"
               fill={g.accent}
               letterSpacing="1.5"
+              stroke={PAPER}
+              strokeWidth="6"
+              paintOrder="stroke"
             >
               {g.name.toUpperCase()}
             </text>
           </g>
         );
       })}
-      {/* Afterlife: title + rule + selectable text rows on the left column */}
-      <g>
-        <text
-          x={AFTERLIFE_X}
-          y={368}
-          textAnchor="start"
-          fontSize="20"
-          fontWeight="700"
-          letterSpacing="1.5"
-          fill={afterlifeAccent}
-        >
-          AFTERLIFE
-        </text>
-        <line
-          x1={AFTERLIFE_X}
-          y1={382}
-          x2={238}
-          y2={382}
-          stroke={afterlifeAccent}
-          strokeWidth="2.5"
-          opacity="0.7"
-        />
-        {AFTERLIFE_DIMS.map((dim) => {
-          const y = AFTERLIFE_ROW_Y[dim.id as 'D7' | 'D8' | 'D9'];
-          const chosen = getPosition(selection, dim.id);
-          const highlighted = activeDim === dim.id || Boolean(chosen);
-          return (
-            <g
-              key={dim.id}
-              onClick={() => onNodeClick(dim.id)}
-              className="cursor-pointer"
-              role="button"
-              aria-label={`${dim.title}: ${chosen ? chosen.label : 'not chosen'}`}
-            >
-              <rect
-                x={AFTERLIFE_X - 8}
-                y={y - 18}
-                width={200}
-                height={48}
-                fill="transparent"
-              />
-              <text
-                x={AFTERLIFE_X}
-                y={y}
-                textAnchor="start"
-                fontSize="15"
-                fontWeight="600"
-                fill={highlighted ? afterlifeAccent : '#252827'}
-              >
-                {dim.title}
-              </text>
-              <text
-                x={AFTERLIFE_X}
-                y={y + 20}
-                textAnchor="start"
-                fontSize="13"
-                fontStyle="italic"
-                fill={chosen ? afterlifeAccent : '#8b877e'}
-              >
-                {chosen ? chosen.label : '?'}
-              </text>
-            </g>
-          );
-        })}
-      </g>
-      {/* connectors + circle nodes (Manifestation + Interaction) */}
-      {NODE_DIMS.map((dim) => {
+      {/* connectors + nodes */}
+      {DIMENSIONS.map((dim) => {
         const angle = NODE_ANGLE[dim.id];
         const accent = GROUP_ACCENT[dim.group];
         const chosen = getPosition(selection, dim.id);
@@ -258,14 +174,14 @@ export default function SpiderGraph({
               </text>
               <text
                 x={nx}
-                y={ny + (multiWordTitle ? 30 : 20)}
+                y={ny + (multiWordTitle ? 28 : 20)}
                 textAnchor="middle"
                 fontSize="13"
                 fontStyle="italic"
                 fill={chosen ? accent : '#8b877e'}
               >
                 {labelLines.map((line, i) => (
-                  <tspan key={line} x={nx} dy={i === 0 ? 0 : 15}>
+                  <tspan key={line} x={nx} dy={i === 0 ? 0 : 12}>
                     {line}
                   </tspan>
                 ))}
