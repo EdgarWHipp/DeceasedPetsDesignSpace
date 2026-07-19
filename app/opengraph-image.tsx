@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const alt =
-  'A Design Space for Representations of Deceased Companion Animals';
+  'A Design Space for Technology-Mediated Representations of Deceased Companion Animals';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -26,8 +26,8 @@ export default function OpengraphImage() {
           <div style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#b18452' }} />
           <div style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#8a7ca8' }} />
         </div>
-        <div style={{ fontSize: 58, fontWeight: 600, textAlign: 'center', lineHeight: 1.15 }}>
-          A Design Space for Representations of Deceased Companion Animals
+        <div style={{ fontSize: 50, fontWeight: 600, textAlign: 'center', lineHeight: 1.15 }}>
+          A Design Space for Technology-Mediated Representations of Deceased Companion Animals
         </div>
         <div style={{ fontSize: 28, marginTop: 28, color: '#5c5955' }}>
           Nine dimensions · KIT Master&apos;s thesis

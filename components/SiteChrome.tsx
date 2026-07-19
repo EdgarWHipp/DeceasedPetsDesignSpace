@@ -12,7 +12,7 @@ export function SiteHeader({ current }: { current: string }) {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-ink text-balance">
-            A Design Space for Representations of Deceased Companion Animals
+            A Design Space for Technology-Mediated Representations of Deceased Companion Animals
           </h1>
           {current === '/' && (
             <p className="mt-1 text-sm text-ink/60">

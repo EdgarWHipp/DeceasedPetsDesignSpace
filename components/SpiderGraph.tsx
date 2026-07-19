@@ -68,16 +68,17 @@ export default function SpiderGraph({
       {GROUPS.map((g) => {
         const a0 = NODE_ANGLE[g.dims[0]] - 16;
         const a1 = NODE_ANGLE[g.dims[g.dims.length - 1]] + 16;
-        // Title anchor: segment midpoint, except Afterlife (mid-left has no
-        // free space outside the ring) which hangs off its lower end at the
-        // bottom-left, mirroring Interaction at the bottom-right.
-        const afterlife = g.name === 'Afterlife';
-        const ta = afterlife ? 140 : (a0 + a1) / 2;
-        const titleR = afterlife ? R_ARC + 62 : R_NODE + 114;
+        // Title anchor angle: segment midpoint, except Afterlife (mid-left
+        // has no free space outside the ring) which hangs off its lower end.
+        const ta = g.name === 'Afterlife' ? 140 : (a0 + a1) / 2;
         const [tx0, ty0] = polar(ta, R_ARC);
-        const [tx1, ty1] = polar(ta, titleR - 18);
-        const [rawLx, ly] = polar(ta, titleR);
-        const lx = Math.min(910, Math.max(90, rawLx));
+        const [tx1, ty1] = polar(ta, R_NODE + 88);
+        // The title starts at the leader line and extends AWAY from the
+        // circle (start-anchored on the right half, end-anchored on the
+        // left), so long names never curl back over the arc.
+        const rightSide = Math.cos((ta * Math.PI) / 180) >= 0;
+        const [ex, ey] = polar(ta, R_NODE + 96);
+        const lx = rightSide ? ex + 8 : Math.max(130, ex - 8);
         return (
           <g key={g.name}>
             <path
@@ -100,8 +101,8 @@ export default function SpiderGraph({
             />
             <text
               x={lx}
-              y={ly}
-              textAnchor="middle"
+              y={ey}
+              textAnchor={rightSide ? 'start' : 'end'}
               dominantBaseline="middle"
               fontSize="20"
               fontWeight="700"

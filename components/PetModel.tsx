@@ -34,7 +34,6 @@ const PROP_ANCHORS = {
   voxel: {
     collar: { pos: [0, 0.78, 0.24], rotX: -1.32, r: 0.44, tube: 0.055, squash: 0.95 },
     tag: [0, 0.6, 0.62],
-    led: [0, 1.55, 0.19],
   },
   voxelStylized: {
     // The stage camera sits nearly level with the collar, so a flat ring
@@ -42,12 +41,10 @@ const PROP_ANCHORS = {
     // the camera: the band dips under the chin and arcs over the shoulders.
     collar: { pos: [0, 0.74, 0.29], rotX: -1.3, r: 0.54, tube: 0.055, squash: 0.9 },
     tag: [0, 0.55, 0.72],
-    led: [0, 1.58, 0.21],
   },
   real: {
     collar: { pos: [0, 1.03, 0.47], rotX: -0.95, r: 0.17, tube: 0.03, squash: 1 },
     tag: [0, 0.84, 0.62],
-    led: [0, 1.52, 0.6],
   },
 } as const;
 
@@ -383,7 +380,6 @@ export default function PetModel({
   const symbolic = selection.D3 === 'D3-P1';
   const behavioral = selection.D3 === 'D3-P3';
   const stone = d1 === 'D1-P2';
-  const robot = d1 === 'D1-P3';
 
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -405,8 +401,8 @@ export default function PetModel({
   useEffect(() => {
     const cache = matCache.current;
     const materialFor = (orig: THREE.MeshStandardMaterial): THREE.Material => {
-      // Interactive (D1-P3) keeps the dog's own colours — the blinking LED
-      // is its whole encoding — so it only needs an override when stylized.
+      // Interactive (D1-P3) keeps the dog's own colours and carries no
+      // extra marker, so it only needs an override when stylized.
       const noRecolor = !d1 || d1 === 'D1-P3';
       if (noRecolor && !stylized) return orig;
       const key = `${d1 ?? 'base'}|${stylized ? 'toon' : 'std'}`;
@@ -484,14 +480,13 @@ export default function PetModel({
     currentAction.current = next;
   }, [actions, names]);
 
-  /* ------------------------------------ per-frame: spawn, LED --- */
+  /* ----------------------------------------- per-frame: spawn, bob --- */
 
   const spawnStart = useRef(0);
   useEffect(() => {
     spawnStart.current = performance.now();
   }, [generation]);
 
-  const ledMat = useRef<THREE.MeshStandardMaterial>(null);
   const realBob = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
@@ -512,14 +507,6 @@ export default function PetModel({
       realBob.current.rotation.z = alive
         ? 0.012 * Math.sin(clock.elapsedTime * 1.3)
         : 0;
-    }
-    // D1-P3 LED: square wave 0 <-> 1 every 1s
-    if (ledMat.current) {
-      ledMat.current.emissiveIntensity = reducedMotion
-        ? 1
-        : Math.floor(clock.elapsedTime) % 2 === 0
-          ? 1
-          : 0;
     }
   });
 
@@ -548,13 +535,6 @@ export default function PetModel({
           <mesh position={[0, 0.06, -0.2]}>
             <boxGeometry args={[1.0, 0.12, 1.4]} />
             <meshStandardMaterial color="#8f887c" />
-          </mesh>
-        )}
-        {/* D1-P3 Interactive: blinking LED above the head */}
-        {robot && (
-          <mesh position={anchors.led as unknown as THREE.Vector3Tuple}>
-            <sphereGeometry args={[0.045, 16, 16]} />
-            <meshStandardMaterial ref={ledMat} color="#e2574e" emissive="#e2574e" />
           </mesh>
         )}
         {/* D3-P1 Symbolic: collar around the neck base + tag below the chin */}

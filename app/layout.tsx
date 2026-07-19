@@ -12,7 +12,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "A Design Space for Representations of Deceased Companion Animals",
+  title: "A Design Space for Technology-Mediated Representations of Deceased Companion Animals",
   description:
     "An interactive explorer for the design space of technology-mediated representations of deceased companion animals. Master's thesis, Karlsruhe Institute of Technology (KIT).",
   openGraph: {

@@ -126,7 +126,7 @@
 <rect x="150.0" y="2136.0" width="14.0" height="540.0" rx="0" fill="#8b8e5a" stroke="none" stroke-width="0"/>
 <text x="188.0" y="2202.0" font-family="Helvetica" font-size="46" font-weight="800" fill="#252827" text-anchor="start">D4</text>
 <text x="268.0" y="2201.0" font-family="Helvetica" font-size="46" font-weight="700" fill="#252827" text-anchor="start">Responsiveness</text>
-<text x="268.0" y="2256.0" font-family="Helvetica" font-size="28" font-weight="400" fill="#252827" text-anchor="start">Whether the pet reacts to the</text><text x="268.0" y="2290.0" font-family="Helvetica" font-size="28" font-weight="400" fill="#252827" text-anchor="start">user.</text>
+<text x="268.0" y="2256.0" font-family="Helvetica" font-size="28" font-weight="400" fill="#252827" text-anchor="start">Whether the pet reacts to the</text><text x="268.0" y="2290.0" font-family="Helvetica" font-size="28" font-weight="400" fill="#252827" text-anchor="start">user&#8217;s actions.</text>
 <rect x="800.0" y="2154.0" width="2203.0" height="504.0" rx="0" fill="#ffffff" stroke="#c8cec9" stroke-width="2"/>
 <svg x="826.0" y="2210.0" width="430.0" height="307.0" viewBox="0 0 420 300" preserveAspectRatio="xMidYMid meet"><rect x="0.0" y="0.0" width="420.0" height="300.0" rx="0" fill="#f7faf8" stroke="none" stroke-width="0"/>
 <circle cx="100.0" cy="166.0" r="14.0" fill="#d8c8b0" stroke="#6b6156" stroke-width="1.56"/><rect x="89.1" y="181.6" width="21.8" height="45.2" rx="0" fill="#8a786b" stroke="#6b6156" stroke-width="1.56"/><line x1="89.1" y1="200.3" x2="65.7" y2="215.9" stroke="#8b8e5a" stroke-width="3.12"/><line x1="110.9" y1="200.3" x2="134.3" y2="215.9" stroke="#8b8e5a" stroke-width="3.12"/>
@@ -137,7 +137,7 @@
 <rect x="826.0" y="2210.0" width="430.0" height="307.0" rx="0" fill="none" stroke="#ffffff" stroke-width="5"/>
 <g data-role="position-badge" data-rightmost="false"><rect x="1298.0" y="2215.0" width="102.0" height="60.0" rx="0" fill="#ffffff" stroke="#8b8e5a" stroke-width="3" shape-rendering="crispEdges"/><text x="1349.0" y="2256.0" font-family="Helvetica" font-size="31" font-weight="700" fill="#252827" text-anchor="middle">P1</text></g>
 <text x="1298.0" y="2330.0" font-family="Helvetica" font-size="44" font-weight="700" fill="#252827" text-anchor="start">Passive</text>
-<g data-role="card-short-description"><text x="1298.0" y="2398.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">Presents content or cues without reacting as the pet.</text></g>
+<g data-role="card-short-description"><text x="1298.0" y="2398.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">Unaffected by the user&#8217;s actions.</text></g>
 <rect x="3025.0" y="2154.0" width="2203.0" height="504.0" rx="0" fill="#ffffff" stroke="#c8cec9" stroke-width="2"/>
 <svg x="3051.0" y="2210.0" width="430.0" height="307.0" viewBox="0 0 420 300" preserveAspectRatio="xMidYMid meet"><rect x="0.0" y="0.0" width="420.0" height="300.0" rx="0" fill="#f7faf8" stroke="none" stroke-width="0"/>
 <circle cx="100.0" cy="166.0" r="14.0" fill="#d8c8b0" stroke="#6b6156" stroke-width="1.56"/><rect x="89.1" y="181.6" width="21.8" height="45.2" rx="0" fill="#8a786b" stroke="#6b6156" stroke-width="1.56"/><line x1="89.1" y1="200.3" x2="65.7" y2="215.9" stroke="#8b8e5a" stroke-width="3.12"/><line x1="110.9" y1="200.3" x2="134.3" y2="215.9" stroke="#8b8e5a" stroke-width="3.12"/>
@@ -150,7 +150,7 @@
 <rect x="3051.0" y="2210.0" width="430.0" height="307.0" rx="0" fill="none" stroke="#ffffff" stroke-width="5"/>
 <g data-role="position-badge" data-rightmost="true"><rect x="3493.0" y="2215.0" width="102.0" height="60.0" rx="0" fill="#ffffff" stroke="#8b8e5a" stroke-width="3" shape-rendering="crispEdges"/><text x="3544.0" y="2256.0" font-family="Helvetica" font-size="31" font-weight="700" fill="#252827" text-anchor="middle">P2</text></g>
 <text x="3523.0" y="2330.0" font-family="Helvetica" font-size="44" font-weight="700" fill="#252827" text-anchor="start">Active</text>
-<g data-role="card-short-description"><text x="3523.0" y="2398.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">The pet responds during use.</text></g>
+<g data-role="card-short-description"><text x="3523.0" y="2398.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">Reacts to the user&#8217;s actions in the moment.</text></g>
 <rect x="150.0" y="2688.0" width="5100.0" height="540.0" rx="0" fill="#ffffff" stroke="#c8cec9" stroke-width="2"/>
 <rect x="150.0" y="2688.0" width="14.0" height="540.0" rx="0" fill="#b18452" stroke="none" stroke-width="0"/>
 <text x="188.0" y="2754.0" font-family="Helvetica" font-size="46" font-weight="800" fill="#252827" text-anchor="start">D5</text>

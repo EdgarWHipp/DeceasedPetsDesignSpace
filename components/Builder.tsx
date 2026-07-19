@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
+  DIMENSIONS,
   DIM_BY_ID,
   GROUPS,
   GROUP_ACCENT,
@@ -52,6 +53,12 @@ export default function Builder() {
     setActiveDim(null);
   };
 
+  // A vignette shows only while the selection exactly matches a preset.
+  const activePreset =
+    PRESETS.find((p) =>
+      DIMENSIONS.every((d) => selection[d.id] === p.selection[d.id]),
+    )?.name ?? null;
+
   return (
     <div className="flex min-h-screen flex-col">
       {!kiosk && <SiteHeader current="/" />}
@@ -59,6 +66,9 @@ export default function Builder() {
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 md:px-6">
         {/* preset bar */}
         <div className="flex flex-wrap items-center justify-center gap-2 py-4">
+          <span className="mr-1 text-[11px] font-semibold uppercase tracking-widest text-ink/50">
+            Selected workshop representations
+          </span>
           {PRESETS.map((preset) => (
             <button
               key={preset.name}
@@ -98,7 +108,11 @@ export default function Builder() {
             className="absolute"
             style={{ left: '26%', top: '27%', width: '48%', height: '48%' }}
           >
-            <PetStage selection={selection} generation={generation} />
+            <PetStage
+              selection={selection}
+              generation={generation}
+              preset={activePreset}
+            />
           </div>
           {activeDim && (
             <DesktopPanel
@@ -117,7 +131,11 @@ export default function Builder() {
         {/* mobile: stage + grouped accordion */}
         <div className="md:hidden">
           <div className="mx-auto aspect-square w-full max-w-md">
-            <PetStage selection={selection} generation={generation} />
+            <PetStage
+              selection={selection}
+              generation={generation}
+              preset={activePreset}
+            />
           </div>
           <div className="mt-2 space-y-4">
             {GROUPS.map((group) => (

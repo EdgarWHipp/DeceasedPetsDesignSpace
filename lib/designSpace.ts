@@ -146,20 +146,21 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D4',
     title: 'Responsiveness',
-    question: 'Does it react to you?',
+    question: 'Does it react to your actions?',
     group: 'Interaction',
     positions: [
       {
         id: 'D4-P1',
         label: 'Passive',
-        definition: 'Shows moments and cues without reacting back.',
+        definition:
+          'Not influenced by your actions in the moment — it may still act on its own or react to its surroundings.',
         examples: ['photo album', 'video replay', 'scent cue'],
-        story: 'it shows you moments without reacting back',
+        story: 'it lives its moments beside you, untouched by what you do',
       },
       {
         id: 'D4-P2',
         label: 'Active',
-        definition: 'Responds to you in the moment.',
+        definition: 'Reacts to your actions in the moment.',
         examples: ['chatbot', 'robot dog', 'interactive game pet'],
         story: 'it answers you — nudging, playing, responding',
       },

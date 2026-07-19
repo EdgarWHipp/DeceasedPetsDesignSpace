@@ -12,25 +12,35 @@ export default function AboutPage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader current="/about" />
       <main className="mx-auto w-full max-w-3xl flex-1 px-6">
-        <h2 className="font-serif text-lg font-semibold text-ink">About this design space</h2>
+        <h2 className="font-serif text-lg font-semibold text-ink">More on this research</h2>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
-          Losing a companion animal is, for many people, losing a family
-          member. Emerging technologies — extended reality, robotics,
-          interactive media — open a wide range of ways a deceased pet can be
-          represented, remembered, and encountered again. This design space
-          maps that range. It grew out of a series of design workshops:
-          participants sketched and discussed concepts for technology-mediated
-          representations of deceased companion animals, and those concepts
-          were then synthesized into the shared structure presented here.
+          Companion animals hold a clear place in everyday life, and their
+          loss can bring serious grief that is still socially
+          under-acknowledged. Research on digital afterlife technologies has
+          mostly focused on deceased humans; deceased companion animals remain
+          far less examined. This thesis addresses that gap by developing a
+          design space for Extended Reality (XR) and adjacent
+          technology-mediated representations of deceased companion animals.
         </p>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
-          The synthesis yields nine dimensions in three groups — how the pet is
-          made present (Manifestation), how the owner can encounter and act
-          with it (Interaction), and how the representation is created, how the
-          bond continues, and who can take part (Afterlife). Each dimension
-          offers two to four positions; together they describe 5,184 possible
-          configurations. The builder explores them one pet at a time; the
-          atlas lays out the whole space.
+          The work uses speculative design: two design workshops generated
+          concepts, sketches, stories, and critiques of imagined posthumous
+          pet representations, which were analyzed through reflexive thematic
+          analysis. Rather than treating technical feasibility as the main
+          constraint, the workshops used speculation to open discussion about
+          which forms of presence, recognition, continuity, and control might
+          feel comforting, unsettling, or unacceptable.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-ink/80">
+          The findings range from sensory traces and place-based replay to
+          ongoing digital companions and transition-oriented services &mdash;
+          and they show that posthumous pet representation is not simply a
+          matter of immersive visualization. What mattered was how a system
+          made the pet recognizable, where and when it appeared, how strongly
+          technology mediated the encounter, and what kind of continuity after
+          loss it supported. These findings were synthesized into the
+          nine-dimensional design space this site explores; a follow-up survey
+          evaluated it as a classification and reflection artifact.
         </p>
         <p className="mt-6 text-sm font-medium text-ink/80">
           Edgar Hipp, Dr.-Ing. Martin Feick, M.Sc. Shi Liu, Prof. Dr. Alexander
