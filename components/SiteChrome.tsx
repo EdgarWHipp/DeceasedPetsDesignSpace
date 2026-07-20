@@ -9,8 +9,8 @@ const NAV = [
 export function SiteHeader({ current }: { current: string }) {
   return (
     <header className="mx-auto w-full max-w-5xl px-6 pt-8 pb-4">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
+      <div className="flex items-center justify-between gap-6">
+        <div className="min-w-0">
           <h1 className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-ink text-balance">
             A Design Space for Technology-Mediated Representations of Deceased Companion Animals
           </h1>
@@ -21,7 +21,7 @@ export function SiteHeader({ current }: { current: string }) {
             </p>
           )}
         </div>
-        <nav className="flex gap-1 text-sm">
+        <nav className="mr-40 flex shrink-0 gap-1 text-sm">
           {NAV.map((item) => (
             <Link
               key={item.href}

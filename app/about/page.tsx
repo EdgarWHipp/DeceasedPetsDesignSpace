@@ -40,9 +40,31 @@ export default function AboutPage() {
           technology mediated the encounter, and what kind of continuity after
           loss it supported. These findings were synthesized into the
           nine-dimensional design space this site explores; a follow-up survey
-          evaluated it as a classification and reflection artifact.
+          evaluated it as a classification artifact.
         </p>
-        <p className="mt-6 text-sm font-medium text-ink/80">
+        <figure className="mt-8">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/workshops/leipzig-workshop.jpg"
+              alt="Speculative design workshop in Leipzig: participants working in small groups at standing tables"
+              className="aspect-[4/3] w-full rounded-xl border border-black/10 object-cover"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/workshops/munich-workshop.jpg"
+              alt="Speculative design workshop in Munich: participants at a whiteboard with a futures wheel and futures cone"
+              className="aspect-[4/3] w-full rounded-xl border border-black/10 object-cover"
+            />
+          </div>
+          <figcaption className="mt-2 text-xs text-ink/50">
+            The two speculative design workshops. Left: Albertina Library,
+            Leipzig (9&nbsp;May&nbsp;2026). Right: University Library, Technical
+            University of Munich (8&nbsp;June&nbsp;2026). Participant faces are
+            blurred.
+          </figcaption>
+        </figure>
+        <p className="mt-8 text-sm font-medium text-ink/80">
           Edgar Hipp, Dr.-Ing. Martin Feick, M.Sc. Shi Liu, Prof. Dr. Alexander
           Mädche
         </p>

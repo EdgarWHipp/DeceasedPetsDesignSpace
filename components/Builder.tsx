@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   DIMENSIONS,
@@ -53,6 +53,59 @@ export default function Builder() {
     setActiveDim(null);
   };
 
+  // Idle preview (normal page only): if the visitor doesn't interact for a
+  // short while, gently cycle through the three preset examples in order so
+  // the stage is never static. Any pointer/key interaction stops the cycle
+  // and re-arms the idle timer. Skipped in kiosk mode (KioskMode runs its own
+  // full-screen attract) and under prefers-reduced-motion.
+  const applyRef = useRef(apply);
+  useEffect(() => {
+    applyRef.current = apply;
+  });
+  useEffect(() => {
+    if (kiosk) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const IDLE_MS = 15000; // start cycling after 15 s of no interaction
+    const STEP_MS = 6000; // advance to the next example every 6 s
+    let idleTimer = 0;
+    let stepTimer = 0;
+    let idx = 0;
+
+    const stop = () => {
+      window.clearInterval(stepTimer);
+      stepTimer = 0;
+    };
+    const start = () => {
+      if (stepTimer) return;
+      idx = 0;
+      const step = () => {
+        applyRef.current(PRESETS[idx % PRESETS.length].selection);
+        idx += 1;
+      };
+      step();
+      stepTimer = window.setInterval(step, STEP_MS);
+    };
+    const arm = () => {
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(start, IDLE_MS);
+    };
+    const onInteract = () => {
+      stop();
+      arm();
+    };
+
+    arm();
+    window.addEventListener('pointerdown', onInteract);
+    window.addEventListener('keydown', onInteract);
+    return () => {
+      window.clearTimeout(idleTimer);
+      stop();
+      window.removeEventListener('pointerdown', onInteract);
+      window.removeEventListener('keydown', onInteract);
+    };
+  }, [kiosk]);
+
   // A vignette shows only while the selection exactly matches a preset.
   const activePreset =
     PRESETS.find((p) =>
@@ -64,8 +117,8 @@ export default function Builder() {
       {!kiosk && <SiteHeader current="/" />}
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 md:px-6">
-        {/* preset bar */}
-        <div className="flex flex-wrap items-center justify-center gap-2 py-4">
+        {/* preset bar — left edge aligned with the title (max-w-5xl header) */}
+        <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-start gap-2 py-4">
           <span className="mr-1 text-[11px] font-semibold uppercase tracking-widest text-ink/50">
             Selected workshop representations
           </span>
@@ -123,7 +176,7 @@ export default function Builder() {
             />
           )}
         </div>
-          <div className="w-[320px] shrink-0">
+          <div className="w-[480px] shrink-0">
             <StoryCard selection={selection} />
           </div>
         </div>
@@ -204,11 +257,13 @@ export default function Builder() {
       </main>
 
       {!kiosk && <SiteFooter />}
-      <KioskMode
-        idleMs={idleSeconds * 1000}
-        startActive={kiosk}
-        onSpawn={apply}
-      />
+      {kiosk && (
+        <KioskMode
+          idleMs={idleSeconds * 1000}
+          startActive={kiosk}
+          onSpawn={apply}
+        />
+      )}
     </div>
   );
 }

@@ -12,6 +12,11 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000",
+  ),
   title: "A Design Space for Technology-Mediated Representations of Deceased Companion Animals",
   description:
     "An interactive explorer for the design space of technology-mediated representations of deceased companion animals. Master's thesis, Karlsruhe Institute of Technology (KIT).",

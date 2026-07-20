@@ -87,7 +87,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D1-P3',
         label: 'Interactive',
         definition: 'A body that can sense and react.',
-        examples: ['robot dog', 'animatronic pet', 'responsive avatar'],
+        examples: ['robot dog', 'animatronic pet'],
         story: 'a responsive body that reacts when you reach out',
       },
     ],
@@ -124,7 +124,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D3-P1',
         label: 'Symbolic',
         definition: 'Recognized by signs and symbols.',
-        examples: ['birthday', 'name tag', 'paw symbol'],
+        examples: ['name tag', 'paw symbol'],
         story: 'you know it by its name tag and paw mark',
       },
       {

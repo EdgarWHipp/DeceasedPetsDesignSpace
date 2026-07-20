@@ -20,6 +20,14 @@ const R_RIM = 258;
 const NODE_R = 58;
 const R_ARC = R_NODE + 78;
 const PAPER = '#f7f5f0';
+// Outer margin baked into the viewBox so group titles can sit further from
+// the ring (with longer leader lines) without clipping at the canvas edge.
+const VB_MARGIN = 60;
+const VB_SPAN = 1000 + 2 * VB_MARGIN;
+// Group-title placement, measured out from the nodes: the leader line ends
+// near R_NODE + LEADER_OUT and the title label sits at R_NODE + TITLE_OUT.
+const LEADER_OUT = 130;
+const TITLE_OUT = 140;
 
 function polar(angleDeg: number, r: number): [number, number] {
   const a = (angleDeg * Math.PI) / 180;
@@ -33,7 +41,10 @@ const NODE_ANGLE: Record<DimId, number> = Object.fromEntries(
 /** Node center as percentages of the square container (for panel anchoring). */
 export function nodePercent(dim: DimId): { x: number; y: number } {
   const [x, y] = polar(NODE_ANGLE[dim], R_NODE);
-  return { x: x / 10, y: y / 10 };
+  return {
+    x: ((x + VB_MARGIN) / VB_SPAN) * 100,
+    y: ((y + VB_MARGIN) / VB_SPAN) * 100,
+  };
 }
 
 function arcPath(a0: number, a1: number, r: number): string {
@@ -63,7 +74,10 @@ export default function SpiderGraph({
   onNodeClick: (dim: DimId) => void;
 }) {
   return (
-    <svg viewBox="0 0 1000 1000" className="absolute inset-0 w-full h-full">
+    <svg
+      viewBox={`${-VB_MARGIN} ${-VB_MARGIN} ${VB_SPAN} ${VB_SPAN}`}
+      className="absolute inset-0 w-full h-full"
+    >
       {/* group ring: one 1/3 colour segment per group + leader line + title */}
       {GROUPS.map((g) => {
         const a0 = NODE_ANGLE[g.dims[0]] - 16;
@@ -72,12 +86,12 @@ export default function SpiderGraph({
         // has no free space outside the ring) which hangs off its lower end.
         const ta = g.name === 'Afterlife' ? 140 : (a0 + a1) / 2;
         const [tx0, ty0] = polar(ta, R_ARC);
-        const [tx1, ty1] = polar(ta, R_NODE + 88);
+        const [tx1, ty1] = polar(ta, R_NODE + LEADER_OUT);
         // The title starts at the leader line and extends AWAY from the
         // circle (start-anchored on the right half, end-anchored on the
         // left), so long names never curl back over the arc.
         const rightSide = Math.cos((ta * Math.PI) / 180) >= 0;
-        const [ex, ey] = polar(ta, R_NODE + 96);
+        const [ex, ey] = polar(ta, R_NODE + TITLE_OUT);
         const lx = rightSide ? ex + 8 : Math.max(130, ex - 8);
         return (
           <g key={g.name}>
@@ -143,6 +157,13 @@ export default function SpiderGraph({
             />
             <g
               onClick={() => onNodeClick(dim.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onNodeClick(dim.id);
+                }
+              }}
+              tabIndex={0}
               className="cursor-pointer"
               role="button"
               aria-label={`${dim.title}: ${chosen ? chosen.label : 'not chosen'}`}
