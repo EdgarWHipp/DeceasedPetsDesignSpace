@@ -400,7 +400,7 @@ export default function PetModel({
   useEffect(() => {
     const cache = matCache.current;
     const materialFor = (orig: THREE.MeshStandardMaterial): THREE.Material => {
-      // Interactive (D1-P3) keeps the dog's own colours and carries no
+      // Interactive (D1-P3) keeps the dog's own colors and carries no
       // extra marker, so it only needs an override when stylized.
       const noRecolor = !d1 || d1 === 'D1-P3';
       if (noRecolor && !stylized) return orig;
