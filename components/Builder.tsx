@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
-  DIMENSIONS,
   DIM_BY_ID,
   GROUPS,
   GROUP_ACCENT,
@@ -11,10 +10,10 @@ import {
   getPosition,
   randomSelection,
   type DimId,
+  type GroupName,
   type Selection,
 } from '@/lib/designSpace';
-import PetStage from '@/components/PetStage';
-import SpiderGraph, { nodePercent } from '@/components/SpiderGraph';
+import GroupStage from '@/components/GroupStage';
 import DimensionPanel from '@/components/DimensionPanel';
 import StoryCard from '@/components/StoryCard';
 import KioskMode from '@/components/KioskMode';
@@ -27,19 +26,25 @@ export default function Builder() {
 
   const [selection, setSelection] = useState<Selection>({});
   const [generation, setGeneration] = useState(0);
-  const [activeDim, setActiveDim] = useState<DimId | null>(null);
   const [openAccordion, setOpenAccordion] = useState<DimId | null>(null);
+  // The bespoke preset vignette (candle / holo projector / arena) shows only
+  // when a preset was *explicitly* chosen — a preset button (or the kiosk
+  // attract). Building the same nine-dimension combination by hand is a
+  // participant's own design, so it stays a neutral pet; any manual pick clears
+  // this.
+  const [presetName, setPresetName] = useState<string | null>(null);
 
   // The spawn pulse (generation) only fires when the pet's own visuals
   // change: Manifestation dims D1-D3. Interaction and Afterlife picks
-  // update the story without re-generating the picture.
+  // update their own diagram without re-spawning the 3D pet.
   const VISUAL_DIMS: DimId[] = ['D1', 'D2', 'D3'];
 
-  const apply = (sel: Selection) => {
+  const apply = (sel: Selection, name: string | null = null) => {
     if (VISUAL_DIMS.some((d) => selection[d] !== sel[d]))
       setGeneration((g) => g + 1);
     setSelection(sel);
-    setActiveDim(null);
+    setPresetName(name);
+    setOpenAccordion(null);
   };
 
   const pick = (dim: DimId, posId: string) => {
@@ -50,67 +55,22 @@ export default function Builder() {
       return next;
     });
     if (VISUAL_DIMS.includes(dim)) setGeneration((g) => g + 1);
-    setActiveDim(null);
+    setPresetName(null);
   };
 
-  // Idle preview (normal page only): if the visitor doesn't interact for a
-  // short while, gently cycle through the three preset examples in order so
-  // the stage is never static. Any pointer/key interaction stops the cycle
-  // and re-arms the idle timer. Skipped in kiosk mode (KioskMode runs its own
-  // full-screen attract) and under prefers-reduced-motion.
-  const applyRef = useRef(apply);
-  useEffect(() => {
-    applyRef.current = apply;
-  });
-  useEffect(() => {
-    if (kiosk) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // The builder starts empty ("?" everywhere) and stays exactly as the visitor
+  // leaves it — no idle auto-cycling through the preset representations. (Kiosk
+  // mode still runs its own full-screen attract via KioskMode.)
 
-    const IDLE_MS = 15000; // start cycling after 15 s of no interaction
-    const STEP_MS = 6000; // advance to the next example every 6 s
-    let idleTimer = 0;
-    let stepTimer = 0;
-    let idx = 0;
-
-    const stop = () => {
-      window.clearInterval(stepTimer);
-      stepTimer = 0;
-    };
-    const start = () => {
-      if (stepTimer) return;
-      idx = 0;
-      const step = () => {
-        applyRef.current(PRESETS[idx % PRESETS.length].selection);
-        idx += 1;
-      };
-      step();
-      stepTimer = window.setInterval(step, STEP_MS);
-    };
-    const arm = () => {
-      window.clearTimeout(idleTimer);
-      idleTimer = window.setTimeout(start, IDLE_MS);
-    };
-    const onInteract = () => {
-      stop();
-      arm();
-    };
-
-    arm();
-    window.addEventListener('pointerdown', onInteract);
-    window.addEventListener('keydown', onInteract);
-    return () => {
-      window.clearTimeout(idleTimer);
-      stop();
-      window.removeEventListener('pointerdown', onInteract);
-      window.removeEventListener('keydown', onInteract);
-    };
-  }, [kiosk]);
-
-  // A vignette shows only while the selection exactly matches a preset.
-  const activePreset =
-    PRESETS.find((p) =>
-      DIMENSIONS.every((d) => selection[d.id] === p.selection[d.id]),
-    )?.name ?? null;
+  const controlsFor = (group: (typeof GROUPS)[number]) => (
+    <GroupControls
+      group={group}
+      selection={selection}
+      openAccordion={openAccordion}
+      setOpenAccordion={setOpenAccordion}
+      onPick={pick}
+    />
+  );
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -125,7 +85,7 @@ export default function Builder() {
           {PRESETS.map((preset) => (
             <button
               key={preset.name}
-              onClick={() => apply(preset.selection)}
+              onClick={() => apply(preset.selection, preset.name)}
               title={preset.blurb}
               className="rounded-full border border-black/15 bg-white px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
             >
@@ -147,112 +107,65 @@ export default function Builder() {
           </button>
         </div>
 
-        {/* desktop: radial spider graph on the left, live story on the right */}
-        <div className="hidden items-center gap-6 md:flex">
-          <div className="relative aspect-square w-full min-w-0 max-w-[820px] flex-1">
-          <SpiderGraph
-            selection={selection}
-            activeDim={activeDim}
-            onNodeClick={(dim) =>
-              setActiveDim((cur) => (cur === dim ? null : dim))
-            }
-          />
-          <div
-            className="absolute"
-            style={{ left: '26%', top: '27%', width: '48%', height: '48%' }}
-          >
-            <PetStage
-              selection={selection}
-              generation={generation}
-              preset={activePreset}
-            />
+        {/* A single nine-dimension pick can't honestly be one picture, so the
+            builder shows one image per group — Manifestation (the 3D pet, with
+            its preset vignette), Interaction and Afterlife (SVG diagrams) — each
+            driven by its own three dimensions, with that group's controls below.
+            Desktop: an aligned image row (joined by flow arrows) over a controls
+            row. Mobile: each group stacked. */}
+
+        {/* desktop */}
+        <div className="mx-auto hidden w-full max-w-5xl md:block">
+          {/* image row with flow-arrow connectors */}
+          <div className="flex items-center">
+            {GROUPS.map((group, i) => (
+              <Fragment key={group.name}>
+                <div className="min-w-0 flex-1">
+                  <GroupStage
+                    group={group}
+                    selection={selection}
+                    generation={generation}
+                    preset={presetName}
+                  />
+                </div>
+                {i < GROUPS.length - 1 && <FlowArrow />}
+              </Fragment>
+            ))}
           </div>
-          {activeDim && (
-            <DesktopPanel
-              dim={activeDim}
-              selection={selection}
-              onPick={(posId) => pick(activeDim, posId)}
-              onClose={() => setActiveDim(null)}
-            />
-          )}
-        </div>
-          <div className="w-[480px] shrink-0">
+          {/* controls row, columns aligned under their images */}
+          <div className="mt-4 flex items-start">
+            {GROUPS.map((group, i) => (
+              <Fragment key={group.name}>
+                <div className="min-w-0 flex-1">{controlsFor(group)}</div>
+                {i < GROUPS.length - 1 && (
+                  <div className="w-10 shrink-0" aria-hidden />
+                )}
+              </Fragment>
+            ))}
+          </div>
+          <div className="mx-auto max-w-2xl py-8">
             <StoryCard selection={selection} />
           </div>
         </div>
 
-        {/* mobile: stage + grouped accordion */}
-        <div className="md:hidden">
-          <div className="mx-auto aspect-square w-full max-w-md">
-            <PetStage
-              selection={selection}
-              generation={generation}
-              preset={activePreset}
-            />
+        {/* mobile: each group stacked — image over its controls */}
+        <div className="mt-2 space-y-8 md:hidden">
+          {GROUPS.map((group) => (
+            <section key={group.name}>
+              <div className="mx-auto mb-3 aspect-square w-full max-w-xs">
+                <GroupStage
+                  group={group}
+                  selection={selection}
+                  generation={generation}
+                  preset={presetName}
+                />
+              </div>
+              {controlsFor(group)}
+            </section>
+          ))}
+          <div className="py-2">
+            <StoryCard selection={selection} />
           </div>
-          <div className="mt-2 space-y-4">
-            {GROUPS.map((group) => (
-              <section key={group.name}>
-                <h2
-                  className="mb-1 text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: group.accent }}
-                >
-                  {group.name}
-                </h2>
-                <div className="space-y-1.5">
-                  {group.dims.map((dimId) => {
-                    const dim = DIM_BY_ID[dimId];
-                    const chosen = getPosition(selection, dimId);
-                    const open = openAccordion === dimId;
-                    return (
-                      <div
-                        key={dimId}
-                        className="rounded-lg border border-black/10 bg-white"
-                      >
-                        <button
-                          onClick={() =>
-                            setOpenAccordion(open ? null : dimId)
-                          }
-                          aria-expanded={open}
-                          className="flex w-full items-center justify-between px-3 py-2.5 text-left"
-                        >
-                          <span className="text-sm font-medium text-ink">
-                            {dim.title}
-                          </span>
-                          <span
-                            className="text-xs italic"
-                            style={{
-                              color: chosen
-                                ? GROUP_ACCENT[dim.group]
-                                : '#8b877e',
-                            }}
-                          >
-                            {chosen ? chosen.label : '?'}
-                          </span>
-                        </button>
-                        {open && (
-                          <div className="px-2 pb-2">
-                            <DimensionPanel
-                              dimension={dim}
-                              selection={selection}
-                              onPick={(posId) => {
-                                pick(dimId, posId);
-                                setOpenAccordion(null);
-                              }}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
-          </div>
-        </div>
-
-        <div className="py-6 md:hidden">
-          <StoryCard selection={selection} />
         </div>
       </main>
 
@@ -268,32 +181,74 @@ export default function Builder() {
   );
 }
 
-function DesktopPanel({
-  dim,
-  selection,
-  onPick,
-  onClose,
-}: {
-  dim: DimId;
-  selection: Selection;
-  onPick: (posId: string) => void;
-  onClose: () => void;
-}) {
-  const pos = nodePercent(dim);
-  // Anchor the popover at the node, growing toward the stage center.
-  const style: React.CSSProperties = { width: 300, zIndex: 20 };
-  if (pos.x < 50) style.left = `${pos.x}%`;
-  else style.right = `${100 - pos.x}%`;
-  if (pos.y < 50) style.top = `${pos.y}%`;
-  else style.bottom = `${100 - pos.y}%`;
+/** Directional connector drawn between two group images in the desktop row. */
+function FlowArrow() {
   return (
-    <div className="absolute" style={style}>
-      <DimensionPanel
-        dimension={DIM_BY_ID[dim]}
-        selection={selection}
-        onPick={onPick}
-        onClose={onClose}
-      />
+    <div className="flex w-10 shrink-0 items-center justify-center" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-6 w-6 text-ink/30">
+        <path
+          d="M4 12h13M12 6l6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
+/** One group's dimension pickers as an accordion, below its image. */
+function GroupControls({
+  group,
+  selection,
+  openAccordion,
+  setOpenAccordion,
+  onPick,
+}: {
+  group: { name: GroupName; dims: DimId[] };
+  selection: Selection;
+  openAccordion: DimId | null;
+  setOpenAccordion: (dim: DimId | null) => void;
+  onPick: (dim: DimId, posId: string) => void;
+}) {
+  return (
+    <div className="space-y-1.5">
+      {group.dims.map((dimId) => {
+        const dim = DIM_BY_ID[dimId];
+        const chosen = getPosition(selection, dimId);
+        const open = openAccordion === dimId;
+        return (
+          <div key={dimId} className="rounded-lg border border-black/10 bg-white">
+            <button
+              onClick={() => setOpenAccordion(open ? null : dimId)}
+              aria-expanded={open}
+              className="flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left"
+            >
+              <span className="text-sm font-medium text-ink">{dim.title}</span>
+              <span
+                className="shrink-0 text-xs italic"
+                style={{ color: chosen ? GROUP_ACCENT[dim.group] : '#8b877e' }}
+              >
+                {chosen ? chosen.label : '?'}
+              </span>
+            </button>
+            {open && (
+              <div className="px-2 pb-2">
+                <DimensionPanel
+                  dimension={dim}
+                  selection={selection}
+                  onPick={(posId) => {
+                    onPick(dimId, posId);
+                    setOpenAccordion(null);
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

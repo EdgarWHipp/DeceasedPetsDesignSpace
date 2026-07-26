@@ -65,8 +65,8 @@ export default function AboutPage() {
           </figcaption>
         </figure>
         <p className="mt-8 text-sm font-medium text-ink/80">
-          Edgar Hipp, Dr.-Ing. Martin Feick, M.Sc. Shi Liu, Prof. Dr. Alexander
-          Mädche
+          M.Sc. Edgar Hipp, Dr.-Ing. Martin Feick, M.Sc. Shi Liu, Prof. Dr.
+          Alexander Mädche
         </p>
         <p className="mt-1 text-sm text-ink/70">
           Master&apos;s Thesis · Human-Centered Systems Lab (h-lab), WIN,
