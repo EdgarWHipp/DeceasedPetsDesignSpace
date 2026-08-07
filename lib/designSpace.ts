@@ -65,28 +65,28 @@ export const GROUPS: {
 export const DIMENSIONS: Dimension[] = [
   {
     id: 'D1',
-    title: 'Tangibility',
-    question: 'Can the pet be touched?',
+    title: 'Form',
+    question: 'What form does the representation take?',
     group: 'Manifestation',
     positions: [
       {
         id: 'D1-P1',
-        label: 'Perceived',
-        definition: 'Present without a touchable body.',
+        label: 'Intangible',
+        definition: 'Present with no physical body; nothing to touch.',
         examples: ['hologram', 'screen pet', 'voice cue'],
         story: 'a presence you can see and hear but never touch',
       },
       {
         id: 'D1-P2',
-        label: 'Material',
-        definition: 'A touchable object that does not act on its own.',
+        label: 'Keepsake',
+        definition: 'A physical object that stands for the pet, not the pet itself.',
         examples: ['collar', 'memorial stone', 'candle'],
         story: 'a quiet object you can hold in your hands',
       },
       {
         id: 'D1-P3',
-        label: 'Interactive',
-        definition: 'A body that can sense and react.',
+        label: 'Body',
+        definition: 'The pet given a physical body of its own.',
         examples: ['robot dog', 'animatronic pet'],
         story: 'a responsive body that reacts when you reach out',
       },
@@ -94,8 +94,8 @@ export const DIMENSIONS: Dimension[] = [
   },
   {
     id: 'D2',
-    title: 'Fidelity',
-    question: 'How lifelike should it be?',
+    title: 'Visual Fidelity',
+    question: 'How closely does it resemble reality?',
     group: 'Manifestation',
     positions: [
       {
@@ -111,6 +111,13 @@ export const DIMENSIONS: Dimension[] = [
         definition: 'Aims for a lifelike impression.',
         examples: ['lifelike hologram', 'realistic robot', 'detailed photo scene'],
         story: 'rendered as lifelike as memory allows',
+      },
+      {
+        id: 'D2-P3',
+        label: 'Abstract',
+        definition: 'Suggests the pet through symbols, shapes, or minimal cues.',
+        examples: ['spirit form', 'light orb', 'geometric robot dog'],
+        story: 'suggested through soft shapes and minimal cues',
       },
     ],
   },
@@ -197,13 +204,13 @@ export const DIMENSIONS: Dimension[] = [
   },
   {
     id: 'D6',
-    title: 'Mobility',
-    question: 'Where can it be?',
+    title: 'Context',
+    question: 'Is it bound to one context, or does it move across contexts?',
     group: 'Interaction',
     positions: [
       {
         id: 'D6-P1',
-        label: 'Context-Bound',
+        label: 'Bound',
         definition: 'Bound to one specific place or context.',
         examples: ['grave', 'old corner', 'fixed display', 'specific VR world'],
         story: 'it lives in one meaningful place',
