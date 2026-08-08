@@ -8,7 +8,7 @@ const svg = readFileSync(SRC, 'utf8');
 // Ordered position ids, matching DIMENSIONS order in lib/designSpace.ts.
 const ORDER = [
   'D1-P1', 'D1-P2', 'D1-P3',
-  'D2-P1', 'D2-P2',
+  'D2-P1', 'D2-P2', 'D2-P3',
   'D3-P1', 'D3-P2', 'D3-P3',
   'D4-P1', 'D4-P2',
   'D5-P1', 'D5-P2', 'D5-P3',

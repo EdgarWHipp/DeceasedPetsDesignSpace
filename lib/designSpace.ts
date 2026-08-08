@@ -320,7 +320,7 @@ export const DIMENSIONS: Dimension[] = [
 
 export type Selection = Partial<Record<DimId, string>>; // position id per dim
 
-export const TOTAL_CONFIGURATIONS = 5184; // 3·2·3·2·3·2·2·4·3
+export const TOTAL_CONFIGURATIONS = 7776; // 3·3·3·2·3·2·2·4·3
 
 export const PRESETS: {
   name: string;

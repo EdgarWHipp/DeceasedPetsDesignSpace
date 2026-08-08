@@ -1,6 +1,6 @@
 # Deceased Pets Design Space
 
-Interactive explorer for the design space of XR and technology-mediated representations of deceased companion animals, developed in a Master's thesis at Karlsruhe Institute of Technology (KIT). Pick one position per dimension and a new version of the pet spawns reflecting every choice — nine dimensions, 5184 possible configurations.
+Interactive explorer for the design space of XR and technology-mediated representations of deceased companion animals, developed in a Master's thesis at Karlsruhe Institute of Technology (KIT). Pick one position per dimension and a new version of the pet spawns reflecting every choice — nine dimensions, 7776 possible configurations.
 
 ## Development
 
