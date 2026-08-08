@@ -400,7 +400,7 @@ export default function PetModel({
   useEffect(() => {
     const cache = matCache.current;
     const materialFor = (orig: THREE.MeshStandardMaterial): THREE.Material => {
-      // Interactive (D1-P3) keeps the dog's own colors and carries no
+      // Body (D1-P3) keeps the dog's own colors and carries no
       // extra marker, so it only needs an override when stylized.
       const noRecolor = !d1 || d1 === 'D1-P3';
       if (noRecolor && !stylized) return orig;
@@ -409,12 +409,12 @@ export default function PetModel({
       if (cached) return cached;
       let mat: THREE.Material;
       if (d1 === 'D1-P1') {
-        // Perceived: teal + translucency is the whole encoding (no glow).
+        // Intangible: teal + translucency is the whole encoding (no glow).
         mat = stylized
           ? new THREE.MeshToonMaterial({ color: '#2f8c78', transparent: true, opacity: 0.55 })
           : new THREE.MeshStandardMaterial({ color: '#2f8c78', transparent: true, opacity: 0.55 });
       } else if (d1 === 'D1-P2') {
-        // Material: matte stone.
+        // Keepsake: matte stone.
         mat = stylized
           ? new THREE.MeshToonMaterial({ color: '#a8a094' })
           : new THREE.MeshStandardMaterial({ color: '#a8a094', roughness: 1, metalness: 0 });
@@ -529,7 +529,7 @@ export default function PetModel({
             <primitive object={model} />
           </group>
         )}
-        {/* D1-P2 Material: plinth (dog's long axis runs along z) */}
+        {/* D1-P2 Keepsake: plinth (dog's long axis runs along z) */}
         {stone && (
           <mesh position={[0, 0.06, -0.2]}>
             <boxGeometry args={[1.0, 0.12, 1.4]} />
@@ -537,7 +537,7 @@ export default function PetModel({
           </mesh>
         )}
         {/* D3-P1 Symbolic: collar around the neck base + tag below the chin.
-            Perceived (D1-P1) renders the necklace as translucent as the pet. */}
+            Intangible (D1-P1) renders the necklace as translucent as the pet. */}
         {symbolic && (
           <>
             <mesh
