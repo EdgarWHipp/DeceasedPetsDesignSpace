@@ -4,7 +4,7 @@ import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'About the design space for XR and technology-mediated representations of deceased companion animals.',
+    'About the design space for XR, adjacent technology-mediated, and analog representations of deceased companion animals.',
 };
 
 export default function AboutPage() {
@@ -19,8 +19,9 @@ export default function AboutPage() {
           under-acknowledged. Research on digital afterlife technologies has
           mostly focused on deceased humans; deceased companion animals remain
           far less examined. This thesis addresses that gap by developing a
-          design space for Extended Reality (XR) and adjacent
-          technology-mediated representations of deceased companion animals.
+          design space for Extended Reality (XR), adjacent
+          technology-mediated, and analog representations of deceased companion
+          animals.
         </p>
         <p className="mt-3 text-sm leading-relaxed text-ink/80">
           The work uses speculative design: two design workshops generated

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   ),
   title: "A Design Space for Technology-Mediated Representations of Deceased Companion Animals",
   description:
-    "An interactive explorer for the design space of technology-mediated representations of deceased companion animals. Master's thesis, Karlsruhe Institute of Technology (KIT).",
+    "An interactive explorer for the design space of XR, adjacent technology-mediated, and analog representations of deceased companion animals. Master's thesis, Karlsruhe Institute of Technology (KIT).",
   openGraph: {
     type: "website",
     siteName: "Deceased Pets Design Space",

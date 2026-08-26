@@ -73,7 +73,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D1-P1',
         label: 'Intangible',
         definition: 'Present with no physical body; nothing to touch.',
-        examples: ['hologram', 'screen pet', 'voice cue'],
+        examples: ['hologram', 'screen pet', 'projected image'],
         story: 'a presence you can see and hear but never touch',
       },
       {
@@ -86,9 +86,9 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D1-P3',
         label: 'Body',
-        definition: 'The pet given a physical body of its own.',
+        definition: 'The pet itself in physical form; something you could touch.',
         examples: ['robot dog', 'animatronic pet'],
-        story: 'a responsive body that reacts when you reach out',
+        story: 'a body of its own, there in the room with you',
       },
     ],
   },
@@ -102,7 +102,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D2-P1',
         label: 'Stylized',
         definition: 'An expressive, simplified likeness.',
-        examples: ['comic hologram', 'cartoon avatar', 'game pet'],
+        examples: ['a cartoon rendering', 'a simplified outline'],
         story: 'drawn with a soft, simplified likeness',
       },
       {
@@ -115,9 +115,9 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D2-P3',
         label: 'Abstract',
-        definition: 'Suggests the pet through symbols, shapes, or minimal cues.',
-        examples: ['spirit form', 'light orb', 'geometric robot dog'],
-        story: 'suggested through soft shapes and minimal cues',
+        definition: 'Stands for the pet without depicting it: a glow, a light, a colour.',
+        examples: ['a drifting glow', 'a light orb', 'a pulse of colour'],
+        story: 'present as a glow rather than a shape',
       },
     ],
   },
@@ -130,16 +130,16 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D3-P1',
         label: 'Symbolic',
-        definition: 'Recognized by signs and symbols.',
-        examples: ['name tag', 'paw symbol'],
-        story: 'you know it by its name tag and paw mark',
+        definition: 'Recognized by a name, a date, or a chosen emblem.',
+        examples: ['a name', 'a date', 'a chosen emblem'],
+        story: 'you know it by the name and date it carries',
       },
       {
         id: 'D3-P2',
         label: 'Sensory',
-        definition: 'Recognized by look, sound, and scent.',
+        definition: 'Recognized by sound, scent, warmth, and texture.',
         examples: ['fur color', 'scent', 'warmth', 'bark'],
-        story: 'you know it by its color, scent, and bark',
+        story: 'you know it by its scent, warmth, and bark',
       },
       {
         id: 'D3-P3',
@@ -161,13 +161,13 @@ export const DIMENSIONS: Dimension[] = [
         label: 'Passive',
         definition:
           'Not influenced by your actions in the moment — it may still act on its own or react to its surroundings.',
-        examples: ['photo album', 'video replay', 'scent cue'],
+        examples: ['a looping clip', 'a still image', 'a replayed scene'],
         story: 'it lives its moments beside you, untouched by what you do',
       },
       {
         id: 'D4-P2',
         label: 'Active',
-        definition: 'Reacts to your actions in the moment.',
+        definition: 'Reacts to what you do. Moving on its own is not enough: that is Passive.',
         examples: ['chatbot', 'robot dog', 'interactive game pet'],
         story: 'it answers you — nudging, playing, responding',
       },
@@ -183,7 +183,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D5-P1',
         label: 'User Initiated',
         definition: 'Appears when the owner calls it up.',
-        examples: ['button', 'app', 'voice command'],
+        examples: ['a button press', 'opened in an app', 'an explicit request'],
         story: 'it appears when you choose to call it',
       },
       {
@@ -204,20 +204,20 @@ export const DIMENSIONS: Dimension[] = [
   },
   {
     id: 'D6',
-    title: 'Context',
-    question: 'Is it bound to one context, or does it move across contexts?',
+    title: 'Location',
+    question: 'Is it tied to one place, or does it move across places?',
     group: 'Interaction',
     positions: [
       {
         id: 'D6-P1',
-        label: 'Bound',
-        definition: 'Bound to one specific place or context.',
-        examples: ['grave', 'old corner', 'fixed display', 'specific VR world'],
+        label: 'Fixed Location',
+        definition: 'Tied to one place, physical or virtual.',
+        examples: ['grave', 'the old sleeping corner', 'one VR world'],
         story: 'it lives in one meaningful place',
       },
       {
         id: 'D6-P2',
-        label: 'Unrestricted',
+        label: 'Location-Independent',
         definition: 'Comes along wherever you are.',
         examples: ['mobile AR', 'wearable overlay', 'cloud companion'],
         story: 'it travels with you wherever you go',
@@ -233,14 +233,14 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D7-P1',
         label: 'Subjective Personal Data',
-        definition: 'Built from your memories and personal records.',
-        examples: ['memory notes', 'questionnaire', 'owner photos', 'voice clips'],
+        definition: 'Memories, descriptions, and records someone chose to keep.',
+        examples: ['written memories', 'owner photos', 'home recordings'],
         story: 'built from your own memories, photos, and stories',
       },
       {
         id: 'D7-P2',
         label: 'Objective Data',
-        definition: 'Built from data the world recorded.',
+        definition: 'Captured by a system or institution, without anyone selecting it.',
         examples: [
           'home sensors',
           'public cameras',
@@ -260,8 +260,8 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D8-P1',
         label: 'Past Moment',
-        definition: 'Returns to a remembered moment.',
-        examples: ['one happy moment', 'replayed walk'],
+        definition: 'Returns to one remembered episode, rather than continuing the bond.',
+        examples: ['returning to one remembered afternoon'],
         story: 'together you return to one remembered moment',
       },
       {
@@ -297,7 +297,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D9-P1',
         label: 'Private',
         definition: 'Keeps the experience personal.',
-        examples: ['personal shrine', 'private memory album', 'solo VR visit'],
+        examples: ['kept to oneself', 'a solo visit'],
         story: 'this encounter is yours alone',
       },
       {
