@@ -361,7 +361,7 @@ export const PRESETS: {
     blurb: 'A quiet keepsake, lit on meaningful days, that helps say goodbye.',
     selection: {
       D1: 'D1-P2',
-      D2: 'D2-P1',
+      D2: 'D2-P3',
       D3: 'D3-P1',
       D4: 'D4-P1',
       D5: 'D5-P1',
