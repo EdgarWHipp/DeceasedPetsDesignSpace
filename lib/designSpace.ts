@@ -234,25 +234,17 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D7-P1',
         label: 'Subjective Personal Data',
         definition:
-          'Chosen and kept by someone who knew the pet: memories, descriptions, photos, and recordings.',
-        examples: [
-          'written memories',
-          'photos the owner chose to keep',
-          'home recordings the family saved',
-        ],
-        story: 'built from what the people who knew it chose to keep',
+          'What someone who knew the pet put into words: memories, descriptions, notes, a questionnaire.',
+        examples: ['written memories', 'a described personality', 'an answered questionnaire'],
+        story: 'built from what the people who knew it could put into words',
       },
       {
         id: 'D7-P2',
         label: 'Objective Data',
-        definition: 'Captured by a system or institution, without anyone selecting it.',
-        examples: [
-          'sensor logs',
-          'public camera footage',
-          'veterinary records',
-          'shelter databases',
-        ],
-        story: 'built from recorded traces the world kept of it',
+        definition:
+          'What a device or an institution recorded, including the owner\u2019s own photos.',
+        examples: ['owner photos', 'home recordings', 'sensor logs', 'veterinary records'],
+        story: 'built from what was recorded of it, by camera or by clinic',
       },
     ],
   },
