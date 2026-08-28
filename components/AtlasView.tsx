@@ -12,7 +12,7 @@ export default function AtlasView() {
     <div>
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6">
         <p className="max-w-3xl text-sm text-ink/70">
-          The complete design space: three groups, nine dimensions.
+          The complete design space: three Aspects, nine Dimensions.
         </p>
         <div
           role="tablist"
@@ -87,7 +87,7 @@ export default function AtlasView() {
                       <table className="w-full min-w-[560px] border-collapse text-sm">
                         <thead>
                           <tr className="border-b border-black/15 text-left text-xs uppercase tracking-wider text-ink/50">
-                            <th className="py-2 pr-4 font-medium">Position</th>
+                            <th className="py-2 pr-4 font-medium">Code</th>
                             <th className="py-2 pr-4 font-medium">Definition</th>
                             <th className="py-2 font-medium">Examples</th>
                           </tr>

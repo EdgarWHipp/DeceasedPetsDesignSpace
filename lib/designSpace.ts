@@ -44,7 +44,7 @@ export const GROUPS: {
     name: 'Manifestation',
     accent: '#1d6a58',
     description:
-      'How the pet takes form — what makes it present and recognizable.',
+      'How the pet takes form: what makes it present and recognizable.',
     dims: ['D1', 'D2', 'D3'],
   },
   {
@@ -205,7 +205,7 @@ export const DIMENSIONS: Dimension[] = [
   {
     id: 'D6',
     title: 'Location',
-    question: 'Is it tied to one place, or does it move across places?',
+    question: 'Where can it be met?',
     group: 'Interaction',
     positions: [
       {

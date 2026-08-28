@@ -49,8 +49,10 @@ export function assembleStory(selection: Selection): string {
 
 export default function StoryCard({ selection }: { selection: Selection }) {
   const story = assembleStory(selection);
+  // display only: the stored ids stay D#-P#, the space calls them Codes
   const coords = DIMENSIONS.map((d) => selection[d.id])
     .filter(Boolean)
+    .map((id) => (id as string).replace('-P', '-C'))
     .join(' · ');
 
   return (
