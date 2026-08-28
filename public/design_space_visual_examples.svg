@@ -232,7 +232,7 @@
 <rect x="3051.0" y="3216.0" width="430.0" height="307.0" rx="0" fill="none" stroke="#ffffff" stroke-width="5"/>
 <g data-role="position-badge" data-rightmost="true"><rect x="3493.0" y="3221.0" width="102.0" height="60.0" rx="0" fill="#ffffff" stroke="#8a7ca8" stroke-width="3" shape-rendering="crispEdges"/><text x="3544.0" y="3262.0" font-family="Helvetica" font-size="31" font-weight="700" fill="#252827" text-anchor="middle">C2</text></g>
 <text x="3523.0" y="3336.0" font-family="Helvetica" font-size="44" font-weight="700" fill="#252827" text-anchor="start">Objective Data</text>
-<g data-role="card-short-description"><text x="3523.0" y="3404.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">What a device or an institution recorded.</text></g>
+<g data-role="card-short-description"><text x="3523.0" y="3404.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">What a device or an instrument captured.</text></g>
 <rect x="150.0" y="3594.0" width="5100.0" height="440.0" rx="0" fill="#fbfcfa" stroke="#c8cec9" stroke-width="2"/>
 <rect x="150.0" y="3594.0" width="14.0" height="440.0" rx="0" fill="#635488" stroke="none" stroke-width="0"/>
 <text x="188.0" y="3660.0" font-family="Helvetica" font-size="46" font-weight="800" fill="#252827" text-anchor="start">D8</text>

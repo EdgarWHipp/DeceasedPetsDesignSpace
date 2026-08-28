@@ -241,9 +241,9 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D7-P2',
         label: 'Objective Data',
-        definition: 'What a device or an institution recorded.',
-        examples: ['owner photos', 'home recordings', 'sensor logs', 'veterinary records'],
-        story: 'built from what was recorded of it, by camera or by clinic',
+        definition: 'What a device or an instrument captured, however it is now stored.',
+        examples: ['owner photos', 'home recordings', 'sensor logs', 'veterinary measurements'],
+        story: 'built from what a camera or an instrument captured of it',
       },
     ],
   },
