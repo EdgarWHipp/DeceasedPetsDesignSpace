@@ -232,7 +232,7 @@
 <rect x="3051.0" y="3956.0" width="430.0" height="307.0" rx="0" fill="none" stroke="#ffffff" stroke-width="5"/>
 <g data-role="position-badge" data-rightmost="true"><rect x="3493.0" y="3961.0" width="102.0" height="60.0" rx="0" fill="#ffffff" stroke="#9b6a7e" stroke-width="3" shape-rendering="crispEdges"/><text x="3544.0" y="4002.0" font-family="Helvetica" font-size="31" font-weight="700" fill="#252827" text-anchor="middle">P2</text></g>
 <text x="3523.0" y="4076.0" font-family="Helvetica" font-size="44" font-weight="700" fill="#252827" text-anchor="start">Objective Data</text>
-<g data-role="card-short-description"><text x="3523.0" y="4144.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">What a device or an institution recorded,</text><text x="3523.0" y="4182.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">including the owner’s own photos and clips.</text></g>
+<g data-role="card-short-description"><text x="3523.0" y="4144.0" font-family="Helvetica" font-size="32" font-weight="700" fill="#252827" text-anchor="start">What a device or an institution recorded.</text></g>
 <rect x="150.0" y="4434.0" width="5100.0" height="540.0" rx="0" fill="#fbfcfa" stroke="#c8cec9" stroke-width="2"/>
 <rect x="150.0" y="4434.0" width="14.0" height="540.0" rx="0" fill="#6c8d76" stroke="none" stroke-width="0"/>
 <text x="188.0" y="4500.0" font-family="Helvetica" font-size="46" font-weight="800" fill="#252827" text-anchor="start">D8</text>
