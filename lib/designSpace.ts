@@ -1,7 +1,7 @@
 // Single source of truth for the design space, adapted from the
 // final 9-dimension version in the thesis (text/content.tex, "The
 // Workshop-Grounded Design Space"). Consumed by the builder, story card,
-// spider graph, and atlas page — no second data source may exist.
+// spider graph, and atlas page. No second data source may exist.
 // Wording lightly humanized for the site; dimension/position structure,
 // labels, and examples match the thesis exactly.
 
@@ -160,7 +160,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D4-P1',
         label: 'Passive',
         definition:
-          'Not influenced by your actions in the moment — it may still act on its own or react to its surroundings.',
+          'Not influenced by your actions in the moment; it may still act on its own or react to its surroundings.',
         examples: ['a looping clip', 'a still image', 'a replayed scene'],
         story: 'it lives its moments beside you, untouched by what you do',
       },
@@ -169,7 +169,7 @@ export const DIMENSIONS: Dimension[] = [
         label: 'Active',
         definition: 'Reacts to what you do. Moving on its own is not enough: that is Passive.',
         examples: ['chatbot', 'robot dog', 'interactive game pet'],
-        story: 'it answers you — nudging, playing, responding',
+        story: 'it answers you, nudging, playing, responding',
       },
     ],
   },
