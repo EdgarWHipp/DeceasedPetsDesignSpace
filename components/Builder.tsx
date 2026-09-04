@@ -13,7 +13,7 @@ import {
 } from '@/lib/designSpace';
 import GroupStage from '@/components/GroupStage';
 import DimensionPanel from '@/components/DimensionPanel';
-import StoryCard from '@/components/StoryCard';
+import ScenarioNote from '@/components/ScenarioNote';
 import AddToLibrary from '@/components/AddToLibrary';
 import KioskMode from '@/components/KioskMode';
 import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
@@ -26,6 +26,7 @@ export default function Builder() {
   const [selection, setSelection] = useState<Selection>({});
   const [generation, setGeneration] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<DimId | null>(null);
+  const [scenario, setScenario] = useState('');
   // The bespoke preset vignette (candle / holo projector / arena) shows only
   // when a preset was *explicitly* chosen — a preset button (or the kiosk
   // attract). Building the same nine-dimension combination by hand is a
@@ -44,6 +45,13 @@ export default function Builder() {
     setSelection(sel);
     setPresetName(name);
     setOpenAccordion(null);
+  };
+
+  // Adding to the Library hands the concept over, so the builder goes back to
+  // empty: nine unset dimensions and a blank scenario, ready for the next one.
+  const clearAll = () => {
+    apply({});
+    setScenario('');
   };
 
   const pick = (dim: DimId, posId: string) => {
@@ -112,11 +120,15 @@ export default function Builder() {
               </Fragment>
             ))}
           </div>
-          <div className="mt-6 flex justify-center">
-            <AddToLibrary selection={selection} />
-          </div>
           <div className="mx-auto max-w-2xl py-8">
-            <StoryCard selection={selection} />
+            <ScenarioNote value={scenario} onChange={setScenario} />
+          </div>
+          <div className="flex justify-center pb-8">
+            <AddToLibrary
+              selection={selection}
+              text={scenario}
+              onSaved={clearAll}
+            />
           </div>
         </div>
 
@@ -136,7 +148,14 @@ export default function Builder() {
             </section>
           ))}
           <div className="py-2">
-            <StoryCard selection={selection} />
+            <ScenarioNote value={scenario} onChange={setScenario} />
+          </div>
+          <div className="flex justify-center pb-6">
+            <AddToLibrary
+              selection={selection}
+              text={scenario}
+              onSaved={clearAll}
+            />
           </div>
         </div>
       </main>

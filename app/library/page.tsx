@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import GalleryCard, { type GalleryEntry } from '@/components/GalleryCard';
+import SavedLibrary from '@/components/SavedLibrary';
 import entries from '@/lib/surveyGallery.json';
 
 export const metadata = {
@@ -13,8 +14,8 @@ const gallery = entries as GalleryEntry[];
 
 const FACTS: { value: string; label: string }[] = [
   { value: '70', label: 'people built their own concept' },
-  { value: '57', label: 'distinct nine-code configurations' },
-  { value: '49', label: 'chose a combination nobody else chose' },
+  { value: '57', label: 'different configurations among those seventy' },
+  { value: '49', label: 'of the seventy picked one nobody else picked' },
   { value: '53', label: 'built an ongoing companion, against 17 replay or keepsake designs' },
 ];
 
@@ -49,6 +50,16 @@ export default function LibraryPage() {
             </div>
           ))}
         </section>
+
+        <p className="mt-3 max-w-3xl text-xs leading-relaxed text-ink/50">
+          Those two middle numbers count different things, which is why they do
+          not add up to each other. Fifty-seven counts configurations; forty-nine
+          counts people. The remaining twenty-one participants shared eight
+          configurations between them, and the two most popular, four people
+          each, differ only in Context.
+        </p>
+
+        <SavedLibrary />
 
         <section className="mt-12">
           <h3 className="font-serif text-xl font-semibold text-ink">
@@ -102,7 +113,7 @@ export default function LibraryPage() {
               {withText} of {gallery.length} wrote a description
             </p>
           </div>
-          <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
             {gallery.map((entry) => (
               <GalleryCard key={entry.id} entry={entry} />
             ))}
