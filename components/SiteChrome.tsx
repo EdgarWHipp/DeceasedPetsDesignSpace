@@ -3,7 +3,7 @@ import Link from 'next/link';
 const NAV = [
   { href: '/', label: 'Builder' },
   { href: '/space', label: 'Atlas' },
-  { href: '/about', label: 'About' },
+  { href: '/library', label: 'Library' },
 ];
 
 export function SiteHeader({ current }: { current: string }) {
@@ -12,7 +12,7 @@ export function SiteHeader({ current }: { current: string }) {
       <div className="flex items-center justify-between gap-6">
         <div className="min-w-0">
           <h1 className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-ink text-balance">
-            A Design Space for Technology-Mediated Representations of Deceased Companion Animals
+            Beyond the Rainbow Bridge: AI Afterlives for Pets
           </h1>
           {current === '/' && (
             <p className="mt-1 text-sm text-ink/60">

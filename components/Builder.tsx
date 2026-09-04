@@ -16,6 +16,7 @@ import {
 import GroupStage from '@/components/GroupStage';
 import DimensionPanel from '@/components/DimensionPanel';
 import StoryCard from '@/components/StoryCard';
+import AddToLibrary from '@/components/AddToLibrary';
 import KioskMode from '@/components/KioskMode';
 import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 
@@ -142,6 +143,9 @@ export default function Builder() {
                 )}
               </Fragment>
             ))}
+          </div>
+          <div className="mt-6 flex justify-center">
+            <AddToLibrary selection={selection} />
           </div>
           <div className="mx-auto max-w-2xl py-8">
             <StoryCard selection={selection} />
