@@ -27,7 +27,7 @@ export interface Position {
 }
 
 /**
- * The hand-drawn code icons, one PNG per position id, under public/icons.
+ * The sketch-style code icons, one PNG per position id, under public/icons.
  * Same set the design space figure is built from, so the tool and the figure
  * cannot drift apart. Every one of the twenty-five ids has a file.
  */
