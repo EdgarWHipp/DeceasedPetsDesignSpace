@@ -1,7 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import {
   GROUP_ACCENT,
+  iconFor,
   type Dimension,
   type Selection,
 } from '@/lib/designSpace';
@@ -52,17 +54,29 @@ export default function DimensionPanel({
                   boxShadow: chosen ? `inset 0 0 0 1px ${accent}` : undefined,
                 }}
               >
-                <span className="flex items-center justify-between gap-2">
-                  <span className="font-medium text-sm text-ink">{pos.label}</span>
-                  {chosen && (
-                    <span className="text-[11px] font-semibold" style={{ color: accent }}>
-                      selected · tap to clear
+                <span className="flex items-start gap-3">
+                  <Image
+                    src={iconFor(pos.id)}
+                    alt=""
+                    width={640}
+                    height={640}
+                    aria-hidden
+                    className="mt-0.5 h-11 w-11 shrink-0 object-contain"
+                  />
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="font-medium text-sm text-ink">{pos.label}</span>
+                      {chosen && (
+                        <span className="text-[11px] font-semibold" style={{ color: accent }}>
+                          selected · tap to clear
+                        </span>
+                      )}
                     </span>
-                  )}
-                </span>
-                <span className="block text-xs text-ink/70 mt-0.5">{pos.definition}</span>
-                <span className="block text-xs text-ink/45 mt-0.5 italic">
-                  e.g. {pos.examples.join(', ')}
+                    <span className="block text-xs text-ink/70 mt-0.5">{pos.definition}</span>
+                    <span className="block text-xs text-ink/45 mt-0.5 italic">
+                      e.g. {pos.examples.join(', ')}
+                    </span>
+                  </span>
                 </span>
               </button>
             </li>

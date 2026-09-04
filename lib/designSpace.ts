@@ -26,6 +26,13 @@ export interface Position {
   story: string; // second-person fragment, lowercase start, spliced into sentences
 }
 
+/**
+ * The hand-drawn code icons, one PNG per position id, under public/icons.
+ * Same set the design space figure is built from, so the tool and the figure
+ * cannot drift apart. Every one of the twenty-five ids has a file.
+ */
+export const iconFor = (positionId: string) => `/icons/${positionId}.png`;
+
 export interface Dimension {
   id: DimId;
   title: string;

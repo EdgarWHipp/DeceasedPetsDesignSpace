@@ -1,21 +1,21 @@
 'use client';
 
-// A group panel built from the thesis "Design Space" figure: it shows the
-// per-position illustration (lib/figureExamples.ts, extracted verbatim from
-// public/design_space_visual_examples.svg) for each of the group's three
+// A group panel built from the design space's own icon set: it shows the
+// hand-drawn icon (public/icons, one per code) for each of the group's three
 // dimensions. Used for Interaction and Afterlife, whose dimensions are abstract
-// and already have canonical artwork in the figure. The group name lives in the
-// StageFrame header above, so the panel carries only the three images —
+// and are carried by the icons rather than by the 3D pet. The group name lives
+// in the StageFrame header above, so the panel carries only the three images —
 // two on top, one centered below. Empty (no dim chosen) mirrors PetStage's "?".
 
+import Image from 'next/image';
 import {
   DIM_BY_ID,
   getPosition,
+  iconFor,
   type DimId,
   type GroupName,
   type Selection,
 } from '@/lib/designSpace';
-import { FIGURE_EXAMPLES, FIGURE_EXAMPLE_VIEWBOX } from '@/lib/figureExamples';
 import { StageEmpty } from '@/components/StageFrame';
 
 export default function FigureGroupStage({
@@ -74,24 +74,25 @@ function DimTile({
   const dim = DIM_BY_ID[dimId];
   const posId = selection[dimId];
   const chosen = getPosition(selection, dimId);
-  const art = posId ? FIGURE_EXAMPLES[posId] : undefined;
 
   return (
     <div
       className={`flex h-full min-h-0 flex-col overflow-hidden rounded-lg border bg-white ${className}`}
       style={{
-        borderColor: art ? `${accent}40` : 'rgba(37,40,39,0.14)',
-        borderStyle: art ? 'solid' : 'dashed',
+        borderColor: posId ? `${accent}40` : 'rgba(37,40,39,0.14)',
+        borderStyle: posId ? 'solid' : 'dashed',
       }}
     >
-      {art ? (
-        <svg
-          viewBox={FIGURE_EXAMPLE_VIEWBOX}
-          preserveAspectRatio="xMidYMid meet"
-          className="w-full min-h-0 flex-1"
-          aria-hidden
-          dangerouslySetInnerHTML={{ __html: art }}
-        />
+      {posId && chosen ? (
+        <div className="flex min-h-0 flex-1 items-center justify-center p-2">
+          <Image
+            src={iconFor(posId)}
+            alt={`${dim.title}: ${chosen.label}`}
+            width={640}
+            height={640}
+            className="h-full w-full object-contain"
+          />
+        </div>
       ) : (
         <div className="flex min-h-0 flex-1 items-center justify-center">
           <span className="font-serif text-2xl text-ink/25">?</span>
