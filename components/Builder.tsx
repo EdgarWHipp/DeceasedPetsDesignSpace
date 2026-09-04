@@ -6,9 +6,7 @@ import {
   DIM_BY_ID,
   GROUPS,
   GROUP_ACCENT,
-  PRESETS,
   getPosition,
-  randomSelection,
   type DimId,
   type GroupName,
   type Selection,
@@ -78,36 +76,6 @@ export default function Builder() {
       {!kiosk && <SiteHeader current="/" />}
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 md:px-6">
-        {/* preset bar — left edge aligned with the title (max-w-5xl header) */}
-        <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-start gap-2 py-4">
-          <span className="mr-1 text-[11px] font-semibold uppercase tracking-widest text-ink/50">
-            Selected workshop representations
-          </span>
-          {PRESETS.map((preset) => (
-            <button
-              key={preset.name}
-              onClick={() => apply(preset.selection, preset.name)}
-              title={preset.blurb}
-              className="rounded-full border border-black/15 bg-white px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
-            >
-              {preset.name}
-            </button>
-          ))}
-          <span className="mx-1 hidden h-5 w-px bg-black/15 sm:block" />
-          <button
-            onClick={() => apply(randomSelection())}
-            className="rounded-full border border-black/15 bg-white px-4 py-1.5 text-sm text-ink hover:bg-ink hover:text-paper transition-colors"
-          >
-            Random
-          </button>
-          <button
-            onClick={() => apply({})}
-            className="rounded-full px-4 py-1.5 text-sm text-ink/60 hover:text-ink hover:bg-black/5 transition-colors"
-          >
-            Reset
-          </button>
-        </div>
-
         {/* A single nine-dimension pick can't honestly be one picture, so the
             builder shows one image per group — Manifestation (the 3D pet, with
             its preset vignette), Interaction and Afterlife (SVG diagrams) — each
