@@ -43,11 +43,11 @@ export default function AtlasView() {
       </div>
 
       {variant === 'visual' ? (
-        /* Visual atlas: the thesis figure, one visual example per position,
-           full page width. */
+        /* Visual atlas: the design space as it appears in the thesis and the
+           paper, one icon per code, full page width. */
         <div className="mx-auto mt-6 w-full max-w-[1800px] px-4">
           <a
-            href="/design_space_visual_examples.svg"
+            href="/design-space-final.png"
             target="_blank"
             rel="noopener"
             className="block rounded-xl border border-black/10 bg-white p-2"
@@ -55,8 +55,8 @@ export default function AtlasView() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/design_space_visual_examples.svg"
-              alt="Thesis figure: the nine-dimension design space with visual examples per position"
+              src="/design-space-final.png"
+              alt="The design space: three aspects, nine dimensions, and one icon per code"
               className="h-auto w-full"
             />
           </a>
