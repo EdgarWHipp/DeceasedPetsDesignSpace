@@ -27,10 +27,10 @@ export default function OpengraphImage() {
           <div style={{ width: 22, height: 22, borderRadius: 11, backgroundColor: '#8a7ca8' }} />
         </div>
         <div style={{ fontSize: 50, fontWeight: 600, textAlign: 'center', lineHeight: 1.15 }}>
-          A Design Space for Technology-Mediated Representations of Deceased Companion Animals
+          Beyond the Rainbow Bridge: AI Afterlives for Pets
         </div>
         <div style={{ fontSize: 28, marginTop: 28, color: '#5c5955' }}>
-          Nine dimensions · KIT Master&apos;s thesis
+          Three aspects · nine dimensions · twenty-five codes
         </div>
       </div>
     ),

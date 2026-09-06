@@ -42,18 +42,11 @@ export function SiteHeader({ current }: { current: string }) {
 }
 
 export function SiteFooter() {
+  // Deliberately unattributed: the paper this accompanies is under anonymous
+  // review, so the site names neither the institution nor the repository.
   return (
     <footer className="mx-auto w-full max-w-5xl px-6 py-8 text-xs text-ink/50">
-      <p>
-        A Master&apos;s thesis project — Karlsruhe Institute of Technology
-        (KIT) ·{' '}
-        <a
-          href="https://github.com/EdgarWHipp/DeceasedPetsDesignSpace"
-          className="underline hover:text-ink"
-        >
-          Source on GitHub
-        </a>
-      </p>
+      <p>An interactive design space for AI afterlives for pets.</p>
     </footer>
   );
 }
