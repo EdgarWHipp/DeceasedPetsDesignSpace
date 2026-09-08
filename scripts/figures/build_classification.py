@@ -148,8 +148,8 @@ def card_diagram(cells, T, out_svg):
     ct_accepted = sum(1 for c in cells if c['used_ct'] and c['outcome'] == MATCHED)
 
     svg = sankey2.render(
-        [stage], width=2200, height=1320, pad=46, node_w=22, gap=16,
-        label_pad=430, font=23, colours=colours,
+        [stage], width=1680, height=860, pad=40, node_w=16, gap=12,
+        label_pad=350, font=20, colours=colours,
         title="Ten concepts, read through the space",
         subtitle=[
             "Each card was placed on all nine dimensions by five to nine people."
