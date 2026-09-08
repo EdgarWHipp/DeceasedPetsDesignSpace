@@ -1,15 +1,14 @@
 'use client';
 
-// Saves the current nine-code pick, plus whatever the visitor wrote, and sends
-// them to the Library where their concept sits above the seventy from the
-// survey. The write goes through lib/libraryStore, which is a mock: nothing is
-// uploaded, so a visitor's idea never joins the research data.
+// Saves the current nine-code pick, plus whatever the visitor wrote, into the
+// library everyone sees. The new concept takes the next number and shows up at
+// the top of the Library page as its most recent entry.
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { DIMENSIONS } from '@/lib/designSpace';
 import type { Selection } from '@/lib/designSpace';
-import { postEntry } from '@/lib/libraryStore';
+import { addToLibrary } from '@/lib/library';
 
 export default function AddToLibrary({
   selection,
@@ -28,9 +27,10 @@ export default function AddToLibrary({
   const save = async () => {
     setState('saving');
     try {
-      await postEntry(selection, text);
+      await addToLibrary(selection, text);
       onSaved();
       router.push('/library');
+      router.refresh();
     } catch {
       setState('error');
     }
@@ -49,7 +49,7 @@ export default function AddToLibrary({
         {state === 'error'
           ? 'That did not save. Try once more.'
           : complete
-            ? 'Saved in this browser only, and shown beside the seventy from the survey'
+            ? 'It joins the library as its most recent entry'
             : `Choose all nine dimensions to add (${chosen} of ${DIMENSIONS.length})`}
       </p>
     </div>
