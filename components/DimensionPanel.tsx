@@ -25,7 +25,7 @@ export default function DimensionPanel({
       <div className="flex items-start justify-between gap-3 mb-1">
         <div>
           <p className="text-[11px] font-semibold tracking-widest uppercase" style={{ color: accent }}>
-            {dimension.group} · {dimension.id}
+            {dimension.group}
           </p>
           <h3 className="text-base font-semibold text-ink">{dimension.title}</h3>
           <p className="text-xs text-ink/60">{dimension.question}</p>

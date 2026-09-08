@@ -1,68 +1,68 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1160" viewBox="0 0 2000 1160"><rect width="2000" height="1160" fill="#ffffff"/>
-<text x="54" y="62" font-family="Helvetica" font-size="25" font-weight="800" fill="#252827">Concept classification: where every cell went</text>
-<text x="54" y="90" font-family="Helvetica" font-size="15" fill="#5C6663">Ten concept cards, five to nine raters each, nine dimensions per card. 630 cells, each drawn exactly once. Key match figures reproduce analysis/reproduce_results.py.</text>
-<text x="54" y="111" font-family="Helvetica" font-size="15" fill="#5C6663">“Cannot tell” was ticked in 78 cells; on 2 of them the archived key accepts it, so those 2 are drawn as matches and this node reads 76. “Does not apply” was ticked in 19, of which 9 are on the card where it is the intended answer.</text>
-<text x="304" y="126" font-family="Helvetica" font-size="14" font-weight="700" fill="#5C6663" text-anchor="start">Concept card</text>
-<text x="1696" y="126" font-family="Helvetica" font-size="14" font-weight="700" fill="#5C6663" text-anchor="end">Outcome</text>
-<path d="M 324.0 235.3 C 1000.0 235.3 1000.0 172.5 1676.0 172.5 L 1676.0 253.5 C 1000.0 253.5 1000.0 316.3 324.0 316.3 Z" fill="#4664AA" fill-opacity="0.42"/>
-<path d="M 324.0 354.1 C 1000.0 354.1 1000.0 253.5 1676.0 253.5 L 1676.0 325.3 C 1000.0 325.3 1000.0 426.0 324.0 426.0 Z" fill="#8f6228" fill-opacity="0.42"/>
-<path d="M 324.0 985.9 C 1000.0 985.9 1000.0 915.6 1676.0 915.6 L 1676.0 987.4 C 1000.0 987.4 1000.0 1057.8 324.0 1057.8 Z" fill="#9AA5A2" fill-opacity="0.42"/>
-<path d="M 324.0 140.0 C 1000.0 140.0 1000.0 325.3 1676.0 325.3 L 1676.0 394.6 C 1000.0 394.6 1000.0 209.2 324.0 209.2 Z" fill="#009682" fill-opacity="0.42"/>
-<path d="M 324.0 890.6 C 1000.0 890.6 1000.0 987.4 1676.0 987.4 L 1676.0 1047.5 C 1000.0 1047.5 1000.0 950.7 324.0 950.7 Z" fill="#1B4A44" fill-opacity="0.42"/>
-<path d="M 324.0 556.5 C 1000.0 556.5 1000.0 394.6 1676.0 394.6 L 1676.0 448.1 C 1000.0 448.1 1000.0 610.0 324.0 610.0 Z" fill="#7FCAC0" fill-opacity="0.42"/>
-<path d="M 324.0 472.9 C 1000.0 472.9 1000.0 448.1 1676.0 448.1 L 1676.0 495.2 C 1000.0 495.2 1000.0 520.0 324.0 520.0 Z" fill="#635488" fill-opacity="0.42"/>
-<path d="M 324.0 795.3 C 1000.0 795.3 1000.0 495.2 1676.0 495.2 L 1676.0 537.0 C 1000.0 537.0 1000.0 837.1 324.0 837.1 Z" fill="#A594C4" fill-opacity="0.42"/>
-<path d="M 324.0 651.8 C 1000.0 651.8 1000.0 537.0 1676.0 537.0 L 1676.0 572.2 C 1000.0 572.2 1000.0 687.0 324.0 687.0 Z" fill="#A2B0D6" fill-opacity="0.42"/>
-<path d="M 324.0 723.6 C 1000.0 723.6 1000.0 572.2 1676.0 572.2 L 1676.0 603.6 C 1000.0 603.6 1000.0 754.9 324.0 754.9 Z" fill="#C89A5C" fill-opacity="0.42"/>
-<path d="M 324.0 837.1 C 1000.0 837.1 1000.0 616.6 1676.0 616.6 L 1676.0 645.3 C 1000.0 645.3 1000.0 865.9 324.0 865.9 Z" fill="#A594C4" fill-opacity="0.42"/>
-<path d="M 324.0 754.9 C 1000.0 754.9 1000.0 645.3 1676.0 645.3 L 1676.0 668.8 C 1000.0 668.8 1000.0 778.4 324.0 778.4 Z" fill="#C89A5C" fill-opacity="0.42"/>
-<path d="M 324.0 950.7 C 1000.0 950.7 1000.0 765.5 1676.0 765.5 L 1676.0 787.7 C 1000.0 787.7 1000.0 972.9 324.0 972.9 Z" fill="#1B4A44" fill-opacity="0.42"/>
-<path d="M 324.0 426.0 C 1000.0 426.0 1000.0 787.7 1676.0 787.7 L 1676.0 807.3 C 1000.0 807.3 1000.0 445.6 324.0 445.6 Z" fill="#8f6228" fill-opacity="0.42"/>
-<path d="M 324.0 610.0 C 1000.0 610.0 1000.0 668.8 1676.0 668.8 L 1676.0 687.1 C 1000.0 687.1 1000.0 628.3 324.0 628.3 Z" fill="#7FCAC0" fill-opacity="0.42"/>
-<path d="M 324.0 520.0 C 1000.0 520.0 1000.0 687.1 1676.0 687.1 L 1676.0 702.8 C 1000.0 702.8 1000.0 535.6 324.0 535.6 Z" fill="#635488" fill-opacity="0.42"/>
-<path d="M 324.0 687.0 C 1000.0 687.0 1000.0 702.8 1676.0 702.8 L 1676.0 718.5 C 1000.0 718.5 1000.0 702.7 324.0 702.7 Z" fill="#A2B0D6" fill-opacity="0.42"/>
-<path d="M 324.0 445.6 C 1000.0 445.6 1000.0 718.5 1676.0 718.5 L 1676.0 732.9 C 1000.0 732.9 1000.0 459.9 324.0 459.9 Z" fill="#8f6228" fill-opacity="0.42"/>
-<path d="M 324.0 1057.8 C 1000.0 1057.8 1000.0 877.7 1676.0 877.7 L 1676.0 889.5 C 1000.0 889.5 1000.0 1069.5 324.0 1069.5 Z" fill="#9AA5A2" fill-opacity="0.42"/>
-<path d="M 324.0 316.3 C 1000.0 316.3 1000.0 732.9 1676.0 732.9 L 1676.0 743.3 C 1000.0 743.3 1000.0 326.7 324.0 326.7 Z" fill="#4664AA" fill-opacity="0.42"/>
-<path d="M 324.0 628.3 C 1000.0 628.3 1000.0 807.3 1676.0 807.3 L 1676.0 817.7 C 1000.0 817.7 1000.0 638.8 324.0 638.8 Z" fill="#7FCAC0" fill-opacity="0.42"/>
-<path d="M 324.0 1069.5 C 1000.0 1069.5 1000.0 817.7 1676.0 817.7 L 1676.0 828.2 C 1000.0 828.2 1000.0 1080.0 324.0 1080.0 Z" fill="#9AA5A2" fill-opacity="0.42"/>
-<path d="M 324.0 209.2 C 1000.0 209.2 1000.0 743.3 1676.0 743.3 L 1676.0 752.5 C 1000.0 752.5 1000.0 218.4 324.0 218.4 Z" fill="#009682" fill-opacity="0.42"/>
-<path d="M 324.0 326.7 C 1000.0 326.7 1000.0 828.2 1676.0 828.2 L 1676.0 836.0 C 1000.0 836.0 1000.0 334.6 324.0 334.6 Z" fill="#4664AA" fill-opacity="0.42"/>
-<path d="M 324.0 535.6 C 1000.0 535.6 1000.0 836.0 1676.0 836.0 L 1676.0 843.8 C 1000.0 843.8 1000.0 543.5 324.0 543.5 Z" fill="#635488" fill-opacity="0.42"/>
-<path d="M 324.0 865.9 C 1000.0 865.9 1000.0 843.8 1676.0 843.8 L 1676.0 851.7 C 1000.0 851.7 1000.0 873.7 324.0 873.7 Z" fill="#A594C4" fill-opacity="0.42"/>
-<path d="M 324.0 334.6 C 1000.0 334.6 1000.0 889.5 1676.0 889.5 L 1676.0 896.0 C 1000.0 896.0 1000.0 341.1 324.0 341.1 Z" fill="#4664AA" fill-opacity="0.42"/>
-<path d="M 324.0 702.7 C 1000.0 702.7 1000.0 851.7 1676.0 851.7 L 1676.0 856.9 C 1000.0 856.9 1000.0 707.9 324.0 707.9 Z" fill="#A2B0D6" fill-opacity="0.42"/>
-<path d="M 324.0 218.4 C 1000.0 218.4 1000.0 856.9 1676.0 856.9 L 1676.0 860.8 C 1000.0 860.8 1000.0 222.3 324.0 222.3 Z" fill="#009682" fill-opacity="0.42"/>
-<path d="M 324.0 778.4 C 1000.0 778.4 1000.0 860.8 1676.0 860.8 L 1676.0 864.7 C 1000.0 864.7 1000.0 782.3 324.0 782.3 Z" fill="#C89A5C" fill-opacity="0.42"/>
-<path d="M 324.0 873.7 C 1000.0 873.7 1000.0 896.0 1676.0 896.0 L 1676.0 899.9 C 1000.0 899.9 1000.0 877.6 324.0 877.6 Z" fill="#A594C4" fill-opacity="0.42"/>
-<path d="M 324.0 707.9 C 1000.0 707.9 1000.0 899.9 1676.0 899.9 L 1676.0 902.6 C 1000.0 902.6 1000.0 710.6 324.0 710.6 Z" fill="#A2B0D6" fill-opacity="0.42"/>
-<rect x="304.0" y="140.0" width="20" height="82.3" rx="3" fill="#009682"/>
-<text x="295.0" y="186.2" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">AR park encounter  63</text>
-<rect x="304.0" y="235.3" width="20" height="105.8" rx="3" fill="#4664AA"/>
-<text x="295.0" y="293.2" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Robot surrogate pet  81</text>
-<rect x="304.0" y="354.1" width="20" height="105.8" rx="3" fill="#8f6228"/>
-<text x="295.0" y="412.0" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">VR reunion world  81</text>
-<rect x="304.0" y="472.9" width="20" height="70.5" rx="3" fill="#635488"/>
-<text x="295.0" y="513.2" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Guided memory replay  54</text>
-<rect x="304.0" y="556.5" width="20" height="82.3" rx="3" fill="#7FCAC0"/>
-<text x="295.0" y="602.6" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Responsive screen companion  63</text>
-<rect x="304.0" y="651.8" width="20" height="58.8" rx="3" fill="#A2B0D6"/>
-<text x="295.0" y="686.2" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">AR hologram, living room  45</text>
-<rect x="304.0" y="723.6" width="20" height="58.8" rx="3" fill="#C89A5C"/>
-<text x="295.0" y="757.9" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Ambient sleeping spot  45</text>
-<rect x="304.0" y="795.3" width="20" height="82.3" rx="3" fill="#A594C4"/>
-<text x="295.0" y="841.5" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Memory archive tablet  63</text>
-<rect x="304.0" y="890.6" width="20" height="82.3" rx="3" fill="#1B4A44"/>
-<text x="295.0" y="936.8" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Partly responsive hologram  63</text>
-<rect x="304.0" y="985.9" width="20" height="94.1" rx="3" fill="#9AA5A2"/>
-<text x="295.0" y="1038.0" font-family="Helvetica" font-size="14" fill="#252827" text-anchor="end">Pet immortality treatment  72</text>
-<rect x="1676.0" y="172.5" width="20" height="431.1" rx="3" fill="#1B2F5C"/>
-<text x="1705.0" y="393.0" font-family="Helvetica" font-size="14" fill="#252827">Matches the key  330</text>
-<rect x="1676.0" y="616.6" width="20" height="135.9" rx="3" fill="#009682"/>
-<text x="1705.0" y="689.5" font-family="Helvetica" font-size="14" fill="#252827">A different code  104</text>
-<rect x="1676.0" y="765.5" width="20" height="99.3" rx="3" fill="#4664AA"/>
-<text x="1705.0" y="820.1" font-family="Helvetica" font-size="14" fill="#252827">Cannot tell  76</text>
-<rect x="1676.0" y="877.7" width="20" height="24.8" rx="3" fill="#8f6228"/>
-<text x="1705.0" y="895.1" font-family="Helvetica" font-size="14" fill="#252827">Does not apply  19</text>
-<rect x="1676.0" y="915.6" width="20" height="131.9" rx="3" fill="#9AA5A2"/>
-<text x="1705.0" y="986.5" font-family="Helvetica" font-size="14" fill="#252827">Coded anyway (no single key)  101</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1320" viewBox="0 0 2200 1320"><rect width="2200" height="1320" fill="#ffffff"/>
+<text x="46" y="80" font-family="Helvetica" font-size="37" font-weight="800" fill="#252827">Ten concepts, read through the space</text>
+<text x="46" y="120" font-family="Helvetica" font-size="22" fill="#5C6663">Each card was placed on all nine dimensions by five to nine people. Every placement is traced here, from the card to where it landed.</text>
+<text x="46" y="152" font-family="Helvetica" font-size="22" fill="#5C6663">“Cannot tell” and “Does not apply” were offered alongside the codes, so a reader could decline a dimension instead of forcing it.</text>
+<text x="476" y="212" font-family="Helvetica" font-size="24" font-weight="700" fill="#5C6663" text-anchor="start">Concept</text>
+<text x="1724" y="212" font-family="Helvetica" font-size="24" font-weight="700" fill="#5C6663" text-anchor="end">Where it landed</text>
+<path d="M 498.0 336.5 C 1100.0 336.5 1100.0 274.6 1702.0 274.6 L 1702.0 359.1 C 1100.0 359.1 1100.0 421.0 498.0 421.0 Z" fill="#4664AA" fill-opacity="0.42"/>
+<path d="M 498.0 462.9 C 1100.0 462.9 1100.0 359.1 1702.0 359.1 L 1702.0 434.1 C 1100.0 434.1 1100.0 537.8 498.0 537.8 Z" fill="#8f6228" fill-opacity="0.42"/>
+<path d="M 498.0 1139.1 C 1100.0 1139.1 1100.0 1059.6 1702.0 1059.6 L 1702.0 1134.5 C 1100.0 1134.5 1100.0 1214.0 498.0 1214.0 Z" fill="#9AA5A2" fill-opacity="0.42"/>
+<path d="M 498.0 234.6 C 1100.0 234.6 1100.0 434.1 1702.0 434.1 L 1702.0 506.3 C 1100.0 506.3 1100.0 306.8 498.0 306.8 Z" fill="#009682" fill-opacity="0.42"/>
+<path d="M 498.0 1037.2 C 1100.0 1037.2 1100.0 1134.5 1702.0 1134.5 L 1702.0 1197.2 C 1100.0 1197.2 1100.0 1099.9 498.0 1099.9 Z" fill="#1B4A44" fill-opacity="0.42"/>
+<path d="M 498.0 678.8 C 1100.0 678.8 1100.0 506.3 1702.0 506.3 L 1702.0 562.2 C 1100.0 562.2 1100.0 734.7 498.0 734.7 Z" fill="#7FCAC0" fill-opacity="0.42"/>
+<path d="M 498.0 589.2 C 1100.0 589.2 1100.0 562.2 1702.0 562.2 L 1702.0 611.2 C 1100.0 611.2 1100.0 638.3 498.0 638.3 Z" fill="#635488" fill-opacity="0.42"/>
+<path d="M 498.0 935.4 C 1100.0 935.4 1100.0 611.2 1702.0 611.2 L 1702.0 654.8 C 1100.0 654.8 1100.0 979.0 498.0 979.0 Z" fill="#A594C4" fill-opacity="0.42"/>
+<path d="M 498.0 780.7 C 1100.0 780.7 1100.0 654.8 1702.0 654.8 L 1702.0 691.6 C 1100.0 691.6 1100.0 817.5 498.0 817.5 Z" fill="#A2B0D6" fill-opacity="0.42"/>
+<path d="M 498.0 858.0 C 1100.0 858.0 1100.0 691.6 1702.0 691.6 L 1702.0 724.3 C 1100.0 724.3 1100.0 890.7 498.0 890.7 Z" fill="#C89A5C" fill-opacity="0.42"/>
+<path d="M 498.0 979.0 C 1100.0 979.0 1100.0 740.3 1702.0 740.3 L 1702.0 770.3 C 1100.0 770.3 1100.0 1008.9 498.0 1008.9 Z" fill="#A594C4" fill-opacity="0.42"/>
+<path d="M 498.0 890.7 C 1100.0 890.7 1100.0 770.3 1702.0 770.3 L 1702.0 794.9 C 1100.0 794.9 1100.0 915.3 498.0 915.3 Z" fill="#C89A5C" fill-opacity="0.42"/>
+<path d="M 498.0 1099.9 C 1100.0 1099.9 1100.0 898.1 1702.0 898.1 L 1702.0 921.2 C 1100.0 921.2 1100.0 1123.1 498.0 1123.1 Z" fill="#1B4A44" fill-opacity="0.42"/>
+<path d="M 498.0 537.8 C 1100.0 537.8 1100.0 921.2 1702.0 921.2 L 1702.0 941.7 C 1100.0 941.7 1100.0 558.3 498.0 558.3 Z" fill="#8f6228" fill-opacity="0.42"/>
+<path d="M 498.0 734.7 C 1100.0 734.7 1100.0 794.9 1702.0 794.9 L 1702.0 813.9 C 1100.0 813.9 1100.0 753.8 498.0 753.8 Z" fill="#7FCAC0" fill-opacity="0.42"/>
+<path d="M 498.0 638.3 C 1100.0 638.3 1100.0 813.9 1702.0 813.9 L 1702.0 830.3 C 1100.0 830.3 1100.0 654.7 498.0 654.7 Z" fill="#635488" fill-opacity="0.42"/>
+<path d="M 498.0 817.5 C 1100.0 817.5 1100.0 830.3 1702.0 830.3 L 1702.0 846.6 C 1100.0 846.6 1100.0 833.8 498.0 833.8 Z" fill="#A2B0D6" fill-opacity="0.42"/>
+<path d="M 498.0 558.3 C 1100.0 558.3 1100.0 846.6 1702.0 846.6 L 1702.0 861.6 C 1100.0 861.6 1100.0 573.2 498.0 573.2 Z" fill="#8f6228" fill-opacity="0.42"/>
+<path d="M 498.0 1214.0 C 1100.0 1214.0 1100.0 1017.7 1702.0 1017.7 L 1702.0 1029.9 C 1100.0 1029.9 1100.0 1226.3 498.0 1226.3 Z" fill="#9AA5A2" fill-opacity="0.42"/>
+<path d="M 498.0 421.0 C 1100.0 421.0 1100.0 861.6 1702.0 861.6 L 1702.0 872.5 C 1100.0 872.5 1100.0 431.9 498.0 431.9 Z" fill="#4664AA" fill-opacity="0.42"/>
+<path d="M 498.0 753.8 C 1100.0 753.8 1100.0 941.7 1702.0 941.7 L 1702.0 952.6 C 1100.0 952.6 1100.0 764.7 498.0 764.7 Z" fill="#7FCAC0" fill-opacity="0.42"/>
+<path d="M 498.0 1226.3 C 1100.0 1226.3 1100.0 952.6 1702.0 952.6 L 1702.0 963.5 C 1100.0 963.5 1100.0 1237.2 498.0 1237.2 Z" fill="#9AA5A2" fill-opacity="0.42"/>
+<path d="M 498.0 306.8 C 1100.0 306.8 1100.0 872.5 1702.0 872.5 L 1702.0 882.1 C 1100.0 882.1 1100.0 316.4 498.0 316.4 Z" fill="#009682" fill-opacity="0.42"/>
+<path d="M 498.0 431.9 C 1100.0 431.9 1100.0 963.5 1702.0 963.5 L 1702.0 971.7 C 1100.0 971.7 1100.0 440.0 498.0 440.0 Z" fill="#4664AA" fill-opacity="0.42"/>
+<path d="M 498.0 654.7 C 1100.0 654.7 1100.0 971.7 1702.0 971.7 L 1702.0 979.9 C 1100.0 979.9 1100.0 662.8 498.0 662.8 Z" fill="#635488" fill-opacity="0.42"/>
+<path d="M 498.0 1008.9 C 1100.0 1008.9 1100.0 979.9 1702.0 979.9 L 1702.0 988.0 C 1100.0 988.0 1100.0 1017.1 498.0 1017.1 Z" fill="#A594C4" fill-opacity="0.42"/>
+<path d="M 498.0 440.0 C 1100.0 440.0 1100.0 1029.9 1702.0 1029.9 L 1702.0 1036.7 C 1100.0 1036.7 1100.0 446.9 498.0 446.9 Z" fill="#4664AA" fill-opacity="0.42"/>
+<path d="M 498.0 833.8 C 1100.0 833.8 1100.0 988.0 1702.0 988.0 L 1702.0 993.5 C 1100.0 993.5 1100.0 839.3 498.0 839.3 Z" fill="#A2B0D6" fill-opacity="0.42"/>
+<path d="M 498.0 316.4 C 1100.0 316.4 1100.0 993.5 1702.0 993.5 L 1702.0 997.6 C 1100.0 997.6 1100.0 320.5 498.0 320.5 Z" fill="#009682" fill-opacity="0.42"/>
+<path d="M 498.0 915.3 C 1100.0 915.3 1100.0 997.6 1702.0 997.6 L 1702.0 1001.7 C 1100.0 1001.7 1100.0 919.4 498.0 919.4 Z" fill="#C89A5C" fill-opacity="0.42"/>
+<path d="M 498.0 1017.1 C 1100.0 1017.1 1100.0 1036.7 1702.0 1036.7 L 1702.0 1040.8 C 1100.0 1040.8 1100.0 1021.2 498.0 1021.2 Z" fill="#A594C4" fill-opacity="0.42"/>
+<path d="M 498.0 839.3 C 1100.0 839.3 1100.0 1040.8 1702.0 1040.8 L 1702.0 1043.6 C 1100.0 1043.6 1100.0 842.0 498.0 842.0 Z" fill="#A2B0D6" fill-opacity="0.42"/>
+<rect x="476.0" y="234.6" width="22" height="85.9" rx="3" fill="#009682"/>
+<text x="462.2" y="285.8" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">AR park encounter  63</text>
+<rect x="476.0" y="336.5" width="22" height="110.4" rx="3" fill="#4664AA"/>
+<text x="462.2" y="399.9" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Robot surrogate pet  81</text>
+<rect x="476.0" y="462.9" width="22" height="110.4" rx="3" fill="#8f6228"/>
+<text x="462.2" y="526.3" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">VR reunion world  81</text>
+<rect x="476.0" y="589.2" width="22" height="73.6" rx="3" fill="#635488"/>
+<text x="462.2" y="634.3" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Guided memory replay  54</text>
+<rect x="476.0" y="678.8" width="22" height="85.9" rx="3" fill="#7FCAC0"/>
+<text x="462.2" y="730.0" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Responsive screen companion  63</text>
+<rect x="476.0" y="780.7" width="22" height="61.3" rx="3" fill="#A2B0D6"/>
+<text x="462.2" y="819.6" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">AR hologram, living room  45</text>
+<rect x="476.0" y="858.0" width="22" height="61.3" rx="3" fill="#C89A5C"/>
+<text x="462.2" y="897.0" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Ambient sleeping spot  45</text>
+<rect x="476.0" y="935.4" width="22" height="85.9" rx="3" fill="#A594C4"/>
+<text x="462.2" y="986.6" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Memory archive tablet  63</text>
+<rect x="476.0" y="1037.2" width="22" height="85.9" rx="3" fill="#1B4A44"/>
+<text x="462.2" y="1088.4" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Partly responsive hologram  63</text>
+<rect x="476.0" y="1139.1" width="22" height="98.1" rx="3" fill="#9AA5A2"/>
+<text x="462.2" y="1196.4" font-family="Helvetica" font-size="23" fill="#252827" text-anchor="end">Pet immortality treatment  72</text>
+<rect x="1702.0" y="274.6" width="22" height="449.7" rx="3" fill="#1B2F5C"/>
+<text x="1737.8" y="507.8" font-family="Helvetica" font-size="23" fill="#252827">Matches the key  330</text>
+<rect x="1702.0" y="740.3" width="22" height="141.7" rx="3" fill="#009682"/>
+<text x="1737.8" y="819.5" font-family="Helvetica" font-size="23" fill="#252827">A different code  104</text>
+<rect x="1702.0" y="898.1" width="22" height="103.6" rx="3" fill="#4664AA"/>
+<text x="1737.8" y="958.1" font-family="Helvetica" font-size="23" fill="#252827">Cannot tell  76</text>
+<rect x="1702.0" y="1017.7" width="22" height="25.9" rx="3" fill="#8f6228"/>
+<text x="1737.8" y="1038.9" font-family="Helvetica" font-size="23" fill="#252827">Does not apply  19</text>
+<rect x="1702.0" y="1059.6" width="22" height="137.6" rx="3" fill="#9AA5A2"/>
+<text x="1737.8" y="1136.7" font-family="Helvetica" font-size="23" fill="#252827">Coded anyway (no single key)  101</text></svg>

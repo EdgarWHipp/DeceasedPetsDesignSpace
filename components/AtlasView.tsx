@@ -80,7 +80,7 @@ export default function AtlasView() {
                 return (
                   <div key={dim.id} className="mt-6">
                     <h3 className="font-serif text-base font-semibold text-ink">
-                      {dim.id} — {dim.title}
+                      {dim.title}
                     </h3>
                     <p className="text-sm text-ink/60">{dim.question}</p>
                     <div className="mt-2 overflow-x-auto">
