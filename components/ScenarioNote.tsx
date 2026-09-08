@@ -2,7 +2,7 @@
 
 // Where the visitor says, in their own words, what their afterlife pet is and
 // how it shows up. The nine codes give the coordinates; this gives the scenario
-// they had in mind, and it travels with them into the Library.
+// they had in mind, and it travels with the concept into the Library.
 
 export default function ScenarioNote({
   value,
@@ -28,7 +28,7 @@ export default function ScenarioNote({
         className="mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-4 py-3 text-sm leading-relaxed text-ink placeholder:text-ink/35 focus:border-ink/30 focus:outline-none"
       />
       <p className="mt-1 text-xs text-ink/50">
-        Optional, and it stays in this browser.
+        Optional, and it goes into the Library with your concept.
       </p>
     </div>
   );
