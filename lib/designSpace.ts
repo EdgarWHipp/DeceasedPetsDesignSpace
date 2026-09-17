@@ -145,7 +145,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D3-P2',
         label: 'Sensory',
         definition: 'Recognized by sound, scent, warmth, and texture.',
-        examples: ['fur color', 'scent', 'warmth', 'bark'],
+        examples: ['fur texture', 'scent', 'warmth', 'bark'],
         story: 'you know it by its scent, warmth, and bark',
       },
       {
