@@ -16,7 +16,7 @@ export function SiteHeader({ current }: { current: string }) {
           </h1>
           {current === '/' && (
             <p className="mt-1 text-sm text-ink/60">
-              Nine dimensions. Choose a position on each, and see who comes
+              Nine dimensions. Choose a code on each, and see who comes
               back.
             </p>
           )}
