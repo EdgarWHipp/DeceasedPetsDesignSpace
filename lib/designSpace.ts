@@ -248,9 +248,9 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D7-P2',
         label: 'Objective Data',
-        definition: 'What a device or an instrument captured, however it is now stored.',
+        definition: 'What a device, an instrument, or an institution recorded, however it is now stored.',
         examples: ['owner photos', 'home recordings', 'sensor logs', 'veterinary measurements'],
-        story: 'built from what a camera or an instrument captured of it',
+        story: 'built from what a device, an instrument, or an institution recorded of it',
       },
     ],
   },
@@ -278,7 +278,7 @@ export const DIMENSIONS: Dimension[] = [
         id: 'D8-P3',
         label: 'New Relationship',
         definition: 'Helps open a new relationship.',
-        examples: ['adoption matching', 'meeting another pet'],
+        examples: ["a keepsake carried into a new pet's home", 'a shared ritual with the next animal'],
         story: 'it walks you toward a new companion',
       },
       {
