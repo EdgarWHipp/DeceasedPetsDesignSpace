@@ -263,14 +263,16 @@ export const DIMENSIONS: Dimension[] = [
       {
         id: 'D8-P1',
         label: 'Past Moment',
-        definition: 'Returns to one remembered episode, rather than continuing the bond.',
+        definition:
+          "Frames the encounter as revisiting a past episode from the pet's life.",
         examples: ['returning to one remembered afternoon'],
         story: 'together you return to one remembered moment',
       },
       {
         id: 'D8-P2',
         label: 'Ongoing Bond',
-        definition: 'Lets the bond continue.',
+        definition:
+          "Frames the representation as a continuing presence in the owner's present-day life.",
         examples: ['check-ins', 'daily companion'],
         story: 'together you keep the bond alive',
       },
